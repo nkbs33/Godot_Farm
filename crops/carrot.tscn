@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bivhyql4ofm38"]
+
+[ext_resource type="Script" path="res://crops/carrot.gd" id="1_bs62x"]
+[ext_resource type="Texture2D" uid="uid://hk0j67e6256l" path="res://resources/carrot.png" id="1_scxps"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8blrq"]
+atlas = ExtResource("1_scxps")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mqt43"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8blrq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_evl7m"]
+radius = 8.52947
+height = 42.4993
+
+[node name="Carrot" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 3
+gravity_scale = 0.0
+max_contacts_reported = 5
+contact_monitor = true
+linear_damp_mode = 1
+linear_damp = 100.0
+angular_damp = 100.0
+script = ExtResource("1_bs62x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mqt43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, -2)
+rotation = 0.872665
+shape = SubResource("CapsuleShape2D_evl7m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

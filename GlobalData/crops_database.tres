@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://d2p62i1e7w6fy"]
+
+[ext_resource type="Script" path="res://GlobalData/crops_database.gd" id="1_c0b4g"]
+
+[resource]
+script = ExtResource("1_c0b4g")
+crop_count = 0

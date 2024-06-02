@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://titluce4as8l"]
+
+[ext_resource type="Script" path="res://UI/slot.gd" id="1_dqwtn"]
+[ext_resource type="Texture2D" uid="uid://hk0j67e6256l" path="res://resources/carrot.png" id="1_yc73e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s26f2"]
+atlas = ExtResource("1_yc73e")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t2ngk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s26f2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Slot_0" type="ColorRect"]
+custom_minimum_size = Vector2(32, 32)
+offset_left = 35.0
+offset_top = 41.0
+offset_right = 67.0
+offset_bottom = 73.0
+color = Color(0.635294, 0.635294, 0.635294, 0.317647)
+script = ExtResource("1_dqwtn")
+
+[node name="Image" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, 16)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_t2ngk")
+
+[node name="Number" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 32.0
+offset_bottom = 35.0
+text = "0"
+horizontal_alignment = 2

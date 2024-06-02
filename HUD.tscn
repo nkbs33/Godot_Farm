@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://06c1ij3vamrq"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_ei6h2"]
+[ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://backpack_ui.tscn" id="2_3a116"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_ei6h2")
+
+[node name="Time" type="Label" parent="."]
+offset_left = 1001.0
+offset_top = 4.0
+offset_right = 1199.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 25
+text = "Tue 14:00 "
+
+[node name="Step" type="Button" parent="."]
+visible = false
+offset_left = 23.0
+offset_top = 582.0
+offset_right = 104.0
+offset_bottom = 634.0
+theme_override_font_sizes/font_size = 31
+text = "step"
+
+[node name="BackpackUI" parent="." instance=ExtResource("2_3a116")]
+visible = false
+
+[connection signal="pressed" from="Step" to="." method="_on_step_pressed"]
