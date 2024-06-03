@@ -11,8 +11,6 @@ func _process(delta):
 
 
 func _on_player_toggle_backpack():
-	if $BackpackUI.visible:
-		$BackpackUI.hide()
-	else:
-		$BackpackUI.show()
+	$BackpackUI.toggle_visible()
+
 		

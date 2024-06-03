@@ -74,9 +74,9 @@ func set_crops(coord, type, override=false):
 	
 func set_wet(coord, is_wet):
 	if is_wet:
-		$Ground.set_cell(GROUND_LAYER, coord, 3, Vector2(1,0))
+		$Ground.set_cell(GROUND_LAYER, coord, 0, Vector2(0,1))
 	else:
-		$Ground.set_cell(GROUND_LAYER, coord, 3, Vector2(0,0))
+		$Ground.set_cell(GROUND_LAYER, coord, 0, Vector2(0,0))
 
 func handle_interaction():
 	var crops_name = crops_manager.get_crops(player_coord)
@@ -92,10 +92,9 @@ func drop_crop():
 	add_child(carrot)
 
 func handle_use_item(item):
-	var soil_source = tile_set.get_source(3)
-	var td = get_tile_data(player_coord, GROUND_LAYER, soil_source)
-	var ground_name = td.get_custom_data("name")
-	if ground_name == "soil":
+	var td = get_tile_data(player_coord, GROUND_LAYER, ground_source)
+	var soil_name = td.get_custom_data("name")
+	if soil_name == "soil":
 		if item == "carrot_seed":
 			crops_manager.set_crops(player_coord, "carrot_seed")
 		elif item == "water":

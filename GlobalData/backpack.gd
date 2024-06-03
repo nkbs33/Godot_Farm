@@ -22,5 +22,9 @@ func add_item(name):
 	if name=="carrot":
 		items[0].amount += 1
 		item_num_change.emit(0, items[0].amount)
-
+		
+func change_item_num(id, change):
+	if id == 0:
+		items[id].amount += change
+		item_num_change.emit(0, items[0].amount)
 	

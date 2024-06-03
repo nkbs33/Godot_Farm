@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://06c1ij3vamrq"]
 
-[ext_resource type="Script" path="res://HUD.gd" id="1_ei6h2"]
-[ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://backpack_ui.tscn" id="2_3a116"]
+[ext_resource type="Script" path="res://UI/HUD.gd" id="1_ei6h2"]
+[ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://UI/backpack_ui.tscn" id="2_3a116"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ei6h2")
