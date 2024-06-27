@@ -3,8 +3,8 @@ extends Node2D
 @export var carrot_scene : PackedScene
 var player_coord = Vector2i(0,0)
 const GROUND_LAYER = 0
-const CROPS_LAYER = 1
-
+const CROPS_LAYER = 2
+const CROPS_SOURCE = 0
 
 var tile_set
 var ground_source
@@ -33,7 +33,7 @@ func init_crop_data():
 	backpack_data = get_node("/root/GlobalDataManager/BackpackData")
 
 
-func respond(world_pos):
+func set_player_position(world_pos):
 	player_coord = $Ground.local_to_map($Ground.to_local(world_pos))
 	$GroundUI.player_pos = $Ground.map_to_local(player_coord)
 

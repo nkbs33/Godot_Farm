@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr71b8du7r676"
-path="res://.godot/imported/pixilart-sprite.png-34e1e20758c9144044a44cfad72a3226.ctex"
+uid="uid://bx51vra31ry2i"
+path="res://.godot/imported/Fences.png-340ce76c2e41fa1d44bfe57a322884f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/pixilart-sprite.png"
-dest_files=["res://.godot/imported/pixilart-sprite.png-34e1e20758c9144044a44cfad72a3226.ctex"]
+source_file="res://resources/tilesheets/Fences.png"
+dest_files=["res://.godot/imported/Fences.png-340ce76c2e41fa1d44bfe57a322884f2.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

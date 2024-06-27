@@ -2,49 +2,46 @@ extends CharacterBody2D
 @export var speed = 300.0
 var direction = Vector2(0, 1)
 
-signal query_coords(world_pos)
 signal interact()
 signal use_item(item)
 signal toggle_backpack()
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var backpack_data
-
-func _ready():
-	backpack_data = get_node("/root/GlobalDataManager/BackpackData")
+var effective_position = Vector2()
+@onready var backpack_data = get_node("/root/GlobalDataManager/BackpackData")
+@onready var animation_player = $AnimationPlayer
+@onready var animation_tree = $AnimationTree
+@onready var state_machine = $AnimationTree["parameters/playback"]
+#parameters/walk/blend_position
 
 func _physics_process(delta):
-	velocity = Vector2.ZERO
+	var inputVec = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
+		inputVec.x += 1
 	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
+		inputVec.x -= 1
 	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
+		inputVec.y -= 1
 	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if velocity.length()>0:
-		direction = velocity
-		velocity = velocity.normalized() * speed
-	# print(velocity)
+		inputVec.y += 1
+	if inputVec.length()>0:
+		direction = inputVec
+		velocity = inputVec.normalized() * speed
+	else:
+		velocity = Vector2.ZERO
 	
 	move_and_slide()
 	
-	if velocity.length()>0:
-		if velocity.y == 0:
-			$AnimatedSprite2D.animation = "walk"
-			if velocity.x < 0:
-				$AnimatedSprite2D.flip_h = true
-			else:
-				$AnimatedSprite2D.flip_h = false
-		elif velocity.y > 0:
-			$AnimatedSprite2D.animation = "walk_down"
+	if inputVec.length()>0:
+		if inputVec.x < 0:
+			$Sprite2D.flip_h = true
 		else:
-			$AnimatedSprite2D.animation = "walk_up"
-		$AnimatedSprite2D.play()
-		
+			$Sprite2D.flip_h = false
+		state_machine.travel("walk")
+		animation_tree.set("parameters/walk/blend_position", inputVec)
+		pass
 	else:
-		$AnimatedSprite2D.animation = "idle"
+		state_machine.travel("idle")
 
 func _unhandled_input(event):
 	if event is InputEventKey:
@@ -59,7 +56,7 @@ func _unhandled_input(event):
 				toggle_backpack.emit()
 
 func _process(delta):
-	query_coords.emit(global_position + direction * 10)
+	effective_position = global_position + direction * 10
 	
 func collect(item):
 	if backpack_data.num_empty == 0:

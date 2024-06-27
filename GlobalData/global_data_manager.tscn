@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjotv7ukgspg7"]
 
-[ext_resource type="Script" path="res://crops_manager.gd" id="1_ponkl"]
+[ext_resource type="Script" path="res://GlobalData/crops_manager.gd" id="1_ponkl"]
 [ext_resource type="Script" path="res://GlobalData/backpack.gd" id="2_vw8hk"]
 
 [node name="GlobalDataManager" type="Node"]
