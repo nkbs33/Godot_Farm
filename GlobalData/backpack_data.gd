@@ -4,11 +4,12 @@ signal item_num_change(index, num)
 
 @export var items = []
 var num_empty = 0
+const NUM_SLOTS = 256
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	items.resize(5)
-	num_empty = 5
+	items.resize(NUM_SLOTS)
+	num_empty = NUM_SLOTS
 	items[0] = {"name":"carrot", "amount":0}
 
 func is_full():

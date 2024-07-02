@@ -1,48 +1,47 @@
 extends CanvasLayer
-signal set_player_input(enable)
+signal set_player_controllable(enable)
 
-var focus:String = ""
 var focus_element = null:
 	set(value):
-		set_player_input.emit(value==null)
+		set_player_controllable.emit(value==null)
 		focus_element = value
 			
 @onready var backpack = $Backpack
 @onready var dialog = $Dialogue
 
 func _ready():
+	initialize()
+
+func initialize():
 	$Backpack.hide()
 	$Dialogue.hide()
-		
+
 func close_current():
 	if focus_element != null:
-		focus_element.hide()
+		focus_element.toggle_visible(false)
 		focus_element = null
-	focus = ""
 
-func toggle_backpack():
-	if focus == "backpack":
+func show_panel(panel):
+	if focus_element:
+		return
+	panel.toggle_visible(true)
+	focus_element = panel
+
+func toggle_panel(panel):
+	if focus_element == panel: # already visible
 		close_current()
 		return
-	elif focus != "":
+	elif focus_element: # focusing others
 		return
-	focus = "backpack"
-	focus_element = backpack
-	focus_element.show()
+	focus_element = panel
+	panel.toggle_visible(true)
 
 func _on_player_toggle_panel(panel):
 	if panel=="backpack":
-		toggle_backpack()
+		toggle_panel(backpack)
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
-		if focus == "":
-			show_dialog()
-		if focus_element != null:
-			focus_element.handle_action("ui_accept")
-
-func show_dialog():
-	dialog.show()
-	dialog.dialog_index = -1
-	focus = "dialogue"
-	focus_element = dialog
+		if focus_element == null:
+			show_panel(dialog)
+		focus_element.handle_action("ui_accept")

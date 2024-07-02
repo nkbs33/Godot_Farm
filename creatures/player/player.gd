@@ -75,5 +75,5 @@ func collect(item):
 		backpack_data.add_item("carrot")
 		item.queue_free()
 
-func toggle_input_enable(enable):
-	input_enabled = enable
+func toggle_controllable(controllable):
+	input_enabled = controllable

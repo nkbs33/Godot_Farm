@@ -7,14 +7,14 @@
 size = Vector2(12.9441, 42.6365)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_htx1v"]
-size = Vector2(2.9396, 42.6365)
+size = Vector2(3, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5233n"]
-size = Vector2(2.94072, 5.51195)
+size = Vector2(3, 6.5)
 
 [node name="WoodBridge" type="Sprite2D"]
 position = Vector2(148, 280)
-scale = Vector2(1.69962, 1.78251)
+scale = Vector2(2, 2)
 texture = ExtResource("1_62vws")
 region_enabled = true
 region_rect = Rect2(0, 1.78314, 15.9435, 43.512)
@@ -30,11 +30,11 @@ shape = SubResource("RectangleShape2D_yyelf")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(8.23714, 0)
+position = Vector2(8.5, 0)
 shape = SubResource("RectangleShape2D_htx1v")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-8.23713, 0)
+position = Vector2(-8.5, 0)
 shape = SubResource("RectangleShape2D_htx1v")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
@@ -46,9 +46,9 @@ position = Vector2(5.569, 18.673)
 shape = SubResource("RectangleShape2D_5233n")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-5.454, -18.808)
+position = Vector2(-5.5, -18.75)
 shape = SubResource("RectangleShape2D_5233n")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(5.486, -18.808)
+position = Vector2(5.5, -18.75)
 shape = SubResource("RectangleShape2D_5233n")

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/backpack/item_menu.gd" id="1_b3bvv"]
 [ext_resource type="PackedScene" uid="uid://ptdk7stfpqt1" path="res://UI/backpack/sub_menu_item.tscn" id="2_jy23k"]
 
-[node name="GridContainer" type="GridContainer"]
+[node name="ItemSubMenu" type="GridContainer"]
 offset_right = 40.0
 offset_bottom = 58.0
 theme_override_constants/v_separation = 1
@@ -11,11 +11,11 @@ script = ExtResource("1_b3bvv")
 
 [node name="Entry_0" parent="." instance=ExtResource("2_jy23k")]
 layout_mode = 2
-text = "eat"
+text = "use"
 
 [node name="Entry_1" parent="." instance=ExtResource("2_jy23k")]
 layout_mode = 2
-text = "use"
+text = "hold"
 
 [node name="Entry_2" parent="." instance=ExtResource("2_jy23k")]
 layout_mode = 2

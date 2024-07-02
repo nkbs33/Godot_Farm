@@ -24,6 +24,7 @@ metadata/_edit_lock_ = true
 [node name="Dialogue" parent="." instance=ExtResource("3_sh8n1")]
 visible = false
 anchors_preset = -1
+text_speed = 3
 
 [node name="Gadgets" type="Control" parent="."]
 layout_mode = 3
@@ -46,5 +47,4 @@ theme_override_fonts/font = ExtResource("4_nemnt")
 theme_override_font_sizes/font_size = 18
 text = "Tue 14:00 "
 
-[connection signal="exit" from="Backpack" to="." method="close_current"]
 [connection signal="exit" from="Dialogue" to="." method="close_current"]
