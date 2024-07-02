@@ -1,18 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://06c1ij3vamrq"]
+[gd_scene load_steps=5 format=3 uid="uid://06c1ij3vamrq"]
 
-[ext_resource type="Script" path="res://UI/HUD.gd" id="1_ei6h2"]
-[ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://UI/backpack_ui.tscn" id="2_3a116"]
+[ext_resource type="Script" path="res://UI/HUD.gd" id="1_ichou"]
+[ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://UI/backpack/backpack_ui.tscn" id="2_sw0u6"]
+[ext_resource type="PackedScene" uid="uid://bcwy3ng4cq0nb" path="res://UI/Dialogue/dialogue.tscn" id="3_sh8n1"]
+[ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="4_nemnt"]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("1_ei6h2")
-
-[node name="Time" type="Label" parent="."]
-offset_left = 1001.0
-offset_top = 4.0
-offset_right = 1199.0
-offset_bottom = 61.0
-theme_override_font_sizes/font_size = 25
-text = "Tue 14:00 "
+script = ExtResource("1_ichou")
 
 [node name="Step" type="Button" parent="."]
 visible = false
@@ -23,17 +17,34 @@ offset_bottom = 634.0
 theme_override_font_sizes/font_size = 31
 text = "step"
 
-[node name="BackpackUI" parent="." instance=ExtResource("2_3a116")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -379.0
-offset_top = -80.0
-offset_right = 379.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Backpack" parent="." instance=ExtResource("2_sw0u6")]
+visible = false
+metadata/_edit_lock_ = true
 
-[connection signal="pressed" from="Step" to="." method="_on_step_pressed"]
+[node name="Dialogue" parent="." instance=ExtResource("3_sh8n1")]
+visible = false
+anchors_preset = -1
+
+[node name="Gadgets" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Time" type="Label" parent="Gadgets"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -74.0
+offset_bottom = 27.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_nemnt")
+theme_override_font_sizes/font_size = 18
+text = "Tue 14:00 "
+
+[connection signal="exit" from="Backpack" to="." method="close_current"]
+[connection signal="exit" from="Dialogue" to="." method="close_current"]

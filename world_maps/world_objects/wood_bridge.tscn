@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://ci4dsdvydwt18"]
+
+[ext_resource type="Texture2D" uid="uid://dwtoj60co51bn" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Wood_Bridge.png" id="1_62vws"]
+[ext_resource type="Script" path="res://world_maps/world_objects/bridge_area.gd" id="2_f13nm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyelf"]
+size = Vector2(12.9441, 42.6365)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htx1v"]
+size = Vector2(2.9396, 42.6365)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5233n"]
+size = Vector2(2.94072, 5.51195)
+
+[node name="WoodBridge" type="Sprite2D"]
+position = Vector2(148, 280)
+scale = Vector2(1.69962, 1.78251)
+texture = ExtResource("1_62vws")
+region_enabled = true
+region_rect = Rect2(0, 1.78314, 15.9435, 43.512)
+script = ExtResource("2_f13nm")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_yyelf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(8.23714, 0)
+shape = SubResource("RectangleShape2D_htx1v")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-8.23713, 0)
+shape = SubResource("RectangleShape2D_htx1v")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-5.424, 18.613)
+shape = SubResource("RectangleShape2D_5233n")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(5.569, 18.673)
+shape = SubResource("RectangleShape2D_5233n")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-5.454, -18.808)
+shape = SubResource("RectangleShape2D_5233n")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(5.486, -18.808)
+shape = SubResource("RectangleShape2D_5233n")

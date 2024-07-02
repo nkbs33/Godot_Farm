@@ -13,7 +13,7 @@ config_version=5
 config/name="NekobusPlanet"
 run/main_scene="res://demo.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://resources/icon.svg"
+config/icon="res://assets/images/icon.svg"
 
 [autoload]
 
@@ -21,9 +21,13 @@ GlobalDataManager="*res://GlobalData/global_data_manager.tscn"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/stretch/scale=4.0
+window/size/viewport_width=480
+window/size/viewport_height=270
+window/size/window_width_override=1440
+window/size/window_height_override=810
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
 
 [input]
 
@@ -52,3 +56,10 @@ move_down={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+viewport/stretch/mode="disabled"
+viewport/stretch/aspect="keep"
+viewport/stretch/scale_mode="integer"
+viewport/size/resizable=true
+viewport/stretch/scale=2.0
+viewport/size/viewport_height=480
+viewport/size/viewport_width=640

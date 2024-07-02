@@ -3,7 +3,7 @@ extends Node2D
 @export var carrot_scene : PackedScene
 var player_coord = Vector2i(0,0)
 const GROUND_LAYER = 0
-const CROPS_LAYER = 2
+const CROPS_LAYER = 3
 const CROPS_SOURCE = 0
 
 var tile_set
@@ -14,12 +14,14 @@ var seed_atlas_coord = Vector2i(0,0)
 var carrot_atlas_coord = Vector2i(1,0)
 var crops_manager
 var backpack_data
+@onready var ground = $GroundTileMap
+var player_pos
 
 func _ready():
-	tile_set = $Ground.tile_set
-	ground_source = tile_set.get_source(0)
+	tile_set = ground.tile_set
+	#ground_source = tile_set.get_source(0)
 	crops_source = tile_set.get_source(2)
-	init_crop_data()
+	#init_crop_data()
 
 func init_crop_data():
 	var ground = $Ground
@@ -34,12 +36,11 @@ func init_crop_data():
 
 
 func set_player_position(world_pos):
-	player_coord = $Ground.local_to_map($Ground.to_local(world_pos))
-	$GroundUI.player_pos = $Ground.map_to_local(player_coord)
-
+	player_coord = ground.local_to_map(ground.to_local(world_pos))
+	player_pos = ground.map_to_local(player_coord)
 
 func get_tile_data(coord, layer, source):
-	var atlas_coord = $Ground.get_cell_atlas_coords(layer, coord)
+	var atlas_coord = ground.get_cell_atlas_coords(layer, coord)
 	if atlas_coord == Vector2i(-1,-1):
 		return ""
 	var tile_data = source.get_tile_data(atlas_coord, 0)
@@ -58,7 +59,7 @@ func get_tile_crops(coord):
 
 # remove crop tile
 func remove_crops(coord):
-	$Ground.erase_cell(CROPS_LAYER, coord)
+	ground.erase_cell(CROPS_LAYER, coord)
 
 func set_crops(coord, type, override=false):	
 	var crop_coord = Vector2i(-1, -1)
@@ -69,14 +70,14 @@ func set_crops(coord, type, override=false):
 		crop_coord = carrot_atlas_coord
 	# apply crop
 	if crop_coord != Vector2i(-1, -1):
-		$Ground.set_cell(CROPS_LAYER, coord, 2, crop_coord)
+		ground.set_cell(CROPS_LAYER, coord, 2, crop_coord)
 		print ("add "+type)
 	
 func set_wet(coord, is_wet):
 	if is_wet:
-		$Ground.set_cell(GROUND_LAYER, coord, 0, Vector2(0,1))
+		ground.set_cell(GROUND_LAYER, coord, 0, Vector2(0,1))
 	else:
-		$Ground.set_cell(GROUND_LAYER, coord, 0, Vector2(0,0))
+		ground.set_cell(GROUND_LAYER, coord, 0, Vector2(0,0))
 
 func handle_interaction():
 	var crops_name = crops_manager.get_crops(player_coord)
@@ -88,7 +89,7 @@ func handle_interaction():
 
 func drop_crop():
 	var carrot = carrot_scene.instantiate()
-	carrot.position = $GroundUI.player_pos 
+	carrot.position = player_pos 
 	add_child(carrot)
 
 func handle_use_item(item):
@@ -103,3 +104,9 @@ func handle_use_item(item):
 	else:
 		print("not soil")
 
+func turn_off_player_collision():
+	print("!")
+	ground.tile_set.set_physics_layer_collision_mask(1, 0)
+
+func turn_on_player_collision():
+	ground.tile_set.set_physics_layer_collision_mask(1, 1)
