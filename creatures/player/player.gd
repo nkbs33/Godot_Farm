@@ -5,17 +5,22 @@ var direction = Vector2(0, 1)
 signal use_item(item)
 signal toggle_panel(panel)
 
+var global_data
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var effective_position = Vector2()
 var input_enabled:bool = true 
-@onready var backpack_data = get_node("/root/GlobalDataManager/BackpackData")
+# movement
 @onready var animation_player = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = $AnimationTree["parameters/playback"]
-
 var input_vec_nz = Vector2(0,1)
+# intearact
 var interactable_list = []
 
+func _ready():
+	global_data = get_node("/root/GlobalData")
+	global_data.player = self
+	
 func get_input_vec():
 	var inputVec = Vector2.ZERO
 	if not input_enabled:
@@ -48,29 +53,32 @@ func _physics_process(delta):
 		state_machine.travel("walk")
 		animation_tree.set("parameters/walk/blend_position", input_vec)
 		input_vec_nz = input_vec 
-		pass
 	else:
 		state_machine.travel("idle")
 		animation_tree.set("parameters/idle/blend_position", input_vec_nz)
 
 func _input(event):
+	if not input_enabled:
+		return
 	if event.is_action_pressed("backpack"):
 		toggle_panel.emit("backpack")
+		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("interact"):
 		interact()
+		get_viewport().set_input_as_handled()
 
 func _process(delta):
 	effective_position = global_position + direction * 10
 	
-func collect(item):
-	if backpack_data.num_empty == 0:
-			return
-	if item.name == "Carrot":
-		backpack_data.add_item("carrot")
-		item.queue_free()
+#func collect(item):
+	#if backpack_data.num_empty == 0:
+	#		return
+	#if item.name == "Carrot":
+	#	backpack_data.add_item("carrot")
+	#	item.queue_free()
 
-func toggle_controllable(controllable):
-	input_enabled = controllable
+func enable_control(enabled):
+	input_enabled = enabled
 
 func interact():
 	if interactable_list.size() == 0:

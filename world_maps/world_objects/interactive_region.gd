@@ -23,7 +23,10 @@ func on_body_exited(body):
 
 func on_interact():
 	var d = []
-	d.append({"name":"wood", "text":"Hi!"})
+	d.append({"name":"Wood", "text":"Hi!"})
+	d.append({"name":"White", "text":"Nice to meet you!"})
 	global_data.dialog_data = d
-	global_data.start_dialog()
+	global_data.start_dialog(on_interact_end)
 	
+func on_interact_end():
+	print("interact end")

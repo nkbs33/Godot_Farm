@@ -1,10 +1,9 @@
 extends CanvasLayer
-signal set_player_controllable(enable)
 
-var focus_element = null:
+var focus = null:
 	set(value):
-		set_player_controllable.emit(value==null)
-		focus_element = value
+		focus = value
+		global_data.player.enable_control(value==null)
 			
 @onready var backpack = $Backpack
 @onready var dialog = $Dialogue
@@ -19,42 +18,31 @@ func initialize():
 	global_data = get_node("/root/GlobalData")
 	global_data.hud = self
 
-func close_current():
-	focus_element = null
-
+# show only
 func show_panel(panel):
-	if focus_element:
+	if focus:
 		return
 	panel.toggle_visible(true)
-	focus_element = panel
 
+# switch show/hide automatically
 func toggle_panel(panel):
-	if focus_element == panel: # already visible
-		focus_element.toggle_visible(false)
+	if focus == panel: # already visible
+		focus.toggle_visible(false)
 		return
-	elif focus_element: # focusing others
+	elif focus: # focusing others
 		return
-	focus_element = panel
 	panel.toggle_visible(true)
 
 func toggle_panel_by_name(panel_name):
-	if panel_name == "dialog":
-		toggle_panel(dialog)
-	elif panel_name == "backpack":
+	if panel_name == "backpack":
 		toggle_panel(backpack)
 
 func _on_player_toggle_panel(panel):
 	if panel=="backpack":
 		toggle_panel(backpack)
 
-func _input(event):
-	if focus_element == null:
-		return
-	if event.is_action_pressed("ui_accept"):
-		focus_element.handle_action("ui_accept")
-
 func _process(delta):
-	if not focus_element or not $MoveTimer.is_stopped():
+	if not focus or not $MoveTimer.is_stopped():
 		return
 	var move_vec = Vector2(0,0) 
 	if Input.is_action_pressed("move_right"):
@@ -67,5 +55,5 @@ func _process(delta):
 		move_vec.y += 1
 	if move_vec == Vector2.ZERO:
 		return
-	if focus_element.move_by_vec(move_vec):
+	if focus.move_by_vec(move_vec):
 		$MoveTimer.start()

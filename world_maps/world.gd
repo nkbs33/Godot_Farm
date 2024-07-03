@@ -20,7 +20,7 @@ var player_pos
 func _ready():
 	tile_set = ground.tile_set
 	#ground_source = tile_set.get_source(0)
-	crops_source = tile_set.get_source(2)
+	#crops_source = tile_set.get_source(2)
 	#init_crop_data()
 
 func init_crop_data():

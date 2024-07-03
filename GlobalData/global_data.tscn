@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjotv7ukgspg7"]
+[gd_scene load_steps=4 format=3 uid="uid://do3cycmmbtnqj"]
 
 [ext_resource type="Script" path="res://GlobalData/global_data.gd" id="1_yux4g"]
 [ext_resource type="Script" path="res://GlobalData/crops_manager.gd" id="2_lnvip"]

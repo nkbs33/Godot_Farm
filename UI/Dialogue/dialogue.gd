@@ -1,9 +1,13 @@
 extends Control
-signal exit 
+signal finish 
 
 var global_data
-var dialog_index = -1
+var dialog_index = -1:
+	set(value):
+		dialog_index=value
+		update_dialog()
 var dialog_data
+var hud
 
 @export var smooth_display_enabled:bool = true
 @export var text_speed = 5
@@ -18,26 +22,33 @@ func _ready():
 	#dialog_data = JSON.parse_string(f.get_as_text())
 	var global_data = get_node("/root/GlobalData")
 	global_data.dialog_ui = self
+	hud = get_parent()
 
 func toggle_visible(vis):
 	visible = vis
-	dialog_index = -1
+	if vis:
+		hud.focus = self
+	else:
+		hud.focus = null
+		finish.emit()
+		var cs = finish.get_connections()
+		for c in cs:
+			finish.disconnect(c.callable)
 
 func start_dialog():
-	visible = true
+	toggle_visible(true)
 	dialog_index = 0
-	update_dialog()
 	smooth_display()
 
-func handle_action(action):
-	if action == "ui_accept" and not is_smooth_playing:
+func _input(event):
+	if not visible or is_smooth_playing:
+		return
+	if event.is_action_pressed("interact") or event.is_action_pressed("ui_cancel"):
 		dialog_index += 1
-		update_dialog()
 		
 func update_dialog():
 	if dialog_index >= dialog_data.size():
 		toggle_visible(false)
-		exit.emit()
 		return
 	d_name.text = "[center]"+dialog_data[dialog_index]["name"]+"[/center]"
 	d_text.text = dialog_data[dialog_index]["text"]

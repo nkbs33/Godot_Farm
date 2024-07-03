@@ -1,7 +1,7 @@
 extends Control
-signal exit 
 
 const NUM_SLOTS_ROW = 9
+var hud
 var backpack_data
 var slots
 var item_menu
@@ -16,7 +16,7 @@ var focus = null
 		item_menu.toggle_visible(false)
 
 func get_slot(idx):
-	return slots.get_node("Slot_"+str(idx))
+	return slots.get_child((idx))
 func get_item_data(idx):
 	return backpack_data.items[idx]
 func check_valid(idx):
@@ -29,6 +29,7 @@ func _ready():
 	item_menu.hide()
 	current_index = 0
 	connect_to_data()
+	hud = get_parent()
 
 func connect_to_data():
 	backpack_data = get_node("/root/GlobalData/Backpack")
@@ -37,14 +38,12 @@ func connect_to_data():
 	backpack_data.set_item_num(1, 2)
 
 func _on_backpack_item_num_change(index, num):
-	slots.get_node("Slot_"+str(index)).num = num
+	get_slot(index).num = num
 
 func toggle_visible(vis):
-	item_menu.hide()
-	focus = null
+	item_menu.toggle_visible(false)
 	visible = vis
-	if not vis:
-		exit.emit()
+	hud.focus = self if vis else null
 	
 func reduce_item():
 	backpack_data.change_item_num(current_index, -1)
@@ -58,11 +57,11 @@ func move_by_vec(vec):
 	return true 
 	
 func _input(event):
-	if not visible:
+	if not visible or focus:
 		return
-	if event.is_action_pressed("ui_cancel") and not focus:
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("backpack"):
 		toggle_visible(false)
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("interact"):
 		if check_valid(current_index):
 			item_menu.toggle_visible(true)
 			focus = item_menu

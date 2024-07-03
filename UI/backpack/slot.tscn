@@ -36,6 +36,7 @@ pivot_offset = Vector2(8, 8)
 
 [node name="Background" type="Panel" parent="Container"]
 clip_contents = true
+layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 12.0
@@ -51,9 +52,10 @@ region_rect = Rect2(1, 33, 14, 14)
 
 [node name="Number" type="Label" parent="Container"]
 layout_mode = 0
-offset_top = 10.3333
-offset_right = 33.0
-offset_bottom = 23.3333
+offset_left = -2.0
+offset_top = 8.3333
+offset_right = 31.0
+offset_bottom = 21.3333
 scale = Vector2(0.6, 0.6)
 theme_override_colors/font_color = Color(0.317758, 0.191793, 7.21961e-08, 1)
 theme_override_fonts/font = ExtResource("3_6mavy")

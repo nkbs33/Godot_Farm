@@ -50,6 +50,3 @@ text = "Tue 14:00 "
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
-
-[connection signal="exit" from="Backpack" to="." method="close_current"]
-[connection signal="exit" from="Dialogue" to="." method="close_current"]

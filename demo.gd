@@ -2,11 +2,9 @@ extends Node2D
 @export var crop_stats: Resource
 var crop_manager
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	crop_manager = get_node("/root/GlobalDataManager/CropsManager")
+	crop_manager = get_node("/root/GlobalData/Crops")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if $Player:
 		$World.set_player_position($Player.effective_position)	
