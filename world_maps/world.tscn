@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bhkgus15wirc7" path="res://assets/images/Sprout Lands - Sprites - Basic pack/tilesheets/Hills.png" id="5_lqlrc"]
 [ext_resource type="Texture2D" uid="uid://bc7lw2bya0vj1" path="res://assets/images/Sprout Lands - Sprites - Basic pack/tilesheets/Wooden House.png" id="6_pynql"]
 [ext_resource type="Texture2D" uid="uid://bntybdrqogiks" path="res://assets/images/Sprout Lands - Sprites - Basic pack/tilesheets/Water.png" id="7_5a2kl"]
+[ext_resource type="PackedScene" uid="uid://cxl5gt4xsydm5" path="res://world_maps/world_objects/small_tree.tscn" id="9_7668q"]
 [ext_resource type="PackedScene" uid="uid://ci4dsdvydwt18" path="res://world_maps/world_objects/wood_bridge.tscn" id="9_awshj"]
 [ext_resource type="PackedScene" uid="uid://c16s0aqkgc2um" path="res://world_maps/world_objects/tree_common.tscn" id="10_iknnk"]
-[ext_resource type="PackedScene" uid="uid://cxl5gt4xsydm5" path="res://world_maps/world_objects/tree_2.tscn" id="12_4fitm"]
 [ext_resource type="Texture2D" uid="uid://0tywlfk8r4ab" path="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/Farming Plants.png" id="12_51ycv"]
 [ext_resource type="Texture2D" uid="uid://ca2chdgre443" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png" id="12_70ge8"]
 [ext_resource type="PackedScene" uid="uid://de5fm804rxt0a" path="res://world_maps/world_objects/chop_wood.tscn" id="12_vh0os"]
@@ -882,7 +882,7 @@ position = Vector2(-153, 375)
 [node name="TreeCommon5" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
 position = Vector2(528, 64)
 
-[node name="Tree2" parent="WorldObjects/Woods" instance=ExtResource("12_4fitm")]
+[node name="SmallTree" parent="WorldObjects/Woods" instance=ExtResource("9_7668q")]
 position = Vector2(271, 225)
 
 [node name="wood" parent="WorldObjects/Woods" instance=ExtResource("12_vh0os")]

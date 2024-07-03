@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://de5fm804rxt0a"]
+[gd_scene load_steps=6 format=3 uid="uid://de5fm804rxt0a"]
 
 [ext_resource type="Texture2D" uid="uid://ca2chdgre443" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png" id="1_2rrv0"]
+[ext_resource type="Script" path="res://world_maps/world_objects/interactive_region.gd" id="2_n586v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yrxk"]
 size = Vector2(16, 4.505)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axgxs"]
+size = Vector2(16, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8crd"]
+size = Vector2(26, 11)
 
 [node name="wood" type="Sprite2D"]
 z_index = 5
@@ -18,3 +25,14 @@ region_rect = Rect2(80, 35, 16, 9)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -0.7475)
 shape = SubResource("RectangleShape2D_1yrxk")
+
+[node name="InteractiveRegion" type="Area2D" parent="."]
+script = ExtResource("2_n586v")
+
+[node name="ShapeV" type="CollisionShape2D" parent="InteractiveRegion"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_axgxs")
+
+[node name="ShapeH" type="CollisionShape2D" parent="InteractiveRegion"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_k8crd")

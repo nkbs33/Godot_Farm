@@ -1,6 +1,7 @@
 extends Control
 signal exit 
 
+var global_data
 var dialog_index = -1
 var dialog_data
 
@@ -13,12 +14,20 @@ var smooth_play_timer:float
 @onready var d_text = $Box.get_node("Text")
 
 func _ready():
-	var f = FileAccess.open("res://UI/Dialogue/assets/dialog_file.json", FileAccess.READ)
-	dialog_data = JSON.parse_string(f.get_as_text())
+	#var f = FileAccess.open("res://UI/Dialogue/assets/dialog_file.json", FileAccess.READ)
+	#dialog_data = JSON.parse_string(f.get_as_text())
+	var global_data = get_node("/root/GlobalData")
+	global_data.dialog_ui = self
 
 func toggle_visible(vis):
 	visible = vis
 	dialog_index = -1
+
+func start_dialog():
+	visible = true
+	dialog_index = 0
+	update_dialog()
+	smooth_display()
 
 func handle_action(action):
 	if action == "ui_accept" and not is_smooth_playing:
@@ -27,6 +36,7 @@ func handle_action(action):
 		
 func update_dialog():
 	if dialog_index >= dialog_data.size():
+		toggle_visible(false)
 		exit.emit()
 		return
 	d_name.text = "[center]"+dialog_data[dialog_index]["name"]+"[/center]"
@@ -52,3 +62,6 @@ func increase_display_length():
 	d_text.visible_characters += 1
 	if d_text.visible_characters == dialog_data[dialog_index]["text"].length():
 		is_smooth_playing = false
+
+func move_by_vec(vec):
+	return false 

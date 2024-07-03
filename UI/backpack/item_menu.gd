@@ -12,27 +12,25 @@ var length = 3
 func _input(event):
 	if not visible:
 		return
-	
 	if event.is_action_pressed("ui_accept"):
 		get_viewport().set_input_as_handled()
 		if current_index == 0:
 			backpack.reduce_item()
-		else:
-			toggle_visible(false)
+		toggle_visible(false)
 		if not backpack.check_valid(backpack.current_index):
 			toggle_visible(false)
-		
-	if event.is_action_pressed("move_down"):
-		current_index += 1
+	elif event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("move_up"):
-		current_index -= 1			
-		get_viewport().set_input_as_handled()
+		toggle_visible(false)
+
+func move_by_vec(vec):
+	current_index += vec.y
+	return true
 
 func toggle_visible(vis):
 	visible = vis
+	current_index = 0
 	if vis:
-		backpack.focus = "item_submenu"
-		current_index = 0
+		backpack.focus = self
 	else:
-		backpack.focus = "slots"
+		backpack.focus = null

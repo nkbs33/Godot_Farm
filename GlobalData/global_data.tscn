@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjotv7ukgspg7"]
+
+[ext_resource type="Script" path="res://GlobalData/global_data.gd" id="1_yux4g"]
+[ext_resource type="Script" path="res://GlobalData/crops_manager.gd" id="2_lnvip"]
+[ext_resource type="Script" path="res://GlobalData/backpack_data.gd" id="3_krf3s"]
+
+[node name="GlobalData" type="Node"]
+script = ExtResource("1_yux4g")
+
+[node name="Crops" type="Node" parent="."]
+script = ExtResource("2_lnvip")
+
+[node name="Backpack" type="Node" parent="."]
+script = ExtResource("3_krf3s")

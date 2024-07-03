@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxl5gt4xsydm5"]
 
-[ext_resource type="Texture2D" uid="uid://ca2chdgre443" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png" id="1_i7y0e"]
+[ext_resource type="Texture2D" uid="uid://ca2chdgre443" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png" id="1_qagwg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2lh"]
 size = Vector2(6, 4)
 
-[node name="Tree2" type="Sprite2D"]
+[node name="SmallTree" type="Sprite2D"]
 z_index = 5
 y_sort_enabled = true
-texture = ExtResource("1_i7y0e")
+texture = ExtResource("1_qagwg")
 offset = Vector2(0, -11.54)
 region_enabled = true
 region_rect = Rect2(1, 0, 14, 27)

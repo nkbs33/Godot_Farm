@@ -2,7 +2,6 @@ extends CharacterBody2D
 @export var speed = 300.0
 var direction = Vector2(0, 1)
 
-signal interact()
 signal use_item(item)
 signal toggle_panel(panel)
 
@@ -15,6 +14,7 @@ var input_enabled:bool = true
 @onready var state_machine = $AnimationTree["parameters/playback"]
 
 var input_vec_nz = Vector2(0,1)
+var interactable_list = []
 
 func get_input_vec():
 	var inputVec = Vector2.ZERO
@@ -53,17 +53,11 @@ func _physics_process(delta):
 		state_machine.travel("idle")
 		animation_tree.set("parameters/idle/blend_position", input_vec_nz)
 
-func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed:
-			if event.keycode == KEY_J:
-				interact.emit()
-			if event.keycode == KEY_I:
-				use_item.emit("carrot_seed")
-			if event.keycode == KEY_K:
-				use_item.emit("water")
-			if event.keycode == KEY_E:
-				toggle_panel.emit("backpack")
+func _input(event):
+	if event.is_action_pressed("backpack"):
+		toggle_panel.emit("backpack")
+	elif event.is_action_pressed("interact"):
+		interact()
 
 func _process(delta):
 	effective_position = global_position + direction * 10
@@ -77,3 +71,15 @@ func collect(item):
 
 func toggle_controllable(controllable):
 	input_enabled = controllable
+
+func interact():
+	if interactable_list.size() == 0:
+		return
+	var i = interactable_list[0]
+	i.on_interact()
+	
+func add_interactable(item):
+	interactable_list.append(item)
+
+func remove_interactable(item):
+	interactable_list.erase(item)
