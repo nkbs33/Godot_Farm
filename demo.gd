@@ -5,10 +5,6 @@ var crop_manager
 func _ready():
 	crop_manager = get_node("/root/GlobalData/Crops")
 
-func _process(_delta):
-	if $Player:
-		$World.set_player_position($Player.effective_position)	
-
 func _on_player_interact():
 	$World.handle_interaction()
 	

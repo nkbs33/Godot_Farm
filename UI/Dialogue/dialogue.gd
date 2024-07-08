@@ -43,7 +43,7 @@ func start_dialog():
 func _input(event):
 	if not visible or is_smooth_playing:
 		return
-	if event.is_action_pressed("interact") or event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("interact") or event.is_action_pressed("cancel"):
 		dialog_index += 1
 		
 func update_dialog():

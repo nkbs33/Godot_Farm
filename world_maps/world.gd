@@ -15,14 +15,26 @@ var carrot_atlas_coord = Vector2i(1,0)
 var crops_manager
 var backpack_data
 @onready var ground = $GroundTileMap
+
+var global_data
+var player
 var player_pos
 
 func _ready():
+	global_data = get_node("/root/GlobalData")
+	global_data.world = self
+	player = global_data.player
 	tile_set = ground.tile_set
 	#ground_source = tile_set.get_source(0)
 	#crops_source = tile_set.get_source(2)
 	#init_crop_data()
 
+func _process(_delta):
+	if player:
+		var pos = player.effective_pos()
+		player_coord = ground.local_to_map(ground.to_local(pos))
+		player_pos = ground.map_to_local(player_coord)
+	
 func init_crop_data():
 	var ground = $Ground
 	var crop_cells = ground.get_used_cells(CROPS_LAYER)
@@ -33,11 +45,6 @@ func init_crop_data():
 	crops_manager.world = self
 	crops_manager.crops_data = data
 	backpack_data = get_node("/root/GlobalDataManager/BackpackData")
-
-
-func set_player_position(world_pos):
-	player_coord = ground.local_to_map(ground.to_local(world_pos))
-	player_pos = ground.map_to_local(player_coord)
 
 func get_tile_data(coord, layer, source):
 	var atlas_coord = ground.get_cell_atlas_coords(layer, coord)

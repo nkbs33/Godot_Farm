@@ -13,7 +13,6 @@ var input_enabled:bool = true
 @onready var animation_player = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = $AnimationTree["parameters/playback"]
-var input_vec_nz = Vector2(0,1)
 # intearact
 var interactable_list = []
 
@@ -49,13 +48,11 @@ func _physics_process(delta):
 			$Sprite2D.flip_h = true
 		else:
 			$Sprite2D.flip_h = false
-		
 		state_machine.travel("walk")
 		animation_tree.set("parameters/walk/blend_position", input_vec)
-		input_vec_nz = input_vec 
 	else:
 		state_machine.travel("idle")
-		animation_tree.set("parameters/idle/blend_position", input_vec_nz)
+		animation_tree.set("parameters/idle/blend_position", direction)
 
 func _input(event):
 	if not input_enabled:
@@ -67,8 +64,8 @@ func _input(event):
 		interact()
 		get_viewport().set_input_as_handled()
 
-func _process(delta):
-	effective_position = global_position + direction * 10
+func effective_pos():
+	return global_position + direction * 2
 	
 #func collect(item):
 	#if backpack_data.num_empty == 0:

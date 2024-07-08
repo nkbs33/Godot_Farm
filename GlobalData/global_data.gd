@@ -1,14 +1,17 @@
 extends Node
 
-# global references
+# ==== global references ====
+# ui
 var hud:CanvasLayer
 var dialog_ui
-var dialog_data = []
+var tile_focus
+# game object
 var player
+var world
 
 # global function
-func start_dialog(callback=null):
-	dialog_ui.dialog_data = dialog_data
+func start_dialog(dialog_data_, callback=null):
+	dialog_ui.dialog_data = dialog_data_
 	hud.toggle_panel_by_name("dialog")
 	if callback:
 		dialog_ui.finish.connect(callback)
