@@ -8,6 +8,7 @@ var focus = null:
 @onready var backpack = $Backpack
 @onready var dialog = $Dialogue
 var global_data
+var viewport_pos
 
 func _ready():
 	initialize()

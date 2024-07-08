@@ -20,11 +20,11 @@ metadata/_edit_lock_ = true
 [node name="HUD" parent="." instance=ExtResource("3_grrx6")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(189, 224)
+position = Vector2(146, 179)
 
 [node name="Player" parent="." instance=ExtResource("6_ebqgk")]
 z_index = 5
-position = Vector2(189, 224)
+position = Vector2(146, 179)
 metadata/_edit_group_ = true
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]

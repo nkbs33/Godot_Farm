@@ -1,6 +1,9 @@
 extends CharacterBody2D
-@export var speed = 300.0
+@export var max_speed = 75.0
+@export var speed_lerp = 0.5
+var speed
 var direction = Vector2(0, 1)
+var last_y = 0
 
 signal use_item(item)
 signal toggle_panel(panel)
@@ -38,8 +41,10 @@ func _physics_process(delta):
 	var input_vec = get_input_vec()
 	if input_vec.length()>0:
 		direction = input_vec
+		speed = (1-speed_lerp)*speed + speed_lerp*max_speed
 		velocity = input_vec.normalized() * speed
 	else:
+		speed = 0
 		velocity = Vector2.ZERO
 	move_and_slide()
 	
@@ -65,7 +70,7 @@ func _input(event):
 		get_viewport().set_input_as_handled()
 
 func effective_pos():
-	return global_position + direction * 2
+	return global_position + direction * 4
 	
 #func collect(item):
 	#if backpack_data.num_empty == 0:

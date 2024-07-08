@@ -1,18 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://06c1ij3vamrq"]
+[gd_scene load_steps=5 format=3 uid="uid://06c1ij3vamrq"]
 
 [ext_resource type="Script" path="res://UI/HUD.gd" id="1_ichou"]
 [ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://UI/backpack/backpack_ui.tscn" id="2_sw0u6"]
 [ext_resource type="PackedScene" uid="uid://bcwy3ng4cq0nb" path="res://UI/Dialogue/dialogue.tscn" id="3_sh8n1"]
 [ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="4_nemnt"]
-[ext_resource type="Script" path="res://UI/tile_focus.gd" id="5_87rdg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wd2wd"]
-bg_color = Color(1, 1, 1, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.982343, 0.982342, 0.982342, 1)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ichou")
@@ -55,13 +46,6 @@ grow_horizontal = 0
 theme_override_fonts/font = ExtResource("4_nemnt")
 theme_override_font_sizes/font_size = 18
 text = "Tue 14:00 "
-
-[node name="TileFocus" type="Panel" parent="Gadgets"]
-layout_mode = 0
-offset_right = 16.0
-offset_bottom = 16.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_wd2wd")
-script = ExtResource("5_87rdg")
 
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 0.2

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c213amf3baau1"]
 
-[ext_resource type="Script" path="res://UI/backpack/BackpackUI.gd" id="1_2mxit"]
+[ext_resource type="Script" path="res://UI/backpack/backpack_ui.gd" id="1_2mxit"]
 [ext_resource type="PackedScene" uid="uid://titluce4as8l" path="res://UI/backpack/slot.tscn" id="2_omvs3"]
 [ext_resource type="PackedScene" uid="uid://p6qo48yl7ndd" path="res://UI/backpack/sub_menu.tscn" id="3_mkn03"]
 
