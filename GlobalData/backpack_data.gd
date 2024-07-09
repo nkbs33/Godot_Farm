@@ -1,30 +1,48 @@
 extends Node
 
-signal item_num_change(index, num)
+signal item_num_change(index)
 
 @export var items = []
 var num_empty = 0
-const NUM_SLOTS = 32
+const num_slots = 9
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	items.resize(NUM_SLOTS)
-	num_empty = NUM_SLOTS
-	items[0] = {"name":"carrot", "amount":0}
-	items[1] = {"name":"carrot", "amount":0}
+	items.resize(num_slots)
+	num_empty = num_slots
+	for i in range(num_slots):
+		items[i] = {"name":"", "amount":0}
 
-func is_full():
-	return num_empty > 0
-	
-func add_item(name):
-	if name=="carrot":
-		items[0].amount += 1
-		item_num_change.emit(0, items[0].amount)
+func get_empty_slot():
+	for i in range(num_slots):
+		if items[i].amount == 0:
+			return i
+	return -1
+
+func find_item(name_):
+	for i in range(num_slots):
+		if items[i] and items[i].name == name_:
+			return i
+	return -1
+
+func add_item(name_):
+	var idx = find_item(name_)
+	if idx >= 0:
+		items[idx].amount += 1
+		item_num_change.emit(idx)
+		return idx
+	idx = get_empty_slot()
+	if idx >= 0:
+		items[idx].name = name_
+		items[idx].amount = 1
+		item_num_change.emit(idx)
+		return idx
+	return -1
 
 func change_item_num(id, change):
 	items[id].amount += change
-	item_num_change.emit(id, items[id].amount)
+	item_num_change.emit(id)
 
 func set_item_num(id, num_):
 	items[id].amount = num_
-	item_num_change.emit(id, num_)
+	item_num_change.emit(id)

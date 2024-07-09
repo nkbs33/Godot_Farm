@@ -3,7 +3,6 @@ extends CharacterBody2D
 @export var speed_lerp = 0.5
 var speed
 var direction = Vector2(0, 1)
-var last_y = 0
 
 signal use_item(item)
 signal toggle_panel(panel)
@@ -68,13 +67,13 @@ func _input(event):
 	elif event.is_action_pressed("interact"):
 		interact()
 		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("cancel"):
+		global_data.set_crop()
 
 func effective_pos():
 	return global_position + direction * 4
 	
 #func collect(item):
-	#if backpack_data.num_empty == 0:
-	#		return
 	#if item.name == "Carrot":
 	#	backpack_data.add_item("carrot")
 	#	item.queue_free()
@@ -84,6 +83,7 @@ func enable_control(enabled):
 
 func interact():
 	if interactable_list.size() == 0:
+		global_data.on_player_interact()
 		return
 	var i = interactable_list[0]
 	i.on_interact()

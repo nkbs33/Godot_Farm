@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://jhouagerd4e2"]
+
+[ext_resource type="Texture2D" uid="uid://ca2chdgre443" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png" id="1_l6uti"]
+[ext_resource type="Script" path="res://world_maps/world_objects/interactive_region.gd" id="2_hd51s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4wxo"]
+size = Vector2(16, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hx6pm"]
+size = Vector2(26, 11)
+
+[node name="FlowerYellow" type="Sprite2D"]
+texture = ExtResource("1_l6uti")
+region_enabled = true
+region_rect = Rect2(99, 39, 9, 5)
+
+[node name="InteractiveRegion" type="Area2D" parent="."]
+script = ExtResource("2_hd51s")
+dialog = [{
+"name": "White",
+"text": "Wow, a little flower!"
+}]
+
+[node name="ShapeV" type="CollisionShape2D" parent="InteractiveRegion"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_m4wxo")
+
+[node name="ShapeH" type="CollisionShape2D" parent="InteractiveRegion"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_hx6pm")

@@ -2,7 +2,9 @@ extends Control
 
 @onready var image = $Container.get_node("Image")
 @onready var number = $Container.get_node("Number")
+@onready var bg = $Container.get_node("Background")
 
+@export var item_name:String
 @export var num:int:
 	set(value):
 		num = value
@@ -25,7 +27,10 @@ func on_num_change():
 	if num == 0:
 		image.hide()
 		number.hide()
+		bg.show()
 	else:
+		image.item_name = item_name
+		bg.hide()
 		image.show()
 		if num == 1:
 			number.hide()

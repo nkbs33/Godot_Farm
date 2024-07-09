@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://sa0r0wr3hl86"]
+
+[ext_resource type="Texture2D" uid="uid://didb38xmfnn4h" path="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/Items/farming-Plants-items.png" id="1_k3j4x"]
+[ext_resource type="Script" path="res://assets/item_resources/crop_item.gd" id="2_wmk5s"]
+
+[node name="CropItem" type="Sprite2D"]
+texture = ExtResource("1_k3j4x")
+hframes = 2
+vframes = 15
+frame = 29
+script = ExtResource("2_wmk5s")
+path = "res://assets/item_resources/crop_item.json"

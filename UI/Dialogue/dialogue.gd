@@ -71,7 +71,7 @@ func _process(delta):
 
 func increase_display_length():
 	d_text.visible_characters += 1
-	if d_text.visible_characters == dialog_data[dialog_index]["text"].length():
+	if d_text.visible_characters >= dialog_data[dialog_index]["text"].length():
 		is_smooth_playing = false
 
 func move_by_vec(vec):

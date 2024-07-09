@@ -4,6 +4,7 @@ extends Area2D
 var hasPlayer:bool = false 
 var player = null
 @onready var global_data = get_node("/root/GlobalData")
+@export var dialog = [{"name":"?", "text":"?"}]
 
 func _ready():
 	body_entered.connect(on_body_entered)
@@ -22,10 +23,7 @@ func on_body_exited(body):
 	body.remove_interactable(self)
 
 func on_interact():
-	var d = []
-	d.append({"name":"Wood", "text":"Hi!"})
-	d.append({"name":"White", "text":"Nice to meet you!"})
-	global_data.start_dialog(d, on_interact_end)
+	global_data.start_dialog(dialog, on_interact_end)
 	
 func on_interact_end():
 	print("interact end")

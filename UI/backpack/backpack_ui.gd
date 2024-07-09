@@ -27,6 +27,7 @@ func _ready():
 	slots = get_node("BackpackPanel/Slots")
 	item_menu = get_node("BackpackPanel/ItemMenu")
 	item_menu.hide()
+	item_menu.backpack = self
 	current_index = 0
 	connect_to_data()
 	hud = get_parent()
@@ -34,11 +35,10 @@ func _ready():
 func connect_to_data():
 	backpack_data = get_node("/root/GlobalData/Backpack")
 	backpack_data.item_num_change.connect(_on_backpack_item_num_change)
-	backpack_data.set_item_num(0, 1)
-	backpack_data.set_item_num(1, 2)
 
-func _on_backpack_item_num_change(index, num):
-	get_slot(index).num = num
+func _on_backpack_item_num_change(index):
+	get_slot(index).item_name = backpack_data.items[index].name
+	get_slot(index).num = backpack_data.items[index].amount
 
 func toggle_visible(vis):
 	item_menu.toggle_visible(false)

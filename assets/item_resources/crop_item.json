@@ -1,0 +1,17 @@
+[
+	{"name":"empty", "id":0},
+	{"name":"corn", "id":1},
+	{"name":"carrot", "id":2},
+	{"name":"cabbage", "id":3},
+	{"name":"tomato", "id":4},
+	{"name":"eggplant", "id":5},
+	{"name":"rose", "id":6},
+	{"name":"green", "id":7},
+	{"name":"stick", "id":8},
+	{"name":"pumpkin", "id":9},
+	{"name":"white_carrot", "id":10},
+	{"name":"flower", "id":11},
+	{"name":"purple_carrot", "id":12},
+	{"name":"star", "id":13},
+	{"name":"cucumber", "id":14},
+]

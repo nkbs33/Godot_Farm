@@ -1,7 +1,7 @@
 extends GridContainer
 
 var length = 3 
-@onready var backpack = get_parent().get_parent()
+var backpack
 
 @export var current_index:int:
 	set(value):
