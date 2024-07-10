@@ -1,0 +1,17 @@
+extends Node2D
+
+@onready var global_data = get_node("/root/GlobalData")
+@export var dialog_data = []
+
+func _ready():
+	var ir = get_parent().get_node("InteractiveRegion")
+	if not ir:
+		return
+	ir.s_interact_start.connect(on_interact)
+
+func on_interact():
+	if dialog_data.size() > 0:
+		global_data.start_dialog(dialog_data, on_dialog_end)
+
+func on_dialog_end():
+	print("dialog end")

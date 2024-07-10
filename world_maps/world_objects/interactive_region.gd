@@ -3,8 +3,9 @@ extends Area2D
 @export var text:String = "interactive region placehold"
 var hasPlayer:bool = false 
 var player = null
-@onready var global_data = get_node("/root/GlobalData")
-@export var dialog = [{"name":"?", "text":"?"}]
+
+signal s_interact_start
+signal s_interact_end
 
 func _ready():
 	body_entered.connect(on_body_entered)
@@ -23,7 +24,4 @@ func on_body_exited(body):
 	body.remove_interactable(self)
 
 func on_interact():
-	global_data.start_dialog(dialog, on_interact_end)
-	
-func on_interact_end():
-	print("interact end")
+	s_interact_start.emit()

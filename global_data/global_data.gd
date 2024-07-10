@@ -28,4 +28,12 @@ func on_player_interact():
 	crop_data.remove_crop(coord)
 
 func set_crop():
-	crop_data.set_crop(world.player_coord, "cabbage")
+	crop_data.set_crop(world.player_coord, "green")
+
+func pickup_item(item):
+	backpack.add_item(item)
+
+func use_backpack_item(idx):
+	var item_name = backpack.items[idx].name
+	print("use "+item_name)	
+	backpack.change_item_num(idx, -1)

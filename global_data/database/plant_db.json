@@ -1,0 +1,17 @@
+[
+	{
+		"name": "carrot",
+		"coord": "Vector2i(0,2)",
+		"sequence": [
+			{
+				"duration": 1
+			},
+			{
+				"duration": 1
+			},
+			{
+				"duration": 1
+			}
+		]
+	}
+]

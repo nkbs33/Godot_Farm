@@ -16,24 +16,17 @@ var selected:bool:
 		selected = value
 		if value:
 			$Container.scale = Vector2(1.3, 1.3)
-			#print(scale)
+			$Container.position = Vector2(0,-1)
 		else:
 			$Container.scale = Vector2(1, 1)
+			$Container.position = Vector2(0,0)
 
 func _ready():
 	on_num_change()
 
 func on_num_change():
-	if num == 0:
-		image.hide()
-		number.hide()
-		bg.show()
-	else:
-		image.item_name = item_name
-		bg.hide()
-		image.show()
-		if num == 1:
-			number.hide()
-		else:
-			number.show()
+	image.visible = num > 0
+	number.visible = num > 1
+	bg.visible = num == 0
+	image.item_name = item_name
 		

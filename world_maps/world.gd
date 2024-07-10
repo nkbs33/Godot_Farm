@@ -20,9 +20,6 @@ func track_player():
 	player_coord = ground_tile_map.local_to_map(ground_tile_map.to_local(player_pos))
 	tile_focus.position = ground_tile_map.map_to_local(player_coord) - Vector2(8,8)
 
-func set_crop():	
-	var atlas = Vector2i(3, 7)
-	crop_tile_map.set_crop(player_coord, atlas)
 	
 func handle_interaction():
 	crop_tile_map.handle_interaction(player_coord)

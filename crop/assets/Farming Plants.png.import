@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0tywlfk8r4ab"
-path="res://.godot/imported/Farming Plants.png-4d519862a637cd0db0a04aaaaab15e1e.ctex"
+path="res://.godot/imported/Farming Plants.png-170d796577016a3e8762922106c57f3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/Farming Plants.png"
-dest_files=["res://.godot/imported/Farming Plants.png-4d519862a637cd0db0a04aaaaab15e1e.ctex"]
+source_file="res://crop/assets/Farming Plants.png"
+dest_files=["res://.godot/imported/Farming Plants.png-170d796577016a3e8762922106c57f3b.ctex"]
 
 [params]
 

@@ -28,10 +28,6 @@ shape = SubResource("RectangleShape2D_1yrxk")
 
 [node name="InteractiveRegion" type="Area2D" parent="."]
 script = ExtResource("2_n586v")
-dialog = [{
-"name": "White",
-"text": "A piece of wood."
-}]
 
 [node name="ShapeV" type="CollisionShape2D" parent="InteractiveRegion"]
 position = Vector2(0, -1.5)

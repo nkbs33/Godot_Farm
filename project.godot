@@ -13,11 +13,10 @@ config_version=5
 config/name="NekobusPlanet"
 run/main_scene="res://demo.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://assets/images/icon.svg"
 
 [autoload]
 
-GlobalData="*res://GlobalData/global_data.tscn"
+GlobalData="*res://global_data/global_data.tscn"
 
 [display]
 

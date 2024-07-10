@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cuk3wfxbmrb68"]
 
-[ext_resource type="Texture2D" uid="uid://0tywlfk8r4ab" path="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/Farming Plants.png" id="1_a81je"]
+[ext_resource type="Texture2D" uid="uid://0tywlfk8r4ab" path="res://crop/assets/Farming Plants.png" id="1_a81je"]
 [ext_resource type="Texture2D" uid="uid://b83olkef71f6" path="res://assets/images/Sprout Lands - Sprites - premium pack/Tilesets/ground tiles/Old tiles/Tilled_Dirt.png" id="2_2tovc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6n8xk"]
@@ -56,6 +56,7 @@ texture = ExtResource("1_a81je")
 2:6/0/y_sort_origin = 4
 3:6/0 = 0
 3:6/0/y_sort_origin = 4
+3:6/0/custom_data_0 = "rose"
 0:7/0 = 0
 0:7/0/y_sort_origin = 4
 1:7/0 = 0
@@ -64,7 +65,7 @@ texture = ExtResource("1_a81je")
 2:7/0/y_sort_origin = 4
 3:7/0 = 0
 3:7/0/y_sort_origin = 4
-3:7/0/custom_data_0 = "cabbage"
+3:7/0/custom_data_0 = "green"
 0:8/0 = 0
 0:8/0/y_sort_origin = 4
 1:8/0 = 0
@@ -134,6 +135,7 @@ texture = ExtResource("1_a81je")
 4:0/size_in_atlas = Vector2i(1, 2)
 4:0/0 = 0
 4:0/0/texture_origin = Vector2i(0, 8)
+4:0/0/custom_data_0 = "corn"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ey130"]
 resource_name = "dirt"

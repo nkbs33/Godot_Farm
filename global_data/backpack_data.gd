@@ -6,7 +6,6 @@ signal item_num_change(index)
 var num_empty = 0
 const num_slots = 9
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	items.resize(num_slots)
 	num_empty = num_slots

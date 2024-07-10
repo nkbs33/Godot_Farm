@@ -1,12 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3xnuxt0w62s8"]
+[gd_scene load_steps=13 format=3 uid="uid://b3xnuxt0w62s8"]
 
 [ext_resource type="Script" path="res://world_maps/world.gd" id="1_i517c"]
+[ext_resource type="TileSet" uid="uid://cuk3wfxbmrb68" path="res://crop/plants/crop_tile_set.tres" id="3_c63gs"]
 [ext_resource type="TileSet" uid="uid://dl7brbwcwfhcv" path="res://world_maps/tile_sets/ground_tile_set.tres" id="3_vmlp8"]
-[ext_resource type="TileSet" uid="uid://cuk3wfxbmrb68" path="res://world_maps/tile_sets/crop_tile_set.tres" id="4_kyedq"]
-[ext_resource type="Script" path="res://world_maps/crops_tile_map.gd" id="5_vbv4y"]
+[ext_resource type="Script" path="res://world_maps/crop_tile_map.gd" id="5_vbv4y"]
 [ext_resource type="PackedScene" uid="uid://jhouagerd4e2" path="res://world_maps/world_objects/flower_yellow.tscn" id="9_4yn0a"]
 [ext_resource type="PackedScene" uid="uid://ci4dsdvydwt18" path="res://world_maps/world_objects/wood_bridge.tscn" id="9_awshj"]
+[ext_resource type="PackedScene" uid="uid://bdh45uumpx21b" path="res://crop/items/crop_item.tscn" id="10_5hl80"]
 [ext_resource type="PackedScene" uid="uid://c16s0aqkgc2um" path="res://world_maps/world_objects/tree_common.tscn" id="10_iknnk"]
+[ext_resource type="Texture2D" uid="uid://c23r5hl8o6cex" path="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/Water well.png" id="11_nehp1"]
+[ext_resource type="Texture2D" uid="uid://bit8hn34e7woa" path="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/work station.png" id="12_5q6su"]
 [ext_resource type="Texture2D" uid="uid://ca2chdgre443" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png" id="12_70ge8"]
 [ext_resource type="PackedScene" uid="uid://de5fm804rxt0a" path="res://world_maps/world_objects/chop_wood.tscn" id="12_vh0os"]
 
@@ -27,7 +30,7 @@ layer_1/tile_data = PackedInt32Array(-196616, 65540, 1, -131080, 65540, 1, -6554
 layer_2/name = "high_ground"
 layer_2/z_index = 1
 layer_2/navigation_enabled = false
-layer_2/tile_data = PackedInt32Array(720900, 65541, 2, 720901, 65541, 2, 720902, 65541, 2, 720903, 65541, 2, 720904, 589829, 5, 720905, 655365, 5, 720906, 65541, 2, 720907, 65541, 2, 720908, 131077, 2, 655372, 131077, 1, 458764, 65541, 1, 393228, 65541, 1, 327692, 65541, 1, 720899, 65541, 2, 720898, 5, 2, 327682, 5, 1, 393218, 5, 1, 458754, 5, 1, 524290, 5, 1, 589826, 5, 1, 655362, 5, 1, 262146, 5, 0, 262147, 65541, 0, 262148, 65541, 0, 262149, 65541, 0, 262150, 65541, 0, 262151, 65541, 0, 262152, 65541, 0, 262153, 65541, 0, 262154, 65541, 0, 262155, 65541, 0, 262156, 65541, 0, 786440, 589829, 6, 786441, 655365, 6, 655368, 589829, 4, 655369, 655365, 4, 524303, 65541, 2, 524304, 65541, 2, 524305, 65541, 2, 524306, 131077, 2, 327693, 65541, 1, 393229, 65541, 1, 327694, 65541, 1, 393230, 65541, 1, 327695, 65541, 1, 393231, 65541, 1, 458767, 65541, 1, 327696, 65541, 1, 393232, 65541, 1, 458768, 65541, 1, 327697, 65541, 1, 393233, 65541, 1, 458769, 65541, 1, 327698, 65541, 1, 393234, 327685, 1, 458770, 131077, 1, 327699, 65541, 1, 393235, 65541, 2, 327700, 65541, 1, 393236, 65541, 2, 327701, 131077, 1, 393237, 131077, 2, 524300, 327685, 1, 589836, 131077, 1, 458766, 65541, 1, 458765, 65541, 1, 524301, 65541, 2, 524302, 65541, 2, 262157, 65541, 0, 262158, 65541, 0, 262159, 65541, 0, 262160, 65541, 0, 262161, 65541, 0, 262162, 65541, 0, 262163, 65541, 0, 262164, 65541, 0, 262165, 131077, 0)
+layer_2/tile_data = PackedInt32Array()
 layer_3/name = "structure"
 layer_3/y_sort_enabled = true
 layer_3/z_index = 5
@@ -41,149 +44,17 @@ layer_4/tile_data = PackedInt32Array(524301, 262150, 0, 589837, 262150, 2, 65537
 
 [node name="CropTileMap" type="TileMap" parent="."]
 y_sort_enabled = true
-tile_set = ExtResource("4_kyedq")
+tile_set = ExtResource("3_c63gs")
 format = 2
 layer_0/name = "dirt"
 layer_0/z_index = 4
-layer_0/tile_data = PackedInt32Array(458757, 65537, 1, 458758, 65537, 1, 458759, 65537, 1, 458760, 65537, 1, 458761, 65537, 1, 458762, 65537, 1, 458763, 65537, 1, 524299, 65537, 1, 589835, 65537, 1, 589834, 65537, 1, 589833, 65537, 1, 589832, 65537, 1, 589831, 65537, 1, 524295, 65537, 1, 524294, 65537, 1, 524293, 65537, 1, 589829, 65537, 1, 589830, 65537, 1, 524296, 65537, 1, 524297, 65537, 1, 524298, 65537, 1, 393228, 131073, 0, 393220, 1, 0, 655372, 131073, 2, 655364, 1, 2, 458756, 1, 1, 524292, 1, 1, 589828, 1, 1, 655365, 65537, 2, 655366, 65537, 2, 655367, 65537, 2, 655368, 65537, 2, 655369, 65537, 2, 655370, 65537, 2, 655371, 65537, 2, 393221, 65537, 0, 393222, 65537, 0, 393223, 65537, 0, 393224, 65537, 0, 393225, 65537, 0, 393226, 65537, 0, 393227, 65537, 0, 458764, 131073, 1, 524300, 131073, 1, 589836, 131073, 1)
+layer_0/tile_data = PackedInt32Array(458757, 65537, 1, 458758, 65537, 1, 458759, 65537, 1, 458760, 65537, 1, 458761, 65537, 1, 458762, 65537, 1, 458763, 65537, 1, 524299, 65537, 1, 589835, 65537, 1, 589834, 65537, 1, 589833, 65537, 1, 589832, 65537, 1, 589831, 65537, 1, 524295, 65537, 1, 524294, 65537, 1, 524293, 65537, 1, 589829, 65537, 1, 589830, 65537, 1, 524296, 65537, 1, 524297, 65537, 1, 524298, 65537, 1, 393228, 131073, 1, 393220, 65537, 1, 655372, 131073, 2, 655364, 65537, 2, 458756, 65537, 1, 524292, 65537, 1, 589828, 65537, 1, 655365, 65537, 2, 655366, 65537, 2, 655367, 65537, 2, 655368, 65537, 2, 655369, 65537, 2, 655370, 65537, 2, 655371, 65537, 2, 393221, 65537, 1, 393222, 65537, 1, 393223, 65537, 1, 393224, 65537, 1, 393225, 65537, 1, 393226, 65537, 1, 393227, 65537, 1, 458764, 131073, 1, 524300, 131073, 1, 589836, 131073, 1, 393219, 65537, 1, 458755, 65537, 1, 524291, 65537, 1, 589827, 65537, 1, 655363, 65537, 2, 262146, 65537, 1, 327682, 65537, 1, 393218, 65537, 1, 458754, 65537, 1, 262147, 65537, 1, 327683, 65537, 1, 262148, 65537, 1, 327684, 65537, 1, 262149, 65537, 1, 327685, 65537, 1, 262150, 65537, 1, 327686, 65537, 1, 262151, 65537, 1, 327687, 65537, 1, 262152, 65537, 1, 327688, 65537, 1, 262153, 65537, 1, 327689, 65537, 1, 262154, 65537, 1, 327690, 65537, 1, 262155, 65537, 1, 327691, 65537, 1, 524290, 65537, 1, 589826, 65537, 1, 655362, 65537, 2, 262156, 131073, 1, 327692, 131073, 1, 196620, 131073, 0, 196611, 65537, 0, 196612, 65537, 0, 196613, 65537, 0, 196614, 65537, 0, 196615, 65537, 0, 196616, 65537, 0, 196617, 65537, 0, 196618, 65537, 0, 196619, 65537, 0, 196610, 65537, 0, 196609, 1, 0, 262145, 1, 1, 327681, 1, 1, 393217, 1, 1, 458753, 1, 1, 524289, 1, 1, 589825, 1, 1, 655361, 1, 2)
 layer_1/name = "crops"
 layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 1
 layer_1/z_index = 5
-layer_1/tile_data = PackedInt32Array(524294, 196608, 10, 524295, 196608, 10, 524296, 196608, 10, 458758, 196608, 0, 458759, 196608, 10, 458760, 196608, 10, 589830, 196608, 10, 589831, 196608, 10, 589832, 196608, 9, 524297, 196608, 9, 589834, 196608, 9, 458762, 196608, 9, 458761, 196608, 5, 524298, 196608, 5, 589833, 196608, 5, 458757, 196608, 0, 524293, 196608, 3, 458763, 262144, 0, 524299, 262144, 0, 589835, 262144, 0, 589829, 196608, 3)
+layer_1/tile_data = PackedInt32Array(524294, 196608, 10, 524295, 196608, 10, 524296, 196608, 10, 458758, 196608, 0, 458759, 196608, 10, 458760, 196608, 10, 589830, 196608, 10, 589831, 196608, 10, 589832, 196608, 9, 524297, 196608, 9, 589834, 196608, 9, 458762, 196608, 9, 458761, 196608, 5, 524298, 196608, 5, 589833, 196608, 5, 458757, 196608, 0, 524293, 196608, 3, 458763, 262144, 0, 524299, 262144, 0, 589835, 262144, 0, 589829, 196608, 3, 589828, 196608, 2, 524292, 196608, 2, 524291, 196608, 2, 589827, 196608, 2)
 script = ExtResource("5_vbv4y")
-
-[node name="WorldObjects" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="WoodBridge" parent="WorldObjects" instance=ExtResource("9_awshj")]
-z_index = 4
-
-[node name="Woods" type="Node2D" parent="WorldObjects"]
-y_sort_enabled = true
-
-[node name="TreeCommon" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(343, 231)
-
-[node name="TreeCommon6" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(20, 207)
-
-[node name="TreeCommon7" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(317, 83)
-
-[node name="TreeCommon8" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(16, 83)
-
-[node name="TreeCommon9" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(297, 154)
-
-[node name="TreeCommon10" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(203, 50)
-
-[node name="TreeCommon11" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(396, 117)
-
-[node name="TreeCommon12" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(396, 117)
-
-[node name="TreeCommon2" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(443, 126)
-
-[node name="TreeCommon3" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(-107, 99)
-
-[node name="TreeCommon4" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(-153, 375)
-
-[node name="TreeCommon5" parent="WorldObjects/Woods" instance=ExtResource("10_iknnk")]
-position = Vector2(528, 64)
-
-[node name="wood" parent="WorldObjects/Woods" instance=ExtResource("12_vh0os")]
-position = Vector2(216, 221)
-
-[node name="wood2" parent="WorldObjects/Woods" instance=ExtResource("12_vh0os")]
-position = Vector2(257, 221)
-
-[node name="WaterPlants" type="Node2D" parent="WorldObjects"]
-
-[node name="WaterPlant1" type="Sprite2D" parent="WorldObjects/WaterPlants"]
-position = Vector2(7, 266)
-scale = Vector2(1.21556, 1.21556)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(112, 68, 13, 9)
-
-[node name="WaterPlant2" type="Sprite2D" parent="WorldObjects/WaterPlants"]
-position = Vector2(-49, 292)
-scale = Vector2(0.833333, 0.833333)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(112, 68, 13, 9)
-
-[node name="WaterPlant3" type="Sprite2D" parent="WorldObjects/WaterPlants"]
-position = Vector2(54, 276)
-scale = Vector2(0.944444, 0.944444)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(112, 68, 13, 9)
-
-[node name="WaterPlant4" type="Sprite2D" parent="WorldObjects/WaterPlants"]
-position = Vector2(106.917, 294.75)
-scale = Vector2(0.833333, 0.833333)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(112, 68, 13, 9)
-
-[node name="WaterPlant7" type="Sprite2D" parent="WorldObjects/WaterPlants"]
-position = Vector2(160, 271)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(112, 68, 13, 9)
-
-[node name="WaterPlant5" type="Sprite2D" parent="WorldObjects/WaterPlants"]
-position = Vector2(252, 262)
-scale = Vector2(0.722222, 0.722222)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(112, 68, 13, 9)
-
-[node name="WaterPlant6" type="Sprite2D" parent="WorldObjects/WaterPlants"]
-position = Vector2(294.472, 293.75)
-scale = Vector2(0.611111, 0.611111)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(112, 68, 13, 9)
-
-[node name="WaterPlant9" type="Sprite2D" parent="WorldObjects/WaterPlants"]
-position = Vector2(222, 298)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(112, 68, 13, 9)
-
-[node name="WaterPlant8" type="Sprite2D" parent="WorldObjects/WaterPlants"]
-position = Vector2(342, 269)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(112, 68, 13, 9)
-
-[node name="FlowerYellow" parent="WorldObjects" instance=ExtResource("9_4yn0a")]
-position = Vector2(189, 200)
-
-[node name="sunflower" type="Sprite2D" parent="WorldObjects"]
-z_index = 5
-position = Vector2(284, 186)
-scale = Vector2(0.639998, 0.639998)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(129, 34, 14, 28)
-
-[node name="sunflower2" type="Sprite2D" parent="WorldObjects"]
-z_index = 5
-position = Vector2(192, 255)
-scale = Vector2(0.639998, 0.639998)
-texture = ExtResource("12_70ge8")
-region_enabled = true
-region_rect = Rect2(80, 67, 16, 12)
 
 [node name="UI" type="Node2D" parent="."]
 
@@ -192,3 +63,149 @@ visible = false
 z_index = 6
 offset_right = 16.0
 offset_bottom = 16.0
+
+[node name="StaticObjects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="WoodBridge" parent="StaticObjects" instance=ExtResource("9_awshj")]
+z_index = 4
+
+[node name="WaterPlants" type="Node2D" parent="StaticObjects"]
+
+[node name="WaterPlant1" type="Sprite2D" parent="StaticObjects/WaterPlants"]
+position = Vector2(7, 266)
+scale = Vector2(1.21556, 1.21556)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(112, 68, 13, 9)
+
+[node name="WaterPlant2" type="Sprite2D" parent="StaticObjects/WaterPlants"]
+position = Vector2(-49, 292)
+scale = Vector2(0.833333, 0.833333)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(112, 68, 13, 9)
+
+[node name="WaterPlant3" type="Sprite2D" parent="StaticObjects/WaterPlants"]
+position = Vector2(54, 276)
+scale = Vector2(0.944444, 0.944444)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(112, 68, 13, 9)
+
+[node name="WaterPlant4" type="Sprite2D" parent="StaticObjects/WaterPlants"]
+position = Vector2(106.917, 294.75)
+scale = Vector2(0.833333, 0.833333)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(112, 68, 13, 9)
+
+[node name="WaterPlant7" type="Sprite2D" parent="StaticObjects/WaterPlants"]
+position = Vector2(160, 271)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(112, 68, 13, 9)
+
+[node name="WaterPlant5" type="Sprite2D" parent="StaticObjects/WaterPlants"]
+position = Vector2(252, 262)
+scale = Vector2(0.722222, 0.722222)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(112, 68, 13, 9)
+
+[node name="WaterPlant6" type="Sprite2D" parent="StaticObjects/WaterPlants"]
+position = Vector2(294.472, 293.75)
+scale = Vector2(0.611111, 0.611111)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(112, 68, 13, 9)
+
+[node name="WaterPlant9" type="Sprite2D" parent="StaticObjects/WaterPlants"]
+position = Vector2(222, 298)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(112, 68, 13, 9)
+
+[node name="WaterPlant8" type="Sprite2D" parent="StaticObjects/WaterPlants"]
+position = Vector2(342, 269)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(112, 68, 13, 9)
+
+[node name="Trees" type="Node2D" parent="StaticObjects"]
+y_sort_enabled = true
+
+[node name="TreeCommon" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(343, 231)
+
+[node name="TreeCommon6" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(-48, 200)
+
+[node name="TreeCommon7" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(317, 83)
+
+[node name="TreeCommon8" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(8, 80)
+
+[node name="TreeCommon9" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(297, 154)
+
+[node name="TreeCommon10" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(203, 50)
+
+[node name="TreeCommon11" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(396, 117)
+
+[node name="TreeCommon12" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(396, 117)
+
+[node name="TreeCommon2" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(443, 126)
+
+[node name="TreeCommon3" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(-112, 120)
+
+[node name="TreeCommon4" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(-153, 375)
+
+[node name="TreeCommon5" parent="StaticObjects/Trees" instance=ExtResource("10_iknnk")]
+position = Vector2(528, 64)
+
+[node name="Misc" type="Node2D" parent="StaticObjects"]
+y_sort_enabled = true
+
+[node name="FlowerYellow" parent="StaticObjects/Misc" instance=ExtResource("9_4yn0a")]
+position = Vector2(189, 200)
+
+[node name="ChopWood" parent="StaticObjects/Misc" instance=ExtResource("12_vh0os")]
+position = Vector2(216, 221)
+
+[node name="ChopWood1" parent="StaticObjects/Misc" instance=ExtResource("12_vh0os")]
+position = Vector2(257, 221)
+
+[node name="Sunflower" type="Sprite2D" parent="StaticObjects/Misc"]
+z_index = 5
+position = Vector2(284, 186)
+scale = Vector2(0.639998, 0.639998)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(129, 34, 14, 28)
+
+[node name="Rock" type="Sprite2D" parent="StaticObjects/Misc"]
+z_index = 5
+position = Vector2(192, 255)
+scale = Vector2(0.639998, 0.639998)
+texture = ExtResource("12_70ge8")
+region_enabled = true
+region_rect = Rect2(80, 67, 16, 12)
+
+[node name="CropIcon" parent="StaticObjects/Misc" instance=ExtResource("10_5hl80")]
+position = Vector2(56, 184)
+
+[node name="WaterWell" type="Sprite2D" parent="."]
+position = Vector2(240, 88)
+texture = ExtResource("11_nehp1")
+
+[node name="WorkStation" type="Sprite2D" parent="."]
+position = Vector2(8, 112)
+texture = ExtResource("12_5q6su")

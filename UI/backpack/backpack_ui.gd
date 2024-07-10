@@ -2,6 +2,7 @@ extends Control
 
 const NUM_SLOTS_ROW = 9
 var hud
+var global_data
 var backpack_data
 var slots
 var item_menu
@@ -23,6 +24,9 @@ func check_valid(idx):
 	var item_data = get_item_data(idx)
 	return item_data != null and item_data.amount > 0
 
+func get_current_item():
+	return backpack_data.items[current_index]
+
 func _ready():
 	slots = get_node("BackpackPanel/Slots")
 	item_menu = get_node("BackpackPanel/ItemMenu")
@@ -33,10 +37,11 @@ func _ready():
 	hud = get_parent()
 
 func connect_to_data():
-	backpack_data = get_node("/root/GlobalData/Backpack")
-	backpack_data.item_num_change.connect(_on_backpack_item_num_change)
+	global_data = get_node("/root/GlobalData")
+	backpack_data = global_data.backpack
+	backpack_data.item_num_change.connect(_on_item_num_change)
 
-func _on_backpack_item_num_change(index):
+func _on_item_num_change(index):
 	get_slot(index).item_name = backpack_data.items[index].name
 	get_slot(index).num = backpack_data.items[index].amount
 
@@ -45,8 +50,8 @@ func toggle_visible(vis):
 	visible = vis
 	hud.focus = self if vis else null
 	
-func reduce_item():
-	backpack_data.change_item_num(current_index, -1)
+func use_item():
+	global_data.use_backpack_item(current_index)
 
 func move_by_vec(vec):
 	if not visible:

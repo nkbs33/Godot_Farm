@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://titluce4as8l"]
 
 [ext_resource type="Script" path="res://UI/backpack/slot.gd" id="1_0q8cb"]
-[ext_resource type="PackedScene" uid="uid://sa0r0wr3hl86" path="res://assets/item_resources/crop_item.tscn" id="2_kynct"]
+[ext_resource type="PackedScene" uid="uid://sa0r0wr3hl86" path="res://crop/items/item_icon.tscn" id="2_uo2qw"]
 [ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="3_6mavy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkqy4"]
@@ -45,7 +45,7 @@ offset_bottom = 12.0
 pivot_offset = Vector2(4, 4)
 theme_override_styles/panel = SubResource("StyleBoxFlat_qkqy4")
 
-[node name="Image" parent="Container" instance=ExtResource("2_kynct")]
+[node name="Image" parent="Container" instance=ExtResource("2_uo2qw")]
 position = Vector2(8, 8)
 
 [node name="Number" type="Label" parent="Container"]
