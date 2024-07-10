@@ -7,6 +7,7 @@ var data = {}
 # dry/wet, nutrition level
 var tile_data = {}
 var crop_tile_map
+@onready var global_data = get_parent()
 
 func get_crop(coord):
 	if not data.has(coord):
@@ -33,3 +34,7 @@ func set_crop(coord, crop_name, override=false):
 		return
 	data[coord] = crop_name
 	crop_tile_map.set_crop(coord, crop_name)
+
+func get_crop_atlas_coord(crop_name):
+	var d = global_data.item_manager.query_crop_data(crop_name)
+	return str_to_var(d.coord)

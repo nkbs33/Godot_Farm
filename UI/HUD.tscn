@@ -18,7 +18,6 @@ theme_override_font_sizes/font_size = 31
 text = "step"
 
 [node name="Backpack" parent="." instance=ExtResource("2_sw0u6")]
-visible = false
 metadata/_edit_lock_ = true
 
 [node name="Dialogue" parent="." instance=ExtResource("3_sh8n1")]

@@ -6,6 +6,7 @@ var player
 var world
 @onready var crop_data = $CropData
 @onready var backpack = $Backpack
+@onready var item_manager = $ItemManager
 
 
 func start_dialog(dialog_data_, callback=null):
@@ -35,5 +36,10 @@ func pickup_item(item):
 
 func use_backpack_item(idx):
 	var item_name = backpack.items[idx].name
-	print("use "+item_name)	
+	#print("use "+item_name)	
+	var item_data = item_manager.query_data(item_name)
+	if item_data.type == "seed":
+		print("use seed: "+item_name)
+		var crop_name = item_data.crop
+		crop_data.set_crop(world.player_coord, crop_name)
 	backpack.change_item_num(idx, -1)

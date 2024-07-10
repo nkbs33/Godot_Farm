@@ -7,6 +7,7 @@ var backpack_data
 var slots
 var item_menu
 var focus = null
+var isFocused:bool
 
 @export var current_index:int:
 	set(value):
@@ -35,6 +36,7 @@ func _ready():
 	current_index = 0
 	connect_to_data()
 	hud = get_parent()
+	toggle_visible(false)
 
 func connect_to_data():
 	global_data = get_node("/root/GlobalData")
@@ -46,8 +48,10 @@ func _on_item_num_change(index):
 	get_slot(index).num = backpack_data.items[index].amount
 
 func toggle_visible(vis):
+	isFocused = vis
 	item_menu.toggle_visible(false)
-	visible = vis
+	#visible = vis
+	modulate = Color(1,1,1,1) if vis else Color(1,1,1,0.75)
 	hud.focus = self if vis else null
 	
 func use_item():

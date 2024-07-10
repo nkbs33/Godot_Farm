@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://crop/items/crop_item.gd" id="1_rqsi7"]
 [ext_resource type="PackedScene" uid="uid://rryf2ssyd1xo" path="res://world_maps/world_objects/interactive_region.tscn" id="2_ki7nb"]
 [ext_resource type="Texture2D" uid="uid://didb38xmfnn4h" path="res://crop/assets/farming-Plants-items.png" id="3_yw8co"]
-[ext_resource type="Script" path="res://crop/items/crop_icon.gd" id="4_85t76"]
+[ext_resource type="Script" path="res://crop/items/item_icon.gd" id="4_iqwpf"]
 [ext_resource type="PackedScene" uid="uid://45vjcht6febs" path="res://objects/dialog_trigger.tscn" id="5_5tufp"]
 
 [node name="CropItem" type="Node2D"]
@@ -17,6 +17,6 @@ texture = ExtResource("3_yw8co")
 hframes = 2
 vframes = 15
 frame = 4
-script = ExtResource("4_85t76")
+script = ExtResource("4_iqwpf")
 
 [node name="DialogTrigger" parent="." instance=ExtResource("5_5tufp")]

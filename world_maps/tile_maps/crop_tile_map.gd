@@ -43,7 +43,7 @@ func get_crop_cells():
 	return get_used_cells(crops_layer)
 
 func set_crop(coord, crop_name):
-	var atlas_coord = Vector2(3,7)
+	var atlas_coord = crop_data.get_crop_atlas_coord(crop_name)
 	set_cell(crops_layer, coord, 0, atlas_coord)
 
 func remove_crop(coord):

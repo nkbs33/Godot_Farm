@@ -26,9 +26,9 @@ anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -101.0
-offset_top = 173.0
+offset_top = 229.425
 offset_right = 102.0
-offset_bottom = 229.0
+offset_bottom = 256.425
 theme_override_styles/panel = SubResource("StyleBoxFlat_5lt2j")
 
 [node name="Slots" type="GridContainer" parent="BackpackPanel"]
@@ -37,9 +37,9 @@ anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -92.5
-offset_top = 12.0
-offset_right = 91.5
-offset_bottom = 36.0
+offset_top = 4.0
+offset_right = 93.5
+offset_bottom = 22.0
 theme_override_constants/h_separation = 5
 columns = 10
 
@@ -71,6 +71,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ItemMenu" parent="BackpackPanel" instance=ExtResource("3_mkn03")]
+visible = false
 layout_mode = 2
 offset_left = 30.0
 offset_top = -2.0

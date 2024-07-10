@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://world_maps/world.gd" id="1_i517c"]
 [ext_resource type="TileSet" uid="uid://cuk3wfxbmrb68" path="res://crop/plants/crop_tile_set.tres" id="3_c63gs"]
 [ext_resource type="TileSet" uid="uid://dl7brbwcwfhcv" path="res://world_maps/tile_sets/ground_tile_set.tres" id="3_vmlp8"]
-[ext_resource type="Script" path="res://world_maps/crop_tile_map.gd" id="5_vbv4y"]
+[ext_resource type="Script" path="res://world_maps/tile_maps/crop_tile_map.gd" id="5_vbv4y"]
 [ext_resource type="PackedScene" uid="uid://jhouagerd4e2" path="res://world_maps/world_objects/flower_yellow.tscn" id="9_4yn0a"]
 [ext_resource type="PackedScene" uid="uid://ci4dsdvydwt18" path="res://world_maps/world_objects/wood_bridge.tscn" id="9_awshj"]
 [ext_resource type="PackedScene" uid="uid://bdh45uumpx21b" path="res://crop/items/crop_item.tscn" id="10_5hl80"]
@@ -199,7 +199,7 @@ texture = ExtResource("12_70ge8")
 region_enabled = true
 region_rect = Rect2(80, 67, 16, 12)
 
-[node name="CropIcon" parent="StaticObjects/Misc" instance=ExtResource("10_5hl80")]
+[node name="CarrotSeed" parent="StaticObjects/Misc" instance=ExtResource("10_5hl80")]
 position = Vector2(56, 184)
 
 [node name="WaterWell" type="Sprite2D" parent="."]
