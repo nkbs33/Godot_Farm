@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://06c1ij3vamrq"]
+[gd_scene load_steps=6 format=3 uid="uid://06c1ij3vamrq"]
 
 [ext_resource type="Script" path="res://UI/HUD.gd" id="1_ichou"]
 [ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://UI/backpack/backpack_ui.tscn" id="2_sw0u6"]
 [ext_resource type="PackedScene" uid="uid://bcwy3ng4cq0nb" path="res://UI/Dialogue/dialogue.tscn" id="3_sh8n1"]
 [ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="4_nemnt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3t7i"]
+bg_color = Color(0.952941, 0.858824, 0.666667, 0.776471)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ichou")
@@ -45,6 +52,21 @@ grow_horizontal = 0
 theme_override_fonts/font = ExtResource("4_nemnt")
 theme_override_font_sizes/font_size = 18
 text = "Tue 14:00 "
+
+[node name="EquipmentUI" type="PanelContainer" parent="Gadgets"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -146.0
+offset_top = -54.0
+offset_right = -114.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y3t7i")
 
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 0.2

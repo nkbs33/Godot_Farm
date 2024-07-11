@@ -18,9 +18,7 @@ var smooth_play_timer:float
 @onready var d_text = $Box.get_node("Text")
 
 func _ready():
-	#var f = FileAccess.open("res://UI/Dialogue/assets/dialog_file.json", FileAccess.READ)
-	#dialog_data = JSON.parse_string(f.get_as_text())
-	var global_data = get_node("/root/GlobalData")
+	global_data = get_node("/root/GlobalData")
 	global_data.dialog_ui = self
 	hud = get_parent()
 
@@ -45,6 +43,7 @@ func _input(event):
 		return
 	if event.is_action_pressed("interact") or event.is_action_pressed("cancel"):
 		dialog_index += 1
+		#get_viewport().set_input_as_handled()
 		
 func update_dialog():
 	if dialog_index >= dialog_data.size():
@@ -74,5 +73,5 @@ func increase_display_length():
 	if d_text.visible_characters >= dialog_data[dialog_index]["text"].length():
 		is_smooth_playing = false
 
-func move_by_vec(vec):
+func move_by_vec(_vec):
 	return false 

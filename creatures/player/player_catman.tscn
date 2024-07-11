@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://cs6naiwvr60pv"]
+[gd_scene load_steps=24 format=3 uid="uid://cs6naiwvr60pv"]
 
 [ext_resource type="Script" path="res://creatures/player/player.gd" id="1_7rp2v"]
 [ext_resource type="Texture2D" uid="uid://bcqtghq2d1lob" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png" id="2_4j4dl"]
+[ext_resource type="Script" path="res://creatures/player/player_input.gd" id="3_bsbp8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02oqv"]
 size = Vector2(6.00003, 4.00002)
@@ -192,7 +193,6 @@ states/walk/position = Vector2(486, 100)
 y_sort_enabled = true
 collision_mask = 7
 script = ExtResource("1_7rp2v")
-speed = 75.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -218,3 +218,6 @@ tree_root = SubResource("AnimationNodeStateMachine_stltk")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 1)
 parameters/walk/blend_position = Vector2(0, 1)
+
+[node name="PlayerInput" type="Node" parent="."]
+script = ExtResource("3_bsbp8")

@@ -15,7 +15,7 @@ text = "use"
 
 [node name="Entry_1" parent="." instance=ExtResource("2_57nfg")]
 layout_mode = 2
-text = "hold"
+text = "equip"
 
 [node name="Entry_2" parent="." instance=ExtResource("2_57nfg")]
 layout_mode = 2

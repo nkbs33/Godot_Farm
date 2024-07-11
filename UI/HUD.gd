@@ -28,7 +28,6 @@ func _ready():
 	initialize()
 
 func initialize():
-	#Backpack.toggle_visible(false)
 	$Dialogue.hide()
 	global_data = get_node("/root/GlobalData")
 	global_data.hud = self
@@ -61,14 +60,16 @@ func _on_player_toggle_panel(panel):
 		toggle_panel(backpack)
 
 func _input(event):
-	if not focus or not $MoveTimer.is_stopped():
+	if not $MoveTimer.is_stopped():
 		return
 	if focus == dialog:
 		return
+	if event.is_action_pressed("backpack"):
+		toggle_panel(backpack)
 	if event.is_action_pressed("switch_focus"):
 		isBackground = not isBackground
 
-func _process(delta):
+func _process(_delta):
 	if not focus or not $MoveTimer.is_stopped():
 		return
 	if isBackground:

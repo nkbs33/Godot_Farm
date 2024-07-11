@@ -202,6 +202,14 @@ region_rect = Rect2(80, 67, 16, 12)
 [node name="CarrotSeed" parent="StaticObjects/Misc" instance=ExtResource("10_5hl80")]
 position = Vector2(56, 184)
 
+[node name="CarrotSeed2" parent="StaticObjects/Misc" instance=ExtResource("10_5hl80")]
+position = Vector2(80, 184)
+item_name = "cauliflower_seed"
+
+[node name="CarrotSeed3" parent="StaticObjects/Misc" instance=ExtResource("10_5hl80")]
+position = Vector2(104, 184)
+item_name = "corn_seed"
+
 [node name="WaterWell" type="Sprite2D" parent="."]
 position = Vector2(240, 88)
 texture = ExtResource("11_nehp1")

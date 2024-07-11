@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="3_6mavy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkqy4"]
-bg_color = Color(0.934474, 0.778842, 0.461092, 1)
+bg_color = Color(0.952925, 0.816631, 0.543812, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -38,17 +38,15 @@ pivot_offset = Vector2(8, 8)
 [node name="Background" type="Panel" parent="Container"]
 clip_contents = true
 layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 12.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 11.0
 offset_bottom = 12.0
 pivot_offset = Vector2(4, 4)
 theme_override_styles/panel = SubResource("StyleBoxFlat_qkqy4")
 
-[node name="Image" parent="Container" instance=ExtResource("2_uo2qw")]
-position = Vector2(8, 8)
-
 [node name="Number" type="Label" parent="Container"]
+z_index = 1
 layout_mode = 0
 offset_left = -2.47
 offset_top = 9.0
@@ -60,3 +58,7 @@ theme_override_fonts/font = ExtResource("3_6mavy")
 theme_override_font_sizes/font_size = 0
 text = "1"
 horizontal_alignment = 2
+
+[node name="Image" parent="Container" instance=ExtResource("2_uo2qw")]
+visible = false
+position = Vector2(8, 8)

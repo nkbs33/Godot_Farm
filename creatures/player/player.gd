@@ -1,22 +1,22 @@
 extends CharacterBody2D
+
 @export var max_speed = 75.0
 @export var speed_lerp = 0.5
 var speed
 var direction = Vector2(0, 1)
 
-signal use_item(item)
-signal toggle_panel(panel)
-
 var global_data
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var effective_position = Vector2()
 var input_enabled:bool = true 
+
 # movement
 @onready var animation_player = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = $AnimationTree["parameters/playback"]
+
 # intearact
 var interactable_list = []
+var equipment
 
 func _ready():
 	global_data = get_node("/root/GlobalData")
@@ -36,7 +36,7 @@ func get_input_vec():
 		inputVec.y += 1
 	return inputVec 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var input_vec = get_input_vec()
 	if input_vec.length()>0:
 		direction = input_vec
@@ -58,25 +58,8 @@ func _physics_process(delta):
 		state_machine.travel("idle")
 		animation_tree.set("parameters/idle/blend_position", direction)
 
-func _input(event):
-	if not input_enabled:
-		return
-	if event.is_action_pressed("backpack"):
-		toggle_panel.emit("backpack")
-		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("interact"):
-		interact()
-		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("cancel"):
-		global_data.set_crop()
-
 func effective_pos():
 	return global_position + direction * 4
-	
-#func collect(item):
-	#if item.name == "Carrot":
-	#	backpack_data.add_item("carrot")
-	#	item.queue_free()
 
 func enable_control(enabled):
 	input_enabled = enabled
@@ -87,9 +70,30 @@ func interact():
 		return
 	var i = interactable_list[0]
 	i.on_interact()
-	
+
 func add_interactable(item):
 	interactable_list.append(item)
 
 func remove_interactable(item):
 	interactable_list.erase(item)
+
+func set_equipment(eq):
+	var d = global_data.db_agent.query_item_data(eq)
+	if not d.has("eq_path"):
+		return
+	var eqnode = load("res://"+d.eq_path).instantiate()
+	if d.type == "seed":
+		eqnode.item_name = d.name
+		eqnode.crop_name = d.crop	
+	var equi = global_data.hud.get_node("Gadgets/EquipmentUI")
+	var ex = equi.get_child(0)
+	if ex:
+		ex.queue_free()
+	equi.add_child(eqnode)
+	eqnode.position = Vector2i(16,16)
+	equipment = eqnode
+
+func use_equipment():
+	if not equipment:
+		return
+	equipment.on_use()

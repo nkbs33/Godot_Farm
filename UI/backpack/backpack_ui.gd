@@ -1,6 +1,6 @@
 extends Control
 
-const NUM_SLOTS_ROW = 9
+const NUM_SLOTS_ROW = 27
 var hud
 var global_data
 var backpack_data
@@ -50,12 +50,15 @@ func _on_item_num_change(index):
 func toggle_visible(vis):
 	isFocused = vis
 	item_menu.toggle_visible(false)
-	#visible = vis
 	modulate = Color(1,1,1,1) if vis else Color(1,1,1,0.75)
+	$BackpackPanel.scale = Vector2(1,1) if vis else Vector2(0.8, 0.8)
 	hud.focus = self if vis else null
 	
 func use_item():
 	global_data.use_backpack_item(current_index)
+
+func equip_item():
+	global_data.equip_backpack_item(current_index)
 
 func move_by_vec(vec):
 	if not visible:
@@ -63,17 +66,19 @@ func move_by_vec(vec):
 	if focus:
 		return focus.move_by_vec(vec)
 	current_index += vec.x
+	current_index += vec.y * 9
 	return true 
 	
 func _input(event):
-	if not visible or focus:
+	if not isFocused or focus:
 		return
-	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("backpack"):
+	if event.is_action_pressed("cancel") or event.is_action_pressed("backpack"):
 		toggle_visible(false)
-	if event.is_action_pressed("interact"):
+		get_viewport().set_input_as_handled()
+	if event.is_action_pressed("accept"):
 		if check_valid(current_index):
 			item_menu.toggle_visible(true)
 			focus = item_menu
 
-func handle_action(action):
+func handle_action(_action):
 	pass 

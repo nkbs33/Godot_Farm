@@ -18,10 +18,12 @@ func get_entry(idx):
 func _input(event):
 	if not visible:
 		return
-	if event.is_action_pressed("interact"):
+	if event.is_action_pressed("accept"):
 		get_viewport().set_input_as_handled()
 		if current_entry.text == "use":
 			backpack.use_item()
+		elif current_entry.text == "equip":
+			backpack.equip_item()
 		toggle_visible(false)
 	elif event.is_action_pressed("cancel"):
 		get_viewport().set_input_as_handled()

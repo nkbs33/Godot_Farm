@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://brp0ew2rcbhse"]
+[gd_scene load_steps=17 format=3 uid="uid://ce5hulawsaq5u"]
 
 [ext_resource type="Script" path="res://creatures/player/player.gd" id="1_wat3b"]
-[ext_resource type="Texture2D" uid="uid://brcus5rah1pxv" path="res://assets/images/cat sheet.png" id="2_woi14"]
+[ext_resource type="Script" path="res://creatures/player/player_input.gd" id="2_ys31y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqnmb"]
 radius = 20.0001
@@ -141,7 +141,6 @@ script = ExtResource("1_wat3b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("2_woi14")
 offset = Vector2(0, -25)
 hframes = 7
 frame = 2
@@ -162,3 +161,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_stltk")
 anim_player = NodePath("../AnimationPlayer")
 parameters/walk/blend_position = Vector2(1, 1)
+
+[node name="PlayerInput" type="Node" parent="."]
+script = ExtResource("2_ys31y")
