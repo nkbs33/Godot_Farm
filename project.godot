@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.2", "Mobile")
 [autoload]
 
 GlobalData="*res://global_data/global_data.tscn"
+Event="*res://singletons/event.tscn"
 
 [display]
 

@@ -1,3 +1,4 @@
+class_name CropTileMap
 extends TileMap
 
 var crop_source

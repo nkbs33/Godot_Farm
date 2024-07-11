@@ -1,9 +1,9 @@
 extends Node
 
-@onready var player = get_parent()
+@onready var player:Player = get_parent()
 
 func _input(event):
-	if not player.input_enabled:
+	if player.paused:
 		return
 	if event.is_action_pressed("interact"):
 		player.interact()

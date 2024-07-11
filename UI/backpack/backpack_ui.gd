@@ -1,13 +1,13 @@
 extends Control
 
 const NUM_SLOTS_ROW = 27
-var hud
-var global_data
+var hud:HUD
 var backpack_data
 var slots
 var item_menu
 var focus = null
-var isFocused:bool
+
+var background:bool
 
 @export var current_index:int:
 	set(value):
@@ -36,49 +36,57 @@ func _ready():
 	current_index = 0
 	connect_to_data()
 	hud = get_parent()
-	toggle_visible(false)
 
 func connect_to_data():
-	global_data = get_node("/root/GlobalData")
-	backpack_data = global_data.backpack
-	backpack_data.item_num_change.connect(_on_item_num_change)
+	backpack_data = GlobalData.backpack
+	Event.bag_item_change.connect(on_item_num_change)
 
-func _on_item_num_change(index):
+func on_item_num_change(index):
 	get_slot(index).item_name = backpack_data.items[index].name
 	get_slot(index).num = backpack_data.items[index].amount
 
 func toggle_visible(vis):
-	isFocused = vis
+	visible = vis
 	item_menu.toggle_visible(false)
-	modulate = Color(1,1,1,1) if vis else Color(1,1,1,0.75)
-	$BackpackPanel.scale = Vector2(1,1) if vis else Vector2(0.8, 0.8)
-	hud.focus = self if vis else null
-	
-func use_item():
-	global_data.use_backpack_item(current_index)
+	hud.occupied_by = self if vis else null
+	set_background(false)
+	if vis:
+		Event.player_pause.emit()
+	else:
+		Event.player_resume.emit()
 
-func equip_item():
-	global_data.equip_backpack_item(current_index)
+func set_background(val:bool):
+	background = val
+	if background:
+		Event.player_resume.emit()
+		$BackpackPanel.modulate = Color(1,1,1,0.75)
+	else:
+		Event.player_pause.emit()
+		$BackpackPanel.modulate = Color(1,1,1,1)
 
 func move_by_vec(vec):
-	if not visible:
-		return false
-	if focus:
-		return focus.move_by_vec(vec)
 	current_index += vec.x
 	current_index += vec.y * 9
-	return true 
 	
+func _process(delta):
+	if visible and not background and not hud.move_vec == Vector2(0,0):
+		if not item_menu.visible:
+			move_by_vec(hud.move_vec)
+		else:
+			item_menu.move_by_vec(hud.move_vec)
+		Event.move_in_ui.emit()
+
 func _input(event):
-	if not isFocused or focus:
+	if not visible or item_menu.visible:
 		return
+	if event.is_action_pressed("switch_focus"):
+		set_background(!background)
 	if event.is_action_pressed("cancel") or event.is_action_pressed("backpack"):
 		toggle_visible(false)
 		get_viewport().set_input_as_handled()
+	if background:
+		return
 	if event.is_action_pressed("accept"):
 		if check_valid(current_index):
 			item_menu.toggle_visible(true)
 			focus = item_menu
-
-func handle_action(_action):
-	pass 

@@ -59,7 +59,6 @@ script = ExtResource("5_vbv4y")
 [node name="UI" type="Node2D" parent="."]
 
 [node name="TileFocus" type="Panel" parent="UI"]
-visible = false
 z_index = 6
 offset_right = 16.0
 offset_bottom = 16.0

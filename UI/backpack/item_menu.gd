@@ -21,9 +21,10 @@ func _input(event):
 	if event.is_action_pressed("accept"):
 		get_viewport().set_input_as_handled()
 		if current_entry.text == "use":
-			backpack.use_item()
+			pass
+			#backpack.use_item()
 		elif current_entry.text == "equip":
-			backpack.equip_item()
+			Event.equip_backpack_item.emit(backpack.current_index)
 		toggle_visible(false)
 	elif event.is_action_pressed("cancel"):
 		get_viewport().set_input_as_handled()

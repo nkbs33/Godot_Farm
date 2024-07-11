@@ -11,7 +11,9 @@ func _ready():
 
 func on_interact():
 	if dialog_data.size() > 0:
-		global_data.start_dialog(dialog_data, on_dialog_end)
+		Event.end_dialog.connect(on_dialog_end)
+		Event.start_dialog.emit(dialog_data)
 
 func on_dialog_end():
 	print("dialog end")
+	Event.end_dialog.disconnect(on_dialog_end)

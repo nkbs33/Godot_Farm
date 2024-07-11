@@ -1,13 +1,10 @@
+class_name Player
 extends CharacterBody2D
 
 @export var max_speed = 75.0
 @export var speed_lerp = 0.5
 var speed
 var direction = Vector2(0, 1)
-
-var global_data
-var effective_position = Vector2()
-var input_enabled:bool = true 
 
 # movement
 @onready var animation_player = $AnimationPlayer
@@ -17,23 +14,24 @@ var input_enabled:bool = true
 # intearact
 var interactable_list = []
 var equipment
+var paused:bool
 
 func _ready():
-	global_data = get_node("/root/GlobalData")
-	global_data.player = self
-	
+	Event.player_pause.connect(pause)
+	Event.player_resume.connect(resume)
+	Event.equip_backpack_item.connect(equip_from_backpack)
+
 func get_input_vec():
 	var inputVec = Vector2.ZERO
-	if not input_enabled:
-		return inputVec
-	if Input.is_action_pressed("move_right"):
-		inputVec.x += 1
-	if Input.is_action_pressed("move_left"):
-		inputVec.x -= 1
-	if Input.is_action_pressed("move_up"):
-		inputVec.y -= 1
-	if Input.is_action_pressed("move_down"):
-		inputVec.y += 1
+	if not paused:
+		if Input.is_action_pressed("move_right"):
+			inputVec.x += 1
+		if Input.is_action_pressed("move_left"):
+			inputVec.x -= 1
+		if Input.is_action_pressed("move_up"):
+			inputVec.y -= 1
+		if Input.is_action_pressed("move_down"):
+			inputVec.y += 1
 	return inputVec 
 
 func _physics_process(_delta):
@@ -42,10 +40,11 @@ func _physics_process(_delta):
 		direction = input_vec
 		speed = (1-speed_lerp)*speed + speed_lerp*max_speed
 		velocity = input_vec.normalized() * speed
+		move_and_slide()
+		Event.player_move.emit(effective_pos())
 	else:
 		speed = 0
 		velocity = Vector2.ZERO
-	move_and_slide()
 	
 	if input_vec.length()>0:
 		if input_vec.x < 0:
@@ -61,15 +60,17 @@ func _physics_process(_delta):
 func effective_pos():
 	return global_position + direction * 4
 
-func enable_control(enabled):
-	input_enabled = enabled
+func pause():
+	paused = true
+func resume():
+	paused = false
 
 func interact():
-	if interactable_list.size() == 0:
-		global_data.on_player_interact()
-		return
-	var i = interactable_list[0]
-	i.on_interact()
+	if interactable_list.size() > 0:
+		var i = interactable_list[0]
+		i.on_interact()
+	else:
+		GlobalData.on_player_interact()
 
 func add_interactable(item):
 	interactable_list.append(item)
@@ -77,22 +78,20 @@ func add_interactable(item):
 func remove_interactable(item):
 	interactable_list.erase(item)
 
-func set_equipment(eq):
-	var d = global_data.db_agent.query_item_data(eq)
+func equip_from_backpack(idx):
+	set_equipment(GlobalData.backpack.items[idx].name)
+
+func set_equipment(equipment_name):
+	var d = GlobalData.db_agent.query_item_data(equipment_name)
 	if not d.has("eq_path"):
 		return
 	var eqnode = load("res://"+d.eq_path).instantiate()
 	if d.type == "seed":
 		eqnode.item_name = d.name
 		eqnode.crop_name = d.crop	
-	var equi = global_data.hud.get_node("Gadgets/EquipmentUI")
-	var ex = equi.get_child(0)
-	if ex:
-		ex.queue_free()
-	equi.add_child(eqnode)
-	eqnode.position = Vector2i(16,16)
 	equipment = eqnode
-
+	Event.player_equip.emit(equipment)
+	
 func use_equipment():
 	if not equipment:
 		return

@@ -27,5 +27,3 @@ metadata/_edit_group_ = true
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
-
-[connection signal="toggle_panel" from="Player" to="HUD" method="_on_player_toggle_panel"]

@@ -3,7 +3,7 @@ extends Node
 var crop_data = {}
 var soil_data = {}
 
-var crop_tile_map
+var crop_tile_map:CropTileMap
 @onready var global_data = get_parent()
 
 func make_crop(name_="", quality=0, stage=0, age=0):
