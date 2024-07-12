@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3xnuxt0w62s8"]
+[gd_scene load_steps=14 format=3 uid="uid://b3xnuxt0w62s8"]
 
 [ext_resource type="Script" path="res://world_maps/world.gd" id="1_i517c"]
 [ext_resource type="TileSet" uid="uid://cuk3wfxbmrb68" path="res://crop/plants/crop_tile_set.tres" id="3_c63gs"]
@@ -12,6 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://bit8hn34e7woa" path="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/work station.png" id="12_5q6su"]
 [ext_resource type="Texture2D" uid="uid://ca2chdgre443" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png" id="12_70ge8"]
 [ext_resource type="PackedScene" uid="uid://de5fm804rxt0a" path="res://world_maps/world_objects/chop_wood.tscn" id="12_vh0os"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4lipb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.498039)
 
 [node name="WorldZero" type="Node2D"]
 z_index = -5
@@ -57,11 +65,14 @@ layer_1/tile_data = PackedInt32Array(524294, 196608, 10, 524295, 196608, 10, 524
 script = ExtResource("5_vbv4y")
 
 [node name="UI" type="Node2D" parent="."]
+z_index = 6
 
 [node name="TileFocus" type="Panel" parent="UI"]
-z_index = 6
+anchors_preset = -1
 offset_right = 16.0
 offset_bottom = 16.0
+pivot_offset = Vector2(8, 8)
+theme_override_styles/panel = SubResource("StyleBoxFlat_4lipb")
 
 [node name="StaticObjects" type="Node2D" parent="."]
 y_sort_enabled = true

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://06c1ij3vamrq"]
+[gd_scene load_steps=8 format=3 uid="uid://06c1ij3vamrq"]
 
 [ext_resource type="Script" path="res://UI/HUD.gd" id="1_ichou"]
 [ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://UI/backpack/backpack_ui.tscn" id="2_sw0u6"]
 [ext_resource type="PackedScene" uid="uid://bcwy3ng4cq0nb" path="res://UI/Dialogue/dialogue.tscn" id="3_sh8n1"]
 [ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="4_nemnt"]
 [ext_resource type="Script" path="res://UI/equipment_ui.gd" id="5_salh6"]
+[ext_resource type="Script" path="res://UI/time_ui.gd" id="5_up8jm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3t7i"]
 bg_color = Color(0.952941, 0.858824, 0.666667, 0.776471)
@@ -49,12 +50,16 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -74.0
-offset_bottom = 27.0
+offset_left = -83.0
+offset_top = 249.0
+offset_right = -9.0
+offset_bottom = 276.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("4_nemnt")
 theme_override_font_sizes/font_size = 18
-text = "Tue 14:00 "
+text = "14:00"
+horizontal_alignment = 2
+script = ExtResource("5_up8jm")
 
 [node name="Equipment" type="PanelContainer" parent="Gadgets"]
 layout_mode = 1

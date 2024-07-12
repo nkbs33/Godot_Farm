@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqy4pt7o0lwx3"]
+
+[ext_resource type="Script" path="res://singletons/time.gd" id="1_cqut7"]
+
+[node name="Time" type="Node"]
+script = ExtResource("1_cqut7")
+minute_sec = 0.1
