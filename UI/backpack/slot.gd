@@ -32,5 +32,3 @@ func on_num_change():
 	number.visible = num > 1
 	bg.visible = num == 0
 	image.item_name = item_name
-	
-		

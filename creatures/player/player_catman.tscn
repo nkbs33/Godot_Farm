@@ -171,13 +171,13 @@ animation = &"walk_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_68dqb"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_dxfx7")
-blend_point_0/pos = Vector2(0.6, 0)
+blend_point_0/pos = Vector2(0.9, 0)
 blend_point_1/node = SubResource("AnimationNodeAnimation_0jf1x")
-blend_point_1/pos = Vector2(-0.6, 0)
+blend_point_1/pos = Vector2(-0.9, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_2nxf4")
-blend_point_2/pos = Vector2(0, -0.9)
+blend_point_2/pos = Vector2(0, -0.6)
 blend_point_3/node = SubResource("AnimationNodeAnimation_w4vsg")
-blend_point_3/pos = Vector2(0, 0.9)
+blend_point_3/pos = Vector2(0, 0.6)
 min_space = Vector2(-1, -1.1)
 max_space = Vector2(1, 1.1)
 blend_mode = 1
@@ -217,7 +217,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_stltk")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 1)
-parameters/walk/blend_position = Vector2(0, 1)
+parameters/walk/blend_position = Vector2(-0.131025, 0.318353)
 
 [node name="PlayerInput" type="Node" parent="."]
 script = ExtResource("3_bsbp8")

@@ -16,7 +16,7 @@ func update_sprite():
 	if item_name == "":
 		texture = null
 		return
-	var d = db_agent.query_item_data(item_name)
+	var d = db_agent.query_item_info(item_name)
 	if not d:
 		return
 	texture = db_agent.textures[d.texture]

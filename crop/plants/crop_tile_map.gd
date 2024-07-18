@@ -6,14 +6,12 @@ const CROP_LAYER = 1
 var crop_source:TileSetAtlasSource
 var soil_source:TileSetAtlasSource
 
-
-
 func _ready():
 	crop_source = tile_set.get_source(0)
 	soil_source = tile_set.get_source(1)
 	init_crop_data()
 	
-	Event.plant_crop.connect(set_crop)
+	Event.crop_planted.connect(set_crop)
 	Event.remove_crop.connect(remove_crop)
 
 func init_crop_data():

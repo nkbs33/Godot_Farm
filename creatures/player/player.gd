@@ -11,15 +11,15 @@ var direction = Vector2(0, 1)
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = $AnimationTree["parameters/playback"]
 
-# intearact
 var interactable_list = []
-var equipment
 var paused:bool
+var equipment 
 
 func _ready():
 	Event.player_pause.connect(pause)
 	Event.player_resume.connect(resume)
-	Event.equip_backpack_item.connect(equip_from_backpack)
+	Event.player_equip.connect(func(eq): equipment = eq)
+	Event.player_unequip.connect(func(): equipment = null)
 
 func get_input_vec():
 	var inputVec = Vector2.ZERO
@@ -78,21 +78,6 @@ func add_interactable(item):
 func remove_interactable(item):
 	interactable_list.erase(item)
 
-func equip_from_backpack(idx):
-	set_equipment(GlobalData.backpack.items[idx].name)
-
-func set_equipment(equipment_name):
-	var d = GlobalData.db_agent.query_item_data(equipment_name)
-	if not d.has("eq_path"):
-		return
-	var eqnode = load("res://"+d.eq_path).instantiate()
-	if d.type == "seed":
-		eqnode.item_name = d.name
-		eqnode.crop_name = d.crop	
-	equipment = eqnode
-	Event.player_equip.emit(equipment)
-	
 func use_equipment():
-	if not equipment:
-		return
-	equipment.on_use()
+	if equipment != null:
+		equipment.on_use()

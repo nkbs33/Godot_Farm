@@ -4,8 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://ptdk7stfpqt1" path="res://UI/backpack/sub_menu_item.tscn" id="2_57nfg"]
 
 [node name="Menu" type="GridContainer"]
-offset_right = 40.0
+offset_right = 56.0
 offset_bottom = 58.0
 theme_override_constants/v_separation = 1
 script = ExtResource("1_s7jee")
 entry_scene = ExtResource("2_57nfg")
+
+[node name="Button" parent="." instance=ExtResource("2_57nfg")]
+visible = false
+layout_mode = 2

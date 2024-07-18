@@ -65,8 +65,6 @@ func _physics_process(delta):
 		y += 1
 	if Input.is_action_just_pressed("ui_up"):
 		y -= 1
-	if x != 0 or y!=0:
-		print(x,y)
 	current_index += x + y*9;
 
 func _input(event):
@@ -80,27 +78,38 @@ func _input(event):
 		get_viewport().set_input_as_handled()
 	if background:
 		return
-	
-	
-	
 	if event.is_action_pressed("accept"):
-		if get_slot(current_index).num > 0:
-			$ItemMenu.toggle_visible(true)
-			focus = $ItemMenu
-			get_viewport().set_input_as_handled()
+		show_item_menu()
+		get_viewport().set_input_as_handled()
 
+
+func show_item_menu():
+	if get_slot(current_index).num == 0:
+		return
+	Event.pre_item_menu_show.emit(current_index, item_menu_entry_callback)
+	$ItemMenu.toggle_visible(true)
+
+func item_menu_entry_callback(entries):
+	$ItemMenu.filter(entries)
 
 func setup_item_menu():
-	$ItemMenu.show_menu.connect(func(): focus = $ItemMenu)
+	$ItemMenu.show_menu.connect(func():
+		focus = $ItemMenu
+	)
 	$ItemMenu.hide_menu.connect(func(): 
 		focus = null
 		grab_focus()
 	)
-	$ItemMenu.add_entry("eat", func(): print("eat"))
+	$ItemMenu.add_entry("use", func(): print("use"))
 	$ItemMenu.add_entry("equip", equip_item)
+	$ItemMenu.add_entry("unequip", unequip_item)
+	$ItemMenu.add_entry("split", func():print("split"))
 	$ItemMenu.add_entry("destroy", func(): print("destroy"))
-	$ItemMenu.add_entry("cancel", func(): print("cancel"))
+	$ItemMenu.add_entry("cancel", func(): $ItemMenu.toggle_visible(false))
 
 func equip_item():
 	Event.equip_backpack_item.emit(current_index)
+	$ItemMenu.toggle_visible(false)
+func unequip_item():
+	Event.unequip_backpack_item.emit(current_index)
 	$ItemMenu.toggle_visible(false)

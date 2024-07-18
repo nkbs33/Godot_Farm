@@ -37,7 +37,7 @@ func _physics_process(delta):
 			time.day += 1
 		if time.day == 30:
 			time.month += 1
-			time.date = 0
+			time.day = 0
 		if time.month == 4:
 			time.year += 1
 			

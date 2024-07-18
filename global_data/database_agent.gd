@@ -34,7 +34,7 @@ func load_crop_db():
 		id_to_crop[(int)(element.id)] = element.name
 
 
-func query_item_data(item_name):
+func query_item_info(item_name):
 	if item_db.has(item_name):
 		return item_db[item_name]
 	else:

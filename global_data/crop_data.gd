@@ -4,7 +4,6 @@ extends Node
 var crop_data = {}
 var soil_data = {}
 
-
 @onready var db_agent:DatabaseAgent = get_node("/root/GlobalData/DatabaseAgent")
 
 class CropPlant:
@@ -33,13 +32,13 @@ func harvest_crop(coord):
 	var info = db_agent.query_crop_data(crop.name)
 	return crop.name if crop.stage == info.stage_num-1 else null # mature
 
-func plant_crop(coord, name_):
+func plant_crop(coord, name_) -> CropPlant:
 	if not soil_data.has(coord) or soil_data[coord].crop:
-		return -1
+		return null
 	var crop = CropPlant.new(name_, 0, 0, 0)
 	add_crop(coord, crop)
-	Event.plant_crop.emit(coord, crop_to_atlas(crop))
-	return 0
+	Event.crop_planted.emit(coord, crop_to_atlas(crop))
+	return crop
 
 func add_crop_by_atlas(coord, atlas):
 	add_crop(coord, atlas_to_crop(atlas))
@@ -75,6 +74,7 @@ func remove_crop(coord):
 
 func _ready():
 	Event.update_time.connect(update_crops)
+	Event.use_seed.connect(_on_use_seed)
 
 func update_crops(time):
 	for coord in crop_data:
@@ -86,5 +86,8 @@ func update_crops(time):
 			if crop.age >= stage_duration:
 				crop.stage += 1
 				crop.age = 0
-				Event.plant_crop.emit(coord, crop_to_atlas(crop))
-			
+				Event.crop_planted.emit(coord, crop_to_atlas(crop))
+
+func _on_use_seed(crop_name):
+	if plant_crop(GlobalData.player_coord, crop_name):
+		Event.consume_equipment.emit()
