@@ -1,10 +1,7 @@
-extends Panel
+class_name SubMenuItem
+extends Button
 
-@export var text = "item"
 var focused:bool:
 	set(val):
 		focused = val
 		$SelectBox.visible = val
-
-func _ready():
-	$Label.text = "[center]"+text+"[/center]"

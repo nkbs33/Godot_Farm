@@ -4,7 +4,7 @@ var hud:HUD
 var player
 var player_coord
 
-@onready var crop_data = $CropData
+@onready var crop_data:CropData = $CropData
 @onready var backpack = $Backpack
 @onready var db_agent = $DatabaseAgent
 

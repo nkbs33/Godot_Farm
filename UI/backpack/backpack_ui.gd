@@ -4,10 +4,11 @@ const NUM_SLOTS_ROW = 27
 var hud:HUD
 var backpack_data
 var slots
-var item_menu
+var item_menu:SubMenu
 var focus = null
 
 var background:bool
+
 
 @export var current_index:int:
 	set(value):
@@ -23,7 +24,7 @@ func get_item_data(idx):
 	return backpack_data.items[idx]
 func check_valid(idx):
 	var item_data = get_item_data(idx)
-	return item_data != null and item_data.amount > 0
+	return item_data != null and item_data.num > 0
 
 func get_current_item():
 	return backpack_data.items[current_index]
@@ -32,10 +33,10 @@ func _ready():
 	slots = get_node("BackpackPanel/Slots")
 	item_menu = get_node("BackpackPanel/ItemMenu")
 	item_menu.hide()
-	item_menu.backpack = self
 	current_index = 0
 	connect_to_data()
 	hud = get_parent()
+	setup_item_menu()
 
 func connect_to_data():
 	backpack_data = GlobalData.backpack
@@ -43,7 +44,7 @@ func connect_to_data():
 
 func on_item_num_change(index):
 	get_slot(index).item_name = backpack_data.items[index].name
-	get_slot(index).num = backpack_data.items[index].amount
+	get_slot(index).num = backpack_data.items[index].num
 
 func toggle_visible(vis):
 	visible = vis
@@ -90,3 +91,11 @@ func _input(event):
 		if check_valid(current_index):
 			item_menu.toggle_visible(true)
 			focus = item_menu
+
+
+func setup_item_menu():
+	item_menu.show_menu.connect(func(): focus = item_menu)
+	item_menu.hide_menu.connect(func(): focus = null)
+	item_menu.add_entry("eat", null)
+	item_menu.add_entry("equip", null)
+	item_menu.add_entry("destroy", null)

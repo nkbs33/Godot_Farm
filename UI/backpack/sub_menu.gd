@@ -1,8 +1,15 @@
+class_name SubMenu
 extends GridContainer
 
-var length = 3 
-var backpack
-var current_entry
+signal show_menu
+signal hide_menu
+
+
+var length:int = 3 
+var current_entry:SubMenuItem
+var entries = []
+
+@export var entry_scene:PackedScene
 
 @export var current_index:int:
 	set(value):
@@ -10,10 +17,16 @@ var current_entry
 			current_entry.focused = false
 		current_index = (value+3)%3
 		current_entry = get_entry(current_index)
-		current_entry.focused = true
+		if current_entry:
+			current_entry.focused = true
+
+func add_entry(name_:String, callback):
+	var entry = entry_scene.instantiate()
+	entry.text = name_
+	add_child(entry)
 
 func get_entry(idx):
-	return get_node("Entry_"+str(idx))
+	return get_child(idx)
 
 func _input(event):
 	if not visible:
@@ -22,9 +35,9 @@ func _input(event):
 		get_viewport().set_input_as_handled()
 		if current_entry.text == "use":
 			pass
-			#backpack.use_item()
 		elif current_entry.text == "equip":
-			Event.equip_backpack_item.emit(backpack.current_index)
+			pass
+			#Event.equip_backpack_item.emit(backpack.current_index)
 		toggle_visible(false)
 	elif event.is_action_pressed("cancel"):
 		get_viewport().set_input_as_handled()
@@ -38,6 +51,6 @@ func toggle_visible(vis):
 	visible = vis
 	current_index = 0
 	if vis:
-		backpack.focus = self
+		show_menu.emit()
 	else:
-		backpack.focus = null
+		hide_menu.emit()

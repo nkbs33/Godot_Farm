@@ -1,3 +1,4 @@
+class_name DatabaseAgent
 extends Node
 
 const db_path = "res://global_data/database/"

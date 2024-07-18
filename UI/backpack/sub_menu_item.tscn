@@ -1,20 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ptdk7stfpqt1"]
+[gd_scene load_steps=4 format=3 uid="uid://ptdk7stfpqt1"]
 
-[ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="1_qfutm"]
 [ext_resource type="Script" path="res://UI/backpack/sub_menu_item.gd" id="1_r1rdc"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhxqq"]
-bg_color = Color(1, 0.823529, 0.623529, 0.811765)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.317758, 0.191793, 7.21961e-08, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-anti_aliasing = false
+[ext_resource type="Theme" uid="uid://4wkwsdd4ub4y" path="res://UI/backpack/menu_theme.tres" id="3_2xqaf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfq7s"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -29,30 +16,16 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing = false
 
-[node name="Entry_0" type="Panel"]
-custom_minimum_size = Vector2(32, 12)
+[node name="Button" type="Button"]
 offset_right = 32.0
 offset_bottom = 12.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fhxqq")
-script = ExtResource("1_r1rdc")
-
-[node name="Label" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 30.0
-offset_bottom = 12.0
-theme_override_colors/default_color = Color(0.317758, 0.191793, 7.21961e-08, 1)
-theme_override_fonts/normal_font = ExtResource("1_qfutm")
-theme_override_font_sizes/normal_font_size = 11
-bbcode_enabled = true
-text = "[center]eat[/center]
+theme = ExtResource("3_2xqaf")
+text = "Test
 "
-scroll_active = false
+script = ExtResource("1_r1rdc")
 
 [node name="SelectBox" type="Panel" parent="."]
 visible = false
-z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
