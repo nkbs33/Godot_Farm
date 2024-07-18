@@ -1,7 +1,5 @@
 extends Control
 
-
-
 @onready var hud:HUD = get_parent()
 @onready var d_name = $Box.get_node("Name")
 @onready var d_text = $Box.get_node("Text")

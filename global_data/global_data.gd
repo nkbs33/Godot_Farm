@@ -18,7 +18,9 @@ func on_player_interact():
 		return
 	crop_data.remove_crop(player_coord)
 
-func equip_backpack_item(idx):
-	player.set_equipment(backpack.items[idx].name)
 
+func _ready():
+	get_viewport().connect("gui_focus_changed", _on_focus_changed)
 
+func _on_focus_changed(control):
+	print("focus: ", control.name)

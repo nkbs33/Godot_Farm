@@ -7,19 +7,21 @@ const num_slots = 27
 
 class Item:
 	var name:String
+	var index:int
 	var num:int
 	var node:Node
 	
-	func _init(name_="", num_=0, node_=null):
+	func _init(name_="", index_=0, num_=0, node_=null):
 		name = name_
 		num = num_
+		index = index_
 		node = node_
 
 func _ready():
 	items.resize(num_slots)
 	num_empty = num_slots
 	for i in range(num_slots):
-		items[i] = Item.new()
+		items[i] = Item.new("", i, 0, null)
 
 func get_empty_slot():
 	for i in range(num_slots):
@@ -37,19 +39,19 @@ func add_item(name_):
 	var idx = find_item(name_)
 	if idx >= 0:
 		items[idx].num += 1
-		Event.bag_item_change.emit(idx)
+		Event.bag_item_change.emit(items[idx])
 		return idx
 	idx = get_empty_slot()
 	if idx >= 0:
 		items[idx].name = name_
 		items[idx].num = 1
-		Event.bag_item_change.emit(idx)
+		Event.bag_item_change.emit(items[idx])
 	return idx
 
 func change_item_num(id, change):
 	items[id].num += change
-	Event.bag_item_change.emit(id)
+	Event.bag_item_change.emit(items[id])
 
 func set_item_num(id, num_):
 	items[id].num = num_
-	Event.bag_item_change.emit(id)
+	Event.bag_item_change.emit(items[id])

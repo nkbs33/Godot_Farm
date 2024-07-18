@@ -1,0 +1,170 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm44ejh8l2qrn"]
+
+[ext_resource type="Script" path="res://UI/backpack/backpack_ui.gd" id="1_giw4k"]
+[ext_resource type="PackedScene" uid="uid://titluce4as8l" path="res://UI/backpack/slot.tscn" id="2_12uh3"]
+[ext_resource type="PackedScene" uid="uid://p6qo48yl7ndd" path="res://UI/backpack/sub_menu.tscn" id="3_2157j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5lt2j"]
+bg_color = Color(0.952941, 0.858824, 0.666667, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = false
+
+[node name="Backpack" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_giw4k")
+
+[node name="BackpackPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.0
+offset_top = 186.0
+offset_right = 102.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(102, 34)
+theme_override_styles/panel = SubResource("StyleBoxFlat_5lt2j")
+metadata/_edit_group_ = true
+
+[node name="Slots" type="GridContainer" parent="BackpackPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -24.0
+offset_right = 94.0
+offset_bottom = 24.0
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 0
+columns = 9
+metadata/_edit_group_ = true
+
+[node name="Slot_0" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_1" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_2" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_3" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_4" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_5" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_6" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_7" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_8" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_9" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_10" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_11" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_12" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_13" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_14" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_15" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_16" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_17" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_18" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_19" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_20" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_21" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_22" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_23" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_24" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_25" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="Slot_26" parent="BackpackPanel/Slots" instance=ExtResource("2_12uh3")]
+layout_mode = 2
+item_name = ""
+
+[node name="ItemMenu" parent="BackpackPanel" instance=ExtResource("3_2157j")]
+visible = false
+layout_mode = 2
+offset_left = 30.0
+offset_top = -2.0
+offset_right = 62.0
+offset_bottom = 36.0

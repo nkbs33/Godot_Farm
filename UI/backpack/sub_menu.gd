@@ -4,53 +4,34 @@ extends GridContainer
 signal show_menu
 signal hide_menu
 
-
-var length:int = 3 
-var current_entry:SubMenuItem
 var entries = []
 
 @export var entry_scene:PackedScene
 
-@export var current_index:int:
-	set(value):
-		if current_entry:
-			current_entry.focused = false
-		current_index = (value+3)%3
-		current_entry = get_entry(current_index)
-		if current_entry:
-			current_entry.focused = true
-
 func add_entry(name_:String, callback):
 	var entry = entry_scene.instantiate()
+	entry.focus_entered.connect(func():print("focus ", name_))
+	entry.name = name_
 	entry.text = name_
+	entry.pressed.connect(callback)
 	add_child(entry)
-
-func get_entry(idx):
-	return get_child(idx)
+	entries.append(entry)
+	if entries.size()>1:
+		entries[entries.size()-2].focus_neighbor_bottom=""
+		entry.focus_neighbor_bottom=entries[0].get_path()
+		entries[0].focus_neighbor_top = entry.get_path()
 
 func _input(event):
 	if not visible:
 		return
-	if event.is_action_pressed("accept"):
-		get_viewport().set_input_as_handled()
-		if current_entry.text == "use":
-			pass
-		elif current_entry.text == "equip":
-			pass
-			#Event.equip_backpack_item.emit(backpack.current_index)
-		toggle_visible(false)
-	elif event.is_action_pressed("cancel"):
+	if event.is_action_pressed("cancel"):
 		get_viewport().set_input_as_handled()
 		toggle_visible(false)
-
-func move_by_vec(vec):
-	current_index += vec.y
-	return true
 
 func toggle_visible(vis):
 	visible = vis
-	current_index = 0
 	if vis:
+		entries[0].grab_focus()
 		show_menu.emit()
 	else:
 		hide_menu.emit()

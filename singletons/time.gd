@@ -1,36 +1,44 @@
 extends Node
 
 var timer:float	
-@export var stopped:bool
+@export var paused:bool
 @export var minute_sec:float
-@export var time_data:Dictionary
+var time:MyTime
+
+class MyTime:
+	var minute
+	var hour
+	var day
+	var month
+	var year
+	
+	func _init():
+		minute = 0
+		hour = 0
+		day = 1
+		month = 1
+		year = 1
 
 func _ready():
-	time_data = {
-		"minute":0,
-		"hour":0,
-		"date":1,
-		"month":1,
-		"year":1
-	}
+	time = MyTime.new()
 
 func _physics_process(delta):
-	if stopped:
+	if paused:
 		return
 	timer += delta
 	if timer > minute_sec:
 		timer -= minute_sec
-		time_data.minute += 10
-		if time_data.minute == 60:
-			time_data.minute = 0
-			time_data.hour += 1
-		if time_data.hour == 24:
-			time_data.hour = 0
-			time_data.date += 1
-		if time_data.date == 30:
-			time_data.month += 1
-			time_data.date = 0
-		if time_data.month == 4:
-			time_data.year += 1
+		time.minute += 10
+		if time.minute == 60:
+			time.minute = 0
+			time.hour += 1
+		if time.hour == 24:
+			time.hour = 0
+			time.day += 1
+		if time.day == 30:
+			time.month += 1
+			time.date = 0
+		if time.month == 4:
+			time.year += 1
 			
-		Event.update_time.emit(time_data)
+		Event.update_time.emit(time)

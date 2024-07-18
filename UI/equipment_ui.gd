@@ -7,8 +7,7 @@ func _ready():
 
 
 func on_equip(equip_node):
-	var ex = get_child(0)
-	if ex:
-		ex.queue_free()
+	if get_child_count() > 0:
+		get_child(0).queue_free()
 	add_child(equip_node)
 	equip_node.position = Vector2i(16,16)
