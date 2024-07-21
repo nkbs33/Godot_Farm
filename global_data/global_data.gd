@@ -19,8 +19,8 @@ func on_player_interact():
 	crop_data.remove_crop(player_coord)
 
 
-func _ready():
-	get_viewport().connect("gui_focus_changed", _on_focus_changed)
+#func _ready():
+#	get_viewport().connect("gui_focus_changed", _on_focus_changed)
 
-func _on_focus_changed(control):
-	print("focus: ", control.name)
+#func _on_focus_changed(control):
+#	print("focus: ", control.name)

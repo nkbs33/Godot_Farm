@@ -4,6 +4,7 @@ extends Node
 var num_empty = 0
 const num_slots = 27
 var equipment_idx:int = -1
+var equipment:Node
 
 enum ItemType {
 	Item,
@@ -67,10 +68,14 @@ func add_item(name_):
 func change_item_num(id, change):
 	items[id].num += change
 	Event.bag_item_change.emit(items[id])
+	if id == equipment_idx:
+		Event.equipment_num_change.emit(items[id].num)
 
 func set_item_num(id, num_):
 	items[id].num = num_
 	Event.bag_item_change.emit(items[id])
+	if id == equipment_idx:
+		Event.equipment_num_change.emit(num_)
 
 func _on_pickup_item(item_name):
 	add_item(item_name)
@@ -93,13 +98,13 @@ func equip_from_backpack(idx):
 	var equipment_name = items[idx].name
 	var d = GlobalData.db_agent.query_item_info(equipment_name)
 	items[idx].consume = d.consume
-	if not d.has("eq_path"):
-		return
-	var eqnode = load("res://"+d.eq_path).instantiate()
+	equipment = load("res://"+d.nodepath).instantiate()
 	if d.subtype == "seed":
-		eqnode.item_name = d.name
-		eqnode.crop_name = d.crop
-	Event.player_equip.emit(eqnode)
+		equipment.item_name = d.name
+		var crop_name = d.name.substr(0, d.name.rfind("_"))
+		equipment.crop_name = crop_name
+	Event.player_equip.emit(equipment)
+	Event.equipment_num_change.emit(items[idx].num)
 
 func unequip_from_backpack(idx):
 	equipment_idx = -1

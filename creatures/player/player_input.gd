@@ -12,6 +12,5 @@ func _input(event):
 		player.use_equipment()
 		get_viewport().set_input_as_handled()
 	if event.is_action_pressed("backpack"):
-		print("backpack")
 		Event.toggle_backpack.emit()
 		get_viewport().set_input_as_handled()

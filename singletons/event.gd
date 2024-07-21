@@ -20,6 +20,7 @@ signal unequip_backpack_item(idx)
 signal pre_item_menu_show(callback)
 signal pickup_item(item)
 signal consume_equipment()
+signal equipment_num_change(num)
 
 # global game utility
 signal update_time(hour, minute)

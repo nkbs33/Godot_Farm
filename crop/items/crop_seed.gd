@@ -3,6 +3,8 @@ extends Node2D
 
 @export var item_name:String
 @export var crop_name:String
+@export var consume:bool = true
+var num:int
 
 func _ready():
 	set_item_name(item_name)

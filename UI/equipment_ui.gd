@@ -1,15 +1,21 @@
 extends PanelContainer
 
+var equipment:Node
+
 func _ready():
 	Event.player_equip.connect(_on_player_equip)
 	Event.player_unequip.connect(_on_player_unequip)
+	Event.equipment_num_change.connect(func(num): 
+		get_node("Control/Number").text = str(num)
+		get_node("Control/Number").visible = num>0 and equipment.consume)
 
 func _on_player_equip(equip_node):
-	if get_child_count() > 0:
-		get_child(0).queue_free()
-	add_child(equip_node)
-	equip_node.position = Vector2i(16,16)
+	equipment = equip_node
+	if get_child_count() > 1:
+		get_child(1).queue_free()
+	add_child(equipment)
+	equipment.position = Vector2i(16,16)
 
 func _on_player_unequip():
-	if get_child_count() > 0:
-		get_child(0).queue_free()
+	if get_child_count() > 1:
+		get_child(1).queue_free()

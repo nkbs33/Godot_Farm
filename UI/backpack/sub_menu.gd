@@ -12,7 +12,7 @@ var entries_visible = []
 
 func add_entry(name_:String, callback):
 	var entry = entry_scene.instantiate()
-	entry.focus_entered.connect(func():print("focus ", name_))
+	#entry.focus_entered.connect(func():print("focus ", name_))
 	entry.name = name_
 	entry.text = name_
 	entry.pressed.connect(callback)

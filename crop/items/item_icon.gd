@@ -5,7 +5,7 @@ extends Sprite2D
 		item_name=val
 		update_sprite()
 		
-@onready var db_agent = get_node("/root/GlobalData").db_agent
+@onready var db_agent:DatabaseAgent = GlobalData.db_agent
 
 func _ready():
 	update_sprite()

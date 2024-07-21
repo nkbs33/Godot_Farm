@@ -60,7 +60,7 @@ func atlas_to_crop(atlas):
 	return CropPlant.new(crop_name, quality, stage, age)
 
 func crop_to_atlas(crop):
-	return Vector2i(crop.stage, db_agent.query_crop_data(crop.name).id)
+	return Vector2i(crop.stage, db_agent.query_crop_data(crop.name).icon_row)
 
 func remove_crop(coord):
 	if not crop_data.has(coord):

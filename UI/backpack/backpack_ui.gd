@@ -73,7 +73,6 @@ func _input(event):
 	if event.is_action_pressed("switch_focus"):
 		set_background(!background)
 	if event.is_action_pressed("cancel") or event.is_action_pressed("backpack"):
-		print("close backpack")
 		toggle_visible(false)
 		get_viewport().set_input_as_handled()
 	if background:
