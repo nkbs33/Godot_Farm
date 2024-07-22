@@ -1,0 +1,48 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cyse7wtts37lc"]
+
+[ext_resource type="StyleBox" uid="uid://qm3mmlrlcn7c" path="res://UI/Dialogue/assets/dialog_box_style.tres" id="1_t3orj"]
+[ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="1_uoepu"]
+[ext_resource type="StyleBox" uid="uid://cmc1dk1oa6xk" path="res://UI/Dialogue/assets/dialog_option_style_hover.tres" id="2_xrrvb"]
+[ext_resource type="StyleBox" uid="uid://bmfiiyesaj2hq" path="res://UI/Dialogue/assets/dialog_option_style.tres" id="3_lkao8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e73pj"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 15
+Button/fonts/font = ExtResource("1_uoepu")
+Button/styles/disabled = SubResource("StyleBoxFlat_e73pj")
+Button/styles/focus = ExtResource("2_xrrvb")
+Button/styles/hover = ExtResource("2_xrrvb")
+Button/styles/normal = ExtResource("3_lkao8")
+Button/styles/pressed = ExtResource("2_xrrvb")
+Fonts/fonts/large = ExtResource("1_uoepu")
+Fonts/fonts/normal = ExtResource("1_uoepu")
+Panel/styles/panel = ExtResource("1_t3orj")
+RichTextLabel/font_sizes/normal_font_size = 18
+RichTextLabel/fonts/normal_font = ExtResource("1_uoepu")

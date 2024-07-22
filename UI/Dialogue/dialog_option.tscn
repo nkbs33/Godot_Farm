@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://deugn7yycsrt"]
+
+[ext_resource type="Theme" uid="uid://cyse7wtts37lc" path="res://UI/Dialogue/assets/dialog_theme.tres" id="1_nbrkl"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(45, 18)
+offset_right = 45.0
+offset_bottom = 18.0
+theme = ExtResource("1_nbrkl")
+text = "Option"

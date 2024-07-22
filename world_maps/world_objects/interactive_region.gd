@@ -1,8 +1,8 @@
 class_name InteractiveRegion
 extends Area2D
 
-signal s_interact_start
-signal s_interact_end
+signal interact_start
+signal interact_end
 
 signal player_enter
 signal player_exit
@@ -24,4 +24,4 @@ func on_body_exited(body):
 	player_exit.emit()
 
 func on_interact():
-	s_interact_start.emit()
+	interact_start.emit()

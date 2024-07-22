@@ -1,8 +1,11 @@
 extends Node
 
 # dialog
-signal start_dialog()
+signal start_dialog(dialog_data, dialog_index)
+signal get_next_line()
+signal show_next_line(idx)
 signal end_dialog()
+signal choose_dialog_option(idx)
 
 # player
 signal player_pause()

@@ -3,7 +3,7 @@ extends Node2D
 
 func _ready():
 	set_item_name(item_name)
-	$InteractiveRegion.s_interact_start.connect(on_interact)
+	$InteractiveRegion.interact_start.connect(on_interact)
 	
 func on_interact():
 	Event.pickup_item.emit(item_name)

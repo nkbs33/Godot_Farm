@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://UI/HUD.gd" id="1_ichou"]
 [ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://UI/backpack/backpack_ui.tscn" id="2_sw0u6"]
-[ext_resource type="PackedScene" uid="uid://bcwy3ng4cq0nb" path="res://UI/Dialogue/dialogue.tscn" id="3_sh8n1"]
+[ext_resource type="PackedScene" uid="uid://bcwy3ng4cq0nb" path="res://UI/Dialogue/dialog.tscn" id="3_sh8n1"]
 [ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="4_nemnt"]
 [ext_resource type="Script" path="res://UI/equipment_ui.gd" id="5_salh6"]
 [ext_resource type="Script" path="res://UI/time_ui.gd" id="5_up8jm"]
@@ -65,6 +65,7 @@ layout_mode = 2
 
 [node name="Number" type="Label" parent="Gadgets/Equipment/Control"]
 visible = false
+layout_mode = 0
 offset_left = 8.0
 offset_top = 19.0
 offset_right = 41.0

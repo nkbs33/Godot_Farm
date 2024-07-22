@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcwy3ng4cq0nb"]
+
+[ext_resource type="Script" path="res://UI/Dialogue/dialog.gd" id="1_cqls1"]
+[ext_resource type="Theme" uid="uid://cyse7wtts37lc" path="res://UI/Dialogue/assets/dialog_theme.tres" id="1_owm88"]
+[ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="3_j1s7g"]
+[ext_resource type="Texture2D" uid="uid://dv7hf23idyluj" path="res://UI/UI_assets/carrot_ui.png" id="4_g0css"]
+[ext_resource type="PackedScene" uid="uid://deugn7yycsrt" path="res://UI/Dialogue/dialog_option.tscn" id="5_mx3jg"]
+
+[node name="Dialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_owm88")
+script = ExtResource("1_cqls1")
+metadata/_edit_lock_ = true
+
+[node name="DialogBox" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 175.0
+offset_right = 160.0
+offset_bottom = 240.0
+metadata/_edit_group_ = true
+
+[node name="Name" type="RichTextLabel" parent="DialogBox"]
+clip_contents = false
+layout_mode = 0
+offset_left = -9.0
+offset_top = -17.0
+offset_right = 56.0
+offset_bottom = 2.0
+theme_override_fonts/normal_font = ExtResource("3_j1s7g")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]cat[/center]
+"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Text" type="RichTextLabel" parent="DialogBox"]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 9.0
+offset_right = 310.0
+offset_bottom = 59.0
+theme_override_fonts/normal_font = ExtResource("3_j1s7g")
+theme_override_font_sizes/normal_font_size = 18
+text = "The person is talking ..."
+scroll_active = false
+
+[node name="Avatar" type="TextureRect" parent="DialogBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 59.0
+texture = ExtResource("4_g0css")
+expand_mode = 1
+
+[node name="OptionGrid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -59.0
+offset_right = 135.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 1
+columns = 5
+
+[node name="Option1" parent="OptionGrid" instance=ExtResource("5_mx3jg")]
+visible = false
+layout_mode = 2
+
+[node name="Option2" parent="OptionGrid" instance=ExtResource("5_mx3jg")]
+visible = false
+layout_mode = 2
+
+[node name="Option3" parent="OptionGrid" instance=ExtResource("5_mx3jg")]
+visible = false
+layout_mode = 2
+
+[node name="OptionTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
