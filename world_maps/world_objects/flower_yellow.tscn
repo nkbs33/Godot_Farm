@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://jhouagerd4e2"]
+[gd_scene load_steps=5 format=3 uid="uid://jhouagerd4e2"]
 
 [ext_resource type="Texture2D" uid="uid://ca2chdgre443" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png" id="1_l6uti"]
 [ext_resource type="PackedScene" uid="uid://rryf2ssyd1xo" path="res://world_maps/world_objects/interactive_region.tscn" id="2_6vx4c"]
 [ext_resource type="Script" path="res://world_maps/world_objects/flower_yellow.gd" id="2_boenh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8shfc"]
 
 [node name="FlowerYellow" type="Sprite2D"]
 texture = ExtResource("1_l6uti")
@@ -11,3 +13,6 @@ region_rect = Rect2(99, 39, 9, 5)
 script = ExtResource("2_boenh")
 
 [node name="InteractiveRegion" parent="." instance=ExtResource("2_6vx4c")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveRegion"]
+shape = SubResource("RectangleShape2D_8shfc")

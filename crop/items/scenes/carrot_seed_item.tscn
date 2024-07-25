@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://csu4kcsba4y3j"]
+
+[ext_resource type="Script" path="res://crop/items/crop_item.gd" id="1_3csj6"]
+[ext_resource type="Texture2D" uid="uid://didb38xmfnn4h" path="res://crop/assets/farming-Plants-items.png" id="3_3fh4f"]
+
+[node name="CarrotSeed" type="Sprite2D"]
+z_index = 99
+texture = ExtResource("3_3fh4f")
+centered = false
+hframes = 2
+vframes = 15
+frame = 4
+script = ExtResource("1_3csj6")
+item_name = "carrot_seed"

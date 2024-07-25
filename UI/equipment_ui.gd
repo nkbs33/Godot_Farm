@@ -19,3 +19,4 @@ func _on_player_equip(equip_node):
 func _on_player_unequip():
 	if get_child_count() > 1:
 		get_child(1).queue_free()
+		get_node("Control/Number").hide()

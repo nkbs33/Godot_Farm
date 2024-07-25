@@ -1,15 +1,21 @@
 extends Node
 
 var hud:HUD
-var player
-var player_coord
+var player:Player
+var player_coord:Vector2i
+var world:World
 
-@onready var crop_data:CropData = $CropData
+@onready var crop_data = $CropData
 @onready var backpack = $Backpack
 @onready var db_agent = $DatabaseAgent
 
 
 func on_player_interact():
+	var item = $ItemData.get_item(player_coord)
+	if item:
+		item.on_interact()
+		return
+	
 	var crop = crop_data.harvest_crop(player_coord)
 	if not crop:
 		return

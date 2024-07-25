@@ -7,7 +7,7 @@ func _input(event):
 		return
 	if event.is_action_pressed("interact"):
 		player.interact()
-		get_viewport().set_input_as_handled()
+		#get_viewport().set_input_as_handled()
 	if event.is_action_pressed("use_equipment"):
 		player.use_equipment()
 		get_viewport().set_input_as_handled()

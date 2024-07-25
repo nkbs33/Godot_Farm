@@ -1,9 +1,6 @@
 class_name SubMenu
 extends GridContainer
 
-signal show_menu
-signal hide_menu
-
 var entries = []
 var entry_dict = {}
 var entries_visible = []
@@ -12,7 +9,6 @@ var entries_visible = []
 
 func add_entry(name_:String, callback):
 	var entry = entry_scene.instantiate()
-	#entry.focus_entered.connect(func():print("focus ", name_))
 	entry.name = name_
 	entry.text = name_
 	entry.pressed.connect(callback)
@@ -40,13 +36,8 @@ func _input(event):
 	if not visible:
 		return
 	if event.is_action_pressed("cancel"):
-		toggle_visible(false)
+		toggle_visible(false)	
 		get_viewport().set_input_as_handled()
-
+	
 func toggle_visible(vis):
 	visible = vis
-	if vis:
-		entries_visible[0].grab_focus()
-		show_menu.emit()
-	else:
-		hide_menu.emit()

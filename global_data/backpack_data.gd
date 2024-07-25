@@ -1,4 +1,7 @@
+class_name BackpackData
 extends Node
+
+signal bag_item_change(item)
 
 @export var items = []
 var num_empty = 0
@@ -31,9 +34,6 @@ func _ready():
 	for i in range(num_slots):
 		items[i] = Item.new("", i, 0, ItemType.Item)
 	Event.pickup_item.connect(_on_pickup_item)
-	Event.pre_item_menu_show.connect(get_item_menu_entries)
-	Event.equip_backpack_item.connect(equip_from_backpack)
-	Event.unequip_backpack_item.connect(unequip_from_backpack)
 	Event.consume_equipment.connect(_on_consume_equipment)
 
 func get_empty_slot():
@@ -43,6 +43,8 @@ func get_empty_slot():
 	return -1
 
 func find_item(name_):
+	if name_ == "":
+		return -1
 	for i in range(num_slots):
 		if items[i] and items[i].name == name_:
 			return i
@@ -52,7 +54,7 @@ func add_item(name_):
 	var idx = find_item(name_)
 	if idx >= 0:
 		items[idx].num += 1
-		Event.bag_item_change.emit(items[idx])
+		bag_item_change.emit(items[idx])
 		return idx
 	idx = get_empty_slot()
 	if idx >= 0:
@@ -62,25 +64,25 @@ func add_item(name_):
 		match item_info.type:
 			"item": items[idx].type = ItemType.Item
 			"equipment": items[idx].type = ItemType.Equipment			
-		Event.bag_item_change.emit(items[idx])
+		bag_item_change.emit(items[idx])
 	return idx
 
 func change_item_num(id, change):
 	items[id].num += change
-	Event.bag_item_change.emit(items[id])
+	bag_item_change.emit(items[id])
 	if id == equipment_idx:
 		Event.equipment_num_change.emit(items[id].num)
 
 func set_item_num(id, num_):
 	items[id].num = num_
-	Event.bag_item_change.emit(items[id])
+	bag_item_change.emit(items[id])
 	if id == equipment_idx:
 		Event.equipment_num_change.emit(num_)
 
 func _on_pickup_item(item_name):
 	add_item(item_name)
 
-func get_item_menu_entries(idx, cb):
+func get_item_menu_entries(idx):
 	var entries = []
 	match items[idx].type:
 		ItemType.Item:
@@ -91,7 +93,7 @@ func get_item_menu_entries(idx, cb):
 			else:
 				entries.append_array(["unequip"])
 	entries.append("cancel")
-	cb.call(entries) 
+	return entries
 
 func equip_from_backpack(idx):
 	equipment_idx = idx

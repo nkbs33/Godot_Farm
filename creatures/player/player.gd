@@ -14,6 +14,7 @@ var direction = Vector2(0, 1)
 var interactable_list = []
 var paused:bool
 var equipment 
+var mouse_pos:Vector2
 
 func _ready():
 	Event.player_pause.connect(pause)
@@ -33,6 +34,11 @@ func get_input_vec():
 		if Input.is_action_pressed("move_down"):
 			inputVec.y += 1
 	return inputVec 
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		mouse_pos = get_global_transform_with_canvas().affine_inverse() * event.position
+		Event.player_move.emit(effective_pos())
 
 func _physics_process(_delta):
 	var input_vec = get_input_vec()
@@ -58,7 +64,17 @@ func _physics_process(_delta):
 		animation_tree.set("parameters/idle/blend_position", direction)
 
 func effective_pos():
-	return global_position + direction * 4
+	var max_reach = 15.9
+	if abs(mouse_pos.x) > max_reach * 1.5:
+		mouse_pos.x = 9999
+	elif abs(mouse_pos.x) > max_reach:
+		mouse_pos.x = sign(mouse_pos.x) * max_reach
+		
+	if abs(mouse_pos.y) > max_reach * 1.5:
+		mouse_pos.y = 9999
+	elif abs(mouse_pos.y) > max_reach:
+		mouse_pos.y = sign(mouse_pos.y) * max_reach
+	return global_position + mouse_pos
 
 func pause():
 	paused = true

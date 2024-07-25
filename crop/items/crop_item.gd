@@ -1,13 +1,10 @@
-extends Node2D
+extends Sprite2D
 @export var item_name:String
 
 func _ready():
-	set_item_name(item_name)
-	$InteractiveRegion.interact_start.connect(on_interact)
+	var item_data = GlobalData.get_node("ItemData")
+	await get_tree().create_timer(0.5).timeout
+	item_data.register(global_position, self)
 	
 func on_interact():
 	Event.pickup_item.emit(item_name)
-
-func set_item_name(v):
-	item_name = v
-	$Icon.item_name = v

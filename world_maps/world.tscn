@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b3xnuxt0w62s8"]
+[gd_scene load_steps=24 format=3 uid="uid://b3xnuxt0w62s8"]
 
 [ext_resource type="Script" path="res://world_maps/world.gd" id="1_i517c"]
 [ext_resource type="TileSet" uid="uid://cuk3wfxbmrb68" path="res://crop/plants/crop_tile_set.tres" id="3_c63gs"]
@@ -6,16 +6,17 @@
 [ext_resource type="Script" path="res://crop/plants/crop_tile_map.gd" id="5_vbv4y"]
 [ext_resource type="PackedScene" uid="uid://jhouagerd4e2" path="res://world_maps/world_objects/flower_yellow.tscn" id="9_4yn0a"]
 [ext_resource type="PackedScene" uid="uid://ci4dsdvydwt18" path="res://world_maps/world_objects/wood_bridge.tscn" id="9_awshj"]
-[ext_resource type="PackedScene" uid="uid://bdh45uumpx21b" path="res://crop/items/crop_item.tscn" id="10_5hl80"]
 [ext_resource type="PackedScene" uid="uid://c16s0aqkgc2um" path="res://world_maps/world_objects/tree_common.tscn" id="10_iknnk"]
+[ext_resource type="PackedScene" uid="uid://csu4kcsba4y3j" path="res://crop/items/scenes/carrot_seed_item.tscn" id="10_jqapn"]
+[ext_resource type="PackedScene" uid="uid://sed0mx5pk2yr" path="res://crop/items/scenes/cauliflower_seed_item.tscn" id="11_2yeto"]
 [ext_resource type="Texture2D" uid="uid://c23r5hl8o6cex" path="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/Water well.png" id="11_nehp1"]
 [ext_resource type="Texture2D" uid="uid://bit8hn34e7woa" path="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/work station.png" id="12_5q6su"]
+[ext_resource type="PackedScene" uid="uid://b6316f8cjowvj" path="res://crop/items/scenes/corn_seed_item.tscn" id="12_45kr0"]
 [ext_resource type="Texture2D" uid="uid://ca2chdgre443" path="res://assets/images/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png" id="12_70ge8"]
 [ext_resource type="PackedScene" uid="uid://de5fm804rxt0a" path="res://world_maps/world_objects/chop_wood.tscn" id="12_vh0os"]
 [ext_resource type="Texture2D" uid="uid://b4u4oxfky3xuv" path="res://assets/images/Sprout Lands - Sprites - premium pack/Tilesets/Building parts/Chest.png" id="13_fe5wj"]
 [ext_resource type="Script" path="res://world_maps/world_objects/chest.gd" id="14_80mif"]
 [ext_resource type="PackedScene" uid="uid://rryf2ssyd1xo" path="res://world_maps/world_objects/interactive_region.tscn" id="15_56wql"]
-[ext_resource type="PackedScene" uid="uid://45vjcht6febs" path="res://objects/dialog_trigger.tscn" id="16_74ffe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4lipb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -61,6 +62,9 @@ _data = {
 "RESET": SubResource("Animation_8p77q"),
 "open": SubResource("Animation_4nnov")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqytu"]
+size = Vector2(27, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71g7v"]
 size = Vector2(16, 9)
@@ -113,8 +117,10 @@ script = ExtResource("5_vbv4y")
 z_index = 6
 
 [node name="TileFocus" type="Panel" parent="UI"]
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = 64.0
+offset_top = 176.0
+offset_right = 80.0
+offset_bottom = 192.0
 pivot_offset = Vector2(8, 8)
 theme_override_styles/panel = SubResource("StyleBoxFlat_4lipb")
 
@@ -253,16 +259,16 @@ texture = ExtResource("12_70ge8")
 region_enabled = true
 region_rect = Rect2(80, 67, 16, 12)
 
-[node name="CarrotSeed" parent="StaticObjects/Misc" instance=ExtResource("10_5hl80")]
-position = Vector2(56, 184)
+[node name="Loot" type="Node2D" parent="StaticObjects"]
 
-[node name="CarrotSeed2" parent="StaticObjects/Misc" instance=ExtResource("10_5hl80")]
-position = Vector2(80, 184)
-item_name = "cauliflower_seed"
+[node name="CarrotSeed" parent="StaticObjects/Loot" instance=ExtResource("10_jqapn")]
+position = Vector2(64, 176)
 
-[node name="CarrotSeed3" parent="StaticObjects/Misc" instance=ExtResource("10_5hl80")]
-position = Vector2(104, 184)
-item_name = "corn_seed"
+[node name="CauliflowerSeed" parent="StaticObjects/Loot" instance=ExtResource("11_2yeto")]
+position = Vector2(80, 176)
+
+[node name="CornSeed" parent="StaticObjects/Loot" instance=ExtResource("12_45kr0")]
+position = Vector2(96, 176)
 
 [node name="WaterWell" type="Sprite2D" parent="."]
 position = Vector2(240, 88)
@@ -275,7 +281,7 @@ texture = ExtResource("12_5q6su")
 [node name="Chest" type="Sprite2D" parent="."]
 z_index = 5
 y_sort_enabled = true
-position = Vector2(56, 213)
+position = Vector2(40, 184)
 texture = ExtResource("13_fe5wj")
 hframes = 5
 vframes = 2
@@ -289,10 +295,13 @@ libraries = {
 [node name="InteractiveRegion" parent="Chest" instance=ExtResource("15_56wql")]
 position = Vector2(0, 3)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chest/InteractiveRegion"]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_oqytu")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="Chest"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chest/StaticBody2D"]
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_71g7v")
-
-[node name="DialogTrigger" parent="Chest" instance=ExtResource("16_74ffe")]
+metadata/_edit_lock_ = true

@@ -10,7 +10,7 @@ func _ready():
 	Event.toggle_backpack.connect(on_toggle_backpack)
 
 func on_toggle_backpack():
-	$Backpack.toggle_visible(true)
+	$Backpack.toggle_visible(!$Backpack.visible)
 
 func clear():
 	for e in visible_elements:

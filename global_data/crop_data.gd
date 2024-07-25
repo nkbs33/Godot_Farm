@@ -4,7 +4,7 @@ extends Node
 var crop_data = {}
 var soil_data = {}
 
-@onready var db_agent:DatabaseAgent = get_node("/root/GlobalData/DatabaseAgent")
+@onready var db_agent:DatabaseAgent = GlobalData.get_node("DatabaseAgent")
 
 class CropPlant:
 	var name:String
@@ -30,7 +30,7 @@ func harvest_crop(coord):
 		return null
 	var crop = crop_data[coord]
 	var info = db_agent.query_crop_data(crop.name)
-	return crop.name if crop.stage == info.stage_num-1 else null # mature
+	return crop.name if crop.stage == info.stage_num-1 else null # check if mature
 
 func plant_crop(coord, name_) -> CropPlant:
 	if not soil_data.has(coord) or soil_data[coord].crop:

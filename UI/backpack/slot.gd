@@ -36,6 +36,11 @@ func _ready():
 	on_num_change()
 	focus_entered.connect(update_render)
 	focus_exited.connect(update_render)
+	
+	mouse_entered.connect(func():
+		grab_focus())
+	mouse_exited.connect(func():
+		release_focus())
 
 func on_num_change():
 	image.visible = num > 0
@@ -44,11 +49,7 @@ func on_num_change():
 	image.item_name = item_name
 
 func _gui_input(event):
-	
-	if backpack_ui.item_menu.visible or backpack_ui.background:
-		return
-	if event is InputEventMouseMotion and not has_focus():
-		grab_focus()
 	if event is InputEventMouseButton and event.is_pressed():
+		print("click!")
 		click.emit()
 	

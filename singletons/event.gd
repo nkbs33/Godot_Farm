@@ -17,13 +17,11 @@ signal player_unequip()
 
 # backpack
 signal toggle_backpack()
-signal bag_item_change(item)
-signal equip_backpack_item(idx)
-signal unequip_backpack_item(idx)
-signal pre_item_menu_show(callback)
 signal pickup_item(item)
 signal consume_equipment()
 signal equipment_num_change(num)
+
+signal open_backpack_sell_mode()
 
 # global game utility
 signal update_time(hour, minute)
