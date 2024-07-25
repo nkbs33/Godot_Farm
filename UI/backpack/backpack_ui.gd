@@ -5,22 +5,30 @@ var slots
 var focus = null
 
 var background:bool
+var selected_indices = []
 
-@export var current_index:int:
-	set(value):
-		get_slot(current_index).selected = false
-		current_index = (value + NUM_SLOTS_ROW)%NUM_SLOTS_ROW
-		get_slot(current_index).selected = true
-		$ItemMenu.set_global_position(get_slot(current_index).global_position + Vector2(21,-14))
-		$ItemMenu.toggle_visible(false)
+@export var idx:int
+@onready var item_menu = $ItemMenu
+
+func set_idx(value):
+	idx = (value + NUM_SLOTS_ROW)%NUM_SLOTS_ROW
+	get_slot(idx).grab_focus()
 
 func get_slot(idx):
 	return slots.get_child((idx))
 
 func _ready():
 	slots = $Slots
+	for i in range(slots.get_child_count()):
+		var slot = slots.get_child(i)
+		slot.id = i
+		slot.focus_entered.connect(func(): idx = slot.id)
+		slot.click.connect(func():
+			slot.selected = true
+			show_item_menu())
+		
 	$ItemMenu.hide()
-	current_index = 0
+	idx = 0
 	connect_to_data()
 	setup_item_menu()
 	
@@ -37,7 +45,7 @@ func toggle_visible(vis):
 	$ItemMenu.toggle_visible(false)
 	set_background(false)
 	if vis:
-		grab_focus() 
+		get_slot(idx).grab_focus() 
 		Event.player_pause.emit()
 	else:
 		Event.player_resume.emit()
@@ -53,7 +61,7 @@ func set_background(val:bool):
 
 
 func _physics_process(delta):
-	if not has_focus() or background:
+	if not visible or background or item_menu.visible:
 		return
 	var x = 0
 	var y = 0
@@ -65,11 +73,10 @@ func _physics_process(delta):
 		y += 1
 	if Input.is_action_just_pressed("ui_up"):
 		y -= 1
-	current_index += x + y*9;
+	if x!=0 or y!=0:
+		set_idx(idx + x + y*9)
 
 func _input(event):
-	if not has_focus():
-		return
 	if event.is_action_pressed("switch_focus"):
 		set_background(!background)
 	if event.is_action_pressed("cancel") or event.is_action_pressed("backpack"):
@@ -83,9 +90,10 @@ func _input(event):
 
 
 func show_item_menu():
-	if get_slot(current_index).num == 0:
+	if get_slot(idx).num == 0:
 		return
-	Event.pre_item_menu_show.emit(current_index, item_menu_entry_callback)
+	$ItemMenu.set_global_position(get_slot(idx).global_position + Vector2(21,-14))
+	Event.pre_item_menu_show.emit(idx, item_menu_entry_callback)
 	$ItemMenu.toggle_visible(true)
 
 func item_menu_entry_callback(entries):
@@ -97,18 +105,20 @@ func setup_item_menu():
 	)
 	$ItemMenu.hide_menu.connect(func(): 
 		focus = null
-		grab_focus()
+		get_slot(idx).grab_focus()
+		get_slot(idx).selected=false
 	)
 	$ItemMenu.add_entry("use", func(): print("use"))
 	$ItemMenu.add_entry("equip", equip_item)
 	$ItemMenu.add_entry("unequip", unequip_item)
 	$ItemMenu.add_entry("split", func():print("split"))
 	$ItemMenu.add_entry("destroy", func(): print("destroy"))
-	$ItemMenu.add_entry("cancel", func(): $ItemMenu.toggle_visible(false))
+	$ItemMenu.add_entry("cancel", func(): 
+		$ItemMenu.toggle_visible(false))
 
 func equip_item():
-	Event.equip_backpack_item.emit(current_index)
+	Event.equip_backpack_item.emit(idx)
 	$ItemMenu.toggle_visible(false)
 func unequip_item():
-	Event.unequip_backpack_item.emit(current_index)
+	Event.unequip_backpack_item.emit(idx)
 	$ItemMenu.toggle_visible(false)

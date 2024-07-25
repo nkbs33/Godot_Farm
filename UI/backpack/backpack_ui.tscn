@@ -12,7 +12,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 anti_aliasing = false
 
-[node name="BackpackPanel" type="Panel"]
+[node name="BackpackUI" type="Panel"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -21,7 +21,7 @@ offset_top = 180.0
 offset_right = 102.0
 offset_bottom = 246.0
 pivot_offset = Vector2(102, 34)
-focus_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_5lt2j")
 script = ExtResource("1_2mxit")
 metadata/_edit_group_ = true

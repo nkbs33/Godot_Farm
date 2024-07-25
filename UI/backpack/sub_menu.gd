@@ -40,8 +40,8 @@ func _input(event):
 	if not visible:
 		return
 	if event.is_action_pressed("cancel"):
-		get_viewport().set_input_as_handled()
 		toggle_visible(false)
+		get_viewport().set_input_as_handled()
 
 func toggle_visible(vis):
 	visible = vis

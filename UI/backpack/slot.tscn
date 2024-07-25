@@ -42,12 +42,14 @@ offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(8, 8)
+mouse_filter = 2
 
 [node name="SelectBox" type="Panel" parent="Container"]
 visible = false
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7cham")
 
 [node name="Background" type="Panel" parent="Container"]
@@ -58,10 +60,10 @@ offset_top = 6.0
 offset_right = 10.0
 offset_bottom = 10.0
 pivot_offset = Vector2(4, 4)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qkqy4")
 
 [node name="Image" parent="Container" instance=ExtResource("2_uo2qw")]
-visible = false
 position = Vector2(8, 8)
 
 [node name="Number" type="Label" parent="Container"]
