@@ -82,11 +82,7 @@ func resume():
 	paused = false
 
 func interact():
-	if interactable_list.size() > 0:
-		var i = interactable_list[0]
-		i.on_interact()
-	else:
-		GlobalData.on_player_interact()
+	GlobalData.on_player_interact()
 
 func add_interactable(item):
 	interactable_list.append(item)

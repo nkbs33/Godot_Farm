@@ -2,12 +2,18 @@ class_name BackpackData
 extends Node
 
 signal bag_item_change(item)
+signal money_change(num)
 
 @export var items = []
 var num_empty = 0
 const num_slots = 27
+
 var equipment_idx:int = -1
 var equipment:Node
+var money:int:
+	set(v):
+		money=v
+		money_change.emit(money)
 
 enum ItemType {
 	Item,
@@ -20,19 +26,21 @@ class Item:
 	var num:int
 	var type:ItemType
 	var consume:bool
+	var value:int
 	
-	func _init(name_="", index_=0, num_=0, type_=ItemType.Item):
+	func _init(name_="", index_=0, num_=0, type_=ItemType.Item, value_=0):
 		name = name_
 		num = num_
 		index = index_
 		type = type_
+		value = value_
 		
 
 func _ready():
 	items.resize(num_slots)
 	num_empty = num_slots
 	for i in range(num_slots):
-		items[i] = Item.new("", i, 0, ItemType.Item)
+		items[i] = Item.new("", i)
 	Event.pickup_item.connect(_on_pickup_item)
 	Event.consume_equipment.connect(_on_consume_equipment)
 
@@ -61,6 +69,7 @@ func add_item(name_):
 		var item_info = GlobalData.db_agent.query_item_info(name_)
 		items[idx].name = name_
 		items[idx].num = 1
+		items[idx].value = item_info.value
 		match item_info.type:
 			"item": items[idx].type = ItemType.Item
 			"equipment": items[idx].type = ItemType.Equipment			

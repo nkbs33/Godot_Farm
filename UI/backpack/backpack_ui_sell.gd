@@ -1,4 +1,4 @@
-class_name BackpackUI
+class_name BackpackUISell
 extends Control
 
 const NUM_SLOTS_ROW = 27
@@ -47,9 +47,11 @@ func _on_bag_item_change(item):
 	get_slot(item.index).num = item.num
 
 func toggle_visible(vis):
-	if visible == vis: return
+	if visible == vis:
+		return
 	visible = vis
-	item_menu.toggle_visible(false)
+	if not vis:
+		item_menu.toggle_visible(false)
 	set_background(false)
 
 func set_background(val:bool):
@@ -86,21 +88,24 @@ func show_item_menu():
 	if get_slot(idx).num == 0:
 		return
 	item_menu.set_global_position(get_slot(idx).global_position + Vector2(21,-14))
-	var entries = backpack_data.get_item_menu_entries(idx)
-	item_menu.filter(entries)
+	#var entries = backpack_data.get_item_menu_entries(idx)
+	#item_menu.filter(entries)
 	item_menu.toggle_visible(true)
 	get_slot(idx).selected = true
 
 func setup_item_menu():
 	item_menu.visibility_changed.connect(_on_item_menu_visibility_changed)
-	item_menu.add_entry("sell", func(): print("sell"))
-	item_menu.add_entry("use", func(): print("use"))
-	item_menu.add_entry("equip", equip_item)
-	item_menu.add_entry("unequip", unequip_item)
-	item_menu.add_entry("split", func():print("split"))
-	item_menu.add_entry("destroy", func(): print("destroy"))
+	item_menu.add_entry("sell", _on_sell_item)
 	item_menu.add_entry("cancel", func(): 
 		item_menu.toggle_visible(false))
+
+func _on_sell_item():
+	var item:BackpackData.Item = backpack_data.items[idx]
+	var sum = item.value * item.num
+	print("sell %s %s" % [item.name, sum])
+	backpack_data.money += sum
+	backpack_data.set_item_num(idx, 0)
+	item_menu.hide()
 
 func _on_item_menu_visibility_changed():
 	if item_menu.visible:

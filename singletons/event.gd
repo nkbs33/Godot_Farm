@@ -1,11 +1,7 @@
 extends Node
 
 # dialog
-signal start_dialog(dialog_data, dialog_index)
-signal get_next_line()
-signal show_next_line(idx)
-signal end_dialog()
-signal choose_dialog_option(idx)
+signal start_dialog(dialog_data)
 
 # player
 signal player_pause()
@@ -21,7 +17,8 @@ signal pickup_item(item)
 signal consume_equipment()
 signal equipment_num_change(num)
 
-signal open_backpack_sell_mode()
+signal open_backpack_sell()
+signal close_backpack_sell()
 
 # global game utility
 signal update_time(hour, minute)

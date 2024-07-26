@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://06c1ij3vamrq"]
+[gd_scene load_steps=12 format=3 uid="uid://06c1ij3vamrq"]
 
 [ext_resource type="Script" path="res://UI/HUD.gd" id="1_ichou"]
 [ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://UI/backpack/backpack_ui.tscn" id="2_sw0u6"]
 [ext_resource type="PackedScene" uid="uid://bcwy3ng4cq0nb" path="res://UI/Dialogue/dialog.tscn" id="3_sh8n1"]
 [ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="4_nemnt"]
+[ext_resource type="Script" path="res://UI/money_label.gd" id="5_lmxm3"]
 [ext_resource type="Script" path="res://UI/equipment_ui.gd" id="5_salh6"]
 [ext_resource type="Script" path="res://UI/time_ui.gd" id="5_up8jm"]
+[ext_resource type="PackedScene" uid="uid://6c6hrv363ddh" path="res://UI/backpack/backpack_ui_sell.tscn" id="7_qftpg"]
+[ext_resource type="StyleBox" uid="uid://btfir0aed8ui3" path="res://UI/backpack/backpack_panel_style_sell.tres" id="9_pkiay"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3t7i"]
 bg_color = Color(0.952941, 0.858824, 0.666667, 0.776471)
@@ -13,6 +16,19 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ltwlq"]
+bg_color = Color(0.384593, 0.336185, 0.240353, 0.72549)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.922804, 0.835803, 0.693676, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+anti_aliasing = false
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ichou")
@@ -26,22 +42,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
-
-[node name="Time" type="Label" parent="Gadgets"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -83.0
-offset_top = 249.0
-offset_right = -9.0
-offset_bottom = 276.0
-grow_horizontal = 0
-theme_override_fonts/font = ExtResource("4_nemnt")
-theme_override_font_sizes/font_size = 18
-text = "14:00"
-horizontal_alignment = 2
-script = ExtResource("5_up8jm")
 
 [node name="Equipment" type="PanelContainer" parent="Gadgets"]
 layout_mode = 1
@@ -77,6 +77,49 @@ theme_override_font_sizes/font_size = 0
 text = "0"
 horizontal_alignment = 2
 
+[node name="Panel" type="Panel" parent="Gadgets"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -102.0
+offset_top = 10.0
+offset_right = -15.0
+offset_bottom = 46.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ltwlq")
+
+[node name="Time" type="Label" parent="Gadgets/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -82.0
+offset_top = 3.0
+offset_right = -8.0
+offset_bottom = 30.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_nemnt")
+theme_override_font_sizes/font_size = 18
+text = "01-01 00:00"
+horizontal_alignment = 2
+script = ExtResource("5_up8jm")
+
+[node name="MoneyLabel" type="RichTextLabel" parent="Gadgets/Panel/Time"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 74.0
+offset_bottom = 40.0
+theme_override_colors/default_color = Color(1, 0.78587, 0.388199, 1)
+theme_override_fonts/normal_font = ExtResource("4_nemnt")
+theme_override_font_sizes/normal_font_size = 18
+text = "123456
+"
+autowrap_mode = 0
+text_direction = 2
+script = ExtResource("5_lmxm3")
+
 [node name="Backpack" parent="." instance=ExtResource("2_sw0u6")]
 visible = false
 anchors_preset = 7
@@ -84,18 +127,16 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -91.0
 offset_bottom = -25.0
-grow_horizontal = 2
-
-[node name="BackpackSellMode" parent="." instance=ExtResource("2_sw0u6")]
-visible = false
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -91.0
-offset_bottom = -25.0
-grow_horizontal = 2
 
 [node name="Dialogue" parent="." instance=ExtResource("3_sh8n1")]
 visible = false
 anchors_preset = -1
 text_speed = 3
+
+[node name="BackpackSell" parent="." instance=ExtResource("7_qftpg")]
+visible = false
+offset_top = 179.0
+offset_right = 104.0
+offset_bottom = 245.0
+theme_override_styles/panel = ExtResource("9_pkiay")
+metadata/_edit_group_ = true

@@ -2,7 +2,7 @@ extends Node
 
 var timer:float	
 @export var paused:bool
-@export var minute_sec:float
+@export var sec_per_min:float
 var time:MyTime
 
 class MyTime:
@@ -21,13 +21,13 @@ class MyTime:
 
 func _ready():
 	time = MyTime.new()
-
+	
 func _physics_process(delta):
 	if paused:
 		return
 	timer += delta
-	if timer > minute_sec:
-		timer -= minute_sec
+	if timer > sec_per_min:
+		timer -= sec_per_min
 		time.minute += 10
 		if time.minute == 60:
 			time.minute = 0

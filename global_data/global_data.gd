@@ -2,16 +2,38 @@ extends Node
 
 var hud:HUD
 var player:Player
-var player_coord:Vector2i
 var world:World
 
-@onready var crop_data = $CropData
-@onready var backpack = $Backpack
-@onready var db_agent = $DatabaseAgent
 
+@onready var crop_data:CropData = $CropData
+@onready var backpack:BackpackData = $Backpack
+@onready var db_agent = $DatabaseAgent
+@onready var item_data:ItemData = $ItemData
+var player_coord:Vector2i
+var target
+
+func set_player_coord(coord_):
+	player_coord = coord_
+	find_target()
+	if target:
+	#	print("t")
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+	else:
+		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+
+func find_target():
+	var item = item_data.get_item(player_coord)
+	if item:
+		target = item
+		return
+	var crop = crop_data.get_crop(player_coord)
+	if crop:
+		target = crop
+		return
+	target = null
 
 func on_player_interact():
-	var item = $ItemData.get_item(player_coord)
+	var item = item_data.get_item(player_coord)
 	if item:
 		item.on_interact()
 		return
@@ -26,7 +48,8 @@ func on_player_interact():
 
 
 #func _ready():
-#	get_viewport().connect("gui_focus_changed", _on_focus_changed)
+	#Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+	#get_viewport().connect("gui_focus_changed", _on_focus_changed)
 
 #func _on_focus_changed(control):
 #	print("focus: ", control.name)

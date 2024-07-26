@@ -46,10 +46,9 @@ func on_num_change():
 	image.visible = num > 0
 	number.visible = num > 1
 	bg.visible = num == 0
-	image.item_name = item_name
+	image.update_sprite(item_name)
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
-		print("click!")
 		click.emit()
 	

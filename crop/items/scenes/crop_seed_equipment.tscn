@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://mfd0xfkgd8bx"]
+
+[ext_resource type="Script" path="res://crop/items/crop_seed_equipment.gd" id="1_k6c15"]
+[ext_resource type="Texture2D" uid="uid://didb38xmfnn4h" path="res://crop/assets/farming-Plants-items.png" id="2_ysywp"]
+[ext_resource type="Script" path="res://crop/items/item_icon.gd" id="3_g7s18"]
+
+[node name="CropSeedEquipment" type="Node2D"]
+script = ExtResource("1_k6c15")
+item_name = "carrot_seed"
+crop_name = "carrot"
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_ysywp")
+hframes = 2
+vframes = 15
+frame = 4
+script = ExtResource("3_g7s18")

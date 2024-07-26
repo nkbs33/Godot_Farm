@@ -25,10 +25,13 @@ class Soil:
 		name = ""
 		crop = null
 
+func get_crop(coord):
+	return crop_data.get(coord)
+
 func harvest_crop(coord):
-	if not crop_data.has(coord):
-		return null
-	var crop = crop_data[coord]
+	var crop = get_crop(coord)
+	if not crop:
+		return
 	var info = db_agent.query_crop_data(crop.name)
 	return crop.name if crop.stage == info.stage_num-1 else null # check if mature
 

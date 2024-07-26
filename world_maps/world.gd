@@ -14,7 +14,7 @@ func _ready():
 	
 func track_player(pos):
 	var coord = get_coordinate(pos)
-	GlobalData.player_coord = get_coordinate(pos)
+	GlobalData.set_player_coord(coord)
 	tile_focus.position = ground_tile_map.map_to_local(coord) - Vector2(8,8)
 
 func get_coordinate(pos):

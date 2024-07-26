@@ -1,14 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6316f8cjowvj"]
 
 [ext_resource type="Texture2D" uid="uid://didb38xmfnn4h" path="res://crop/assets/farming-Plants-items.png" id="1_y8pws"]
-[ext_resource type="Script" path="res://crop/items/crop_item.gd" id="2_0wbve"]
+[ext_resource type="Script" path="res://crop/items/item.gd" id="2_gluxd"]
 
 [node name="CornSeed" type="Sprite2D"]
-z_index = 99
 texture = ExtResource("1_y8pws")
 centered = false
 hframes = 2
 vframes = 15
 frame = 2
-script = ExtResource("2_0wbve")
+script = ExtResource("2_gluxd")
 item_name = "corn_seed"

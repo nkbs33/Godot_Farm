@@ -1,3 +1,4 @@
+class_name Dialog
 extends Control
 
 @onready var hud:HUD = get_parent()
@@ -5,50 +6,70 @@ extends Control
 @onready var d_text = $DialogBox.get_node("Text")
 
 var dialog_data
-var dialog_index = -1:
-	set(value):
-		dialog_index=value
-		update_dialog()
+var dialog_index:int
 		
 @export var smooth_display_enabled:bool = true
 @export var text_speed = 5
 var is_smooth_playing:bool = false
 var smooth_play_timer:float
-var has_option:bool = false
 
+var has_option:bool = false
+var option_chosen:String
+var opt_request:String
 
 func _ready():
 	Event.start_dialog.connect(_on_start_dialog)
-	Event.end_dialog.connect(_on_end_dialog)
-	Event.show_next_line.connect(_on_show_next_line)
 	setup_options()
 
 func toggle_visible(vis):
 	visible = vis
 	
-func _on_start_dialog(dialog_data_, dialog_index_):
+func _on_start_dialog(dialog_data_):
+	Event.player_pause.emit()
 	toggle_visible(true)
 	dialog_data = dialog_data_
-	dialog_index = dialog_index_
-	smooth_display()
-	Event.player_pause.emit()
+	dialog_index = -1
+	get_next_line()
 
-func _on_end_dialog():
+func end_dialog():
 	toggle_visible(false)
 	Event.player_resume.emit()
-
-func _on_show_next_line(idx):
-	dialog_index = idx
 
 func _input(event):
 	if not visible or is_smooth_playing:
 		return
 	if not has_option and (event.is_action_pressed("interact") or event.is_action_pressed("cancel")):
-		Event.get_next_line.emit()
+		get_next_line()
 		get_viewport().set_input_as_handled()
 		
-func update_dialog():
+
+
+func get_next_line():
+	while true:
+		dialog_index += 1
+		if dialog_index >= dialog_data.size():
+			end_dialog()
+			return
+		var line = dialog_data[dialog_index]
+		if line.condition==null:
+			break
+		if line.condition.substr(0,1)=="_":
+			opt_request = line.condition.substr(1)+"-"
+			print("request option: ", opt_request)
+			break
+		if line.condition == option_chosen:
+			break
+	update_dialog_box()
+
+func choose_dialog_option(idx):
+	option_chosen = opt_request+str(idx)
+	print("option chosen: ", option_chosen)
+	get_next_line()
+
+func update_dialog_box():
 	hide_options()
+	if dialog_index >= dialog_data.size():
+		return
 	d_name.text = "[center]"+dialog_data[dialog_index]["name"]+"[/center]"
 	d_text.text = dialog_data[dialog_index]["text"]
 	smooth_display()
@@ -74,11 +95,14 @@ func increase_display_length():
 		is_smooth_playing = false
 		show_options()
 
+
+
+
 func setup_options():
 	for i in range(1,3):
 		var c = $OptionGrid.get_child(i-1)
 		c.pressed.connect(func(): 
-			Event.choose_dialog_option.emit(i)
+			choose_dialog_option(i)
 			has_option = false)
 	$OptionTimer.timeout.connect(_on_optiontimer_timeout)
 	
@@ -100,9 +124,3 @@ func _on_optiontimer_timeout():
 			var btn = $OptionGrid.get_child(i-1)
 			btn.text = opt
 			btn.show()
-			if i==1:
-				btn.grab_focus()
-				
-				
-func move_by_vec(_vec):
-	return false 

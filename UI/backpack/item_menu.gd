@@ -40,4 +40,5 @@ func _input(event):
 		get_viewport().set_input_as_handled()
 	
 func toggle_visible(vis):
+	push_warning("item menu visible", vis)
 	visible = vis

@@ -1,5 +1,5 @@
-extends Sprite2D
-@export var item_name:String
+extends Node2D
+signal item_interact
 
 func _ready():
 	var item_data = GlobalData.get_node("ItemData")
@@ -7,4 +7,4 @@ func _ready():
 	item_data.register(global_position, self)
 	
 func on_interact():
-	Event.pickup_item.emit(item_name)
+	item_interact.emit()

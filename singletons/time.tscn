@@ -4,4 +4,4 @@
 
 [node name="Time" type="Node"]
 script = ExtResource("1_cqut7")
-minute_sec = 0.1
+sec_per_min = 5.0

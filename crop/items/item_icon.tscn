@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://sa0r0wr3hl86"]
+[gd_scene load_steps=3 format=3 uid="uid://br263wmpmvg2r"]
 
 [ext_resource type="Texture2D" uid="uid://didb38xmfnn4h" path="res://crop/assets/farming-Plants-items.png" id="1_5ssu4"]
 [ext_resource type="Script" path="res://crop/items/item_icon.gd" id="2_ogiqi"]
