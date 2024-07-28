@@ -135,8 +135,9 @@ text_speed = 3
 
 [node name="BackpackSell" parent="." instance=ExtResource("7_qftpg")]
 visible = false
+offset_left = -103.0
 offset_top = 179.0
-offset_right = 104.0
+offset_right = 103.0
 offset_bottom = 245.0
 theme_override_styles/panel = ExtResource("9_pkiay")
 metadata/_edit_group_ = true

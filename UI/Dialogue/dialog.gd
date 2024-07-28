@@ -25,6 +25,8 @@ func toggle_visible(vis):
 	visible = vis
 	
 func _on_start_dialog(dialog_data_):
+	if not dialog_data_ or dialog_data_.size()==0:
+		return
 	Event.player_pause.emit()
 	toggle_visible(true)
 	dialog_data = dialog_data_

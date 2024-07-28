@@ -12,7 +12,7 @@ func _ready():
 
 func on_toggle_backpack():
 	if $BackpackSell.visible:
-		return
+		$BackpackSell.hide()
 	$Backpack.toggle_visible(!$Backpack.visible)
 
 func _on_open_backpack_sell():

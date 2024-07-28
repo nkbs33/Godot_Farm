@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw31kuiwvvcud"]
+
+[ext_resource type="Texture2D" uid="uid://bit8hn34e7woa" path="res://assets/images/Sprout Lands - Sprites - premium pack/Objects/work station.png" id="1_8cydm"]
+[ext_resource type="Script" path="res://world_maps/world_objects/work_station.gd" id="1_dw51j"]
+[ext_resource type="PackedScene" uid="uid://rryf2ssyd1xo" path="res://world_maps/world_objects/interactive_region.tscn" id="3_lpewp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwd62"]
+size = Vector2(30, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kd3qp"]
+size = Vector2(59, 37)
+
+[node name="WorkStation" type="Control"]
+y_sort_enabled = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 30.0
+offset_bottom = 20.0
+script = ExtResource("1_dw51j")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(15, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_iwd62")
+
+[node name="InteractiveRegion" parent="." instance=ExtResource("3_lpewp")]
+position = Vector2(15, 13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveRegion"]
+position = Vector2(-0.5, -2.5)
+shape = SubResource("RectangleShape2D_kd3qp")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(15, 13)
+texture = ExtResource("1_8cydm")
+offset = Vector2(0, -7)
+metadata/_edit_group_ = true

@@ -2,7 +2,7 @@ class_name CropTileMap
 extends TileMap
 
 const SOIL_LAYER = 0
-const CROP_LAYER = 1
+const CROP_LAYER = 2
 var crop_source:TileSetAtlasSource
 var soil_source:TileSetAtlasSource
 

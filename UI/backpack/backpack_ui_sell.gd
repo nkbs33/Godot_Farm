@@ -33,11 +33,6 @@ func _ready():
 	connect_to_data()
 	setup_item_menu()
 	
-	mouse_entered.connect(func():
-		set_background(false))
-	mouse_exited.connect(func():
-		set_background(true))
-	
 func connect_to_data():
 	backpack_data = GlobalData.backpack
 	backpack_data.bag_item_change.connect(_on_bag_item_change)
