@@ -16,6 +16,10 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(146, 179)
+limit_left = -150
+limit_top = -100
+limit_right = 450
+limit_bottom = 325
 
 [node name="Player" parent="." instance=ExtResource("6_ebqgk")]
 z_index = 5
