@@ -91,6 +91,16 @@ func set_item_num(id, num_):
 func _on_pickup_item(item_name):
 	add_item(item_name)
 
+func use(idx):
+	match items[idx].type:
+		ItemType.Item:
+			pass
+		ItemType.Equipment:
+			if equipment_idx == idx:
+				unequip_from_backpack(idx)
+			else:
+				equip_from_backpack(idx)
+	
 func get_item_menu_entries(idx):
 	var entries = []
 	match items[idx].type:

@@ -26,17 +26,12 @@ func _ready():
 		slot.id = i
 		slot.focus_entered.connect(func(): idx = slot.id)
 		slot.click.connect(func():
-			show_item_menu())
+			backpack_data.use(idx))
 		
 	item_menu.hide()
 	idx = 0
 	connect_to_data()
 	setup_item_menu()
-	
-	#mouse_entered.connect(func():
-	#	set_background(false))
-	#mouse_exited.connect(func():
-	#	set_background(true))
 	
 func connect_to_data():
 	backpack_data = GlobalData.backpack
@@ -80,7 +75,6 @@ func _input(event):
 		return
 	if visible and not item_menu.visible and event.is_action_pressed("cancel"):
 		toggle_visible(false)
-
 
 func show_item_menu():
 	if get_slot(idx).num == 0:

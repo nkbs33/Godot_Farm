@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4kssa1ua1wpx"]
+
+[ext_resource type="Texture2D" uid="uid://c6r1nj4sn72n5" path="res://structures/Basic_Furniture.png" id="1_oqvhd"]
+
+[node name="Bed" type="Sprite2D"]
+z_index = 6
+position = Vector2(120, -59)
+texture = ExtResource("1_oqvhd")
+region_enabled = true
+region_rect = Rect2(1, 26, 14, 22)

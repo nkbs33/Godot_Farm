@@ -49,6 +49,6 @@ func on_num_change():
 	image.update_sprite(item_name)
 
 func _gui_input(event):
-	if event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton and event.is_released() and has_focus():
 		click.emit()
 	

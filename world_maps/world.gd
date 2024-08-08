@@ -12,6 +12,11 @@ func _ready():
 	Event.player_resume.connect(func(): tile_focus.show())
 	GlobalData.world = self
 	
+	Event.player_enter_house.connect(func(layer):
+		ground_tile_map.set_layer_enabled(layer, false))
+	Event.player_exit_house.connect(func(layer):
+		ground_tile_map.set_layer_enabled(layer, true))
+	
 func track_player(pos):
 	var coord = get_coordinate(pos)
 	GlobalData.set_player_coord(coord)

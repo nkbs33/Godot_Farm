@@ -11,6 +11,9 @@ signal player_world_interact()
 signal player_equip(item)
 signal player_unequip()
 
+signal player_enter_house(layer)
+signal player_exit_house(layer)
+
 # backpack
 signal toggle_backpack()
 signal pickup_item(item)

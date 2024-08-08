@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ce7h4q55b3ncg"
-path="res://.godot/imported/door animation sprites.png-f8e988df41d6b5049a5b9491679fe119.ctex"
+path="res://.godot/imported/door animation sprites.png-42f6a50cf8c09eb80641e29aea323bba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/Sprout Lands - Sprites - premium pack/Tilesets/Building parts/door animation sprites.png"
-dest_files=["res://.godot/imported/door animation sprites.png-f8e988df41d6b5049a5b9491679fe119.ctex"]
+source_file="res://structures/door animation sprites.png"
+dest_files=["res://.godot/imported/door animation sprites.png-42f6a50cf8c09eb80641e29aea323bba.ctex"]
 
 [params]
 
