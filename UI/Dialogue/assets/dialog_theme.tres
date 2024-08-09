@@ -1,5 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cyse7wtts37lc"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cyse7wtts37lc"]
 
+[ext_resource type="FontFile" uid="uid://b0a7w5xwxiwr2" path="res://assets/fonts/Unifontexmono-DYWdE.ttf" id="1_nb621"]
 [ext_resource type="StyleBox" uid="uid://qm3mmlrlcn7c" path="res://UI/Dialogue/assets/dialog_box_style.tres" id="1_t3orj"]
 [ext_resource type="FontFile" uid="uid://dp4ol5p3bnpvv" path="res://assets/fonts/m5x7.ttf" id="1_uoepu"]
 [ext_resource type="StyleBox" uid="uid://cmc1dk1oa6xk" path="res://UI/Dialogue/assets/dialog_option_style_hover.tres" id="2_xrrvb"]
@@ -34,8 +35,8 @@ Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
 Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
-Button/font_sizes/font_size = 15
-Button/fonts/font = ExtResource("1_uoepu")
+Button/font_sizes/font_size = 11
+Button/fonts/font = ExtResource("1_nb621")
 Button/styles/disabled = SubResource("StyleBoxFlat_e73pj")
 Button/styles/focus = ExtResource("2_xrrvb")
 Button/styles/hover = ExtResource("2_xrrvb")

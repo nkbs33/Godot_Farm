@@ -1,6 +1,6 @@
 extends Control
 
-var npc_name:String = "Chiki"
+var npc_name:String = "奇奇"
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
