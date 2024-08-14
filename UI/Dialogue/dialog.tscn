@@ -3,8 +3,10 @@
 [ext_resource type="Script" path="res://UI/Dialogue/dialog.gd" id="1_cqls1"]
 [ext_resource type="Theme" uid="uid://cyse7wtts37lc" path="res://UI/Dialogue/assets/dialog_theme.tres" id="1_owm88"]
 [ext_resource type="FontFile" uid="uid://b0a7w5xwxiwr2" path="res://assets/fonts/Unifontexmono-DYWdE.ttf" id="3_02jum"]
-[ext_resource type="Texture2D" uid="uid://dv7hf23idyluj" path="res://UI/UI_assets/carrot_ui.png" id="4_g0css"]
 [ext_resource type="PackedScene" uid="uid://deugn7yycsrt" path="res://UI/Dialogue/dialog_option.tscn" id="5_mx3jg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lfnxq"]
+load_path = "res://.godot/imported/carrot_ui.png-377670a7dc2690fa5405876010bad344.ctex"
 
 [node name="Dialog" type="Control"]
 layout_mode = 3
@@ -13,7 +15,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme = ExtResource("1_owm88")
 script = ExtResource("1_cqls1")
 metadata/_edit_lock_ = true
@@ -27,6 +28,7 @@ offset_left = -160.0
 offset_top = 175.0
 offset_right = 160.0
 offset_bottom = 240.0
+mouse_filter = 1
 metadata/_edit_group_ = true
 
 [node name="Name" type="RichTextLabel" parent="DialogBox"]
@@ -62,7 +64,7 @@ offset_left = 8.0
 offset_top = 4.0
 offset_right = 56.0
 offset_bottom = 59.0
-texture = ExtResource("4_g0css")
+texture = SubResource("CompressedTexture2D_lfnxq")
 expand_mode = 1
 
 [node name="OptionGrid" type="GridContainer" parent="."]
@@ -83,16 +85,16 @@ theme_override_constants/v_separation = 1
 columns = 5
 
 [node name="Option1" parent="OptionGrid" instance=ExtResource("5_mx3jg")]
-visible = false
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Option2" parent="OptionGrid" instance=ExtResource("5_mx3jg")]
-visible = false
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Option3" parent="OptionGrid" instance=ExtResource("5_mx3jg")]
-visible = false
 layout_mode = 2
+mouse_filter = 1
 
 [node name="OptionTimer" type="Timer" parent="."]
 wait_time = 0.2

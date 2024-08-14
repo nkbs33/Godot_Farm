@@ -25,6 +25,7 @@ signal close_backpack_sell()
 
 # global game utility
 signal update_time(hour, minute)
+signal prompt_input(prompt, callback)
 
 # crop
 signal use_seed(seed_name)

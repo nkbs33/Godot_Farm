@@ -9,6 +9,8 @@ func _ready():
 	Event.toggle_backpack.connect(on_toggle_backpack)
 	Event.open_backpack_sell.connect(_on_open_backpack_sell)
 	Event.close_backpack_sell.connect(_on_close_backpack_sell)
+	
+	Event.prompt_input.connect(_on_prompt_input)
 
 func on_toggle_backpack():
 	if $BackpackSell.visible:
@@ -21,3 +23,11 @@ func _on_open_backpack_sell():
 
 func _on_close_backpack_sell():
 	$BackpackSell.toggle_visible(false)
+
+func _on_prompt_input(prompt, callback:Callable):
+	if prompt == "{prompt_player_name}":
+		var li:LineInput = %LineInput
+		li.make_input_dialog("你的名字是？","咪咪", func():
+			GlobalData.global_var['player_name'] = %LineInput.get_node("panel/field").text
+			callback.call())
+		li.show()

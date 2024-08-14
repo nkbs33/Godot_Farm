@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://06c1ij3vamrq"]
+[gd_scene load_steps=13 format=3 uid="uid://06c1ij3vamrq"]
 
 [ext_resource type="Script" path="res://UI/HUD.gd" id="1_ichou"]
 [ext_resource type="PackedScene" uid="uid://c213amf3baau1" path="res://UI/backpack/backpack_ui.tscn" id="2_sw0u6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://UI/money_label.gd" id="5_lmxm3"]
 [ext_resource type="Script" path="res://UI/equipment_ui.gd" id="5_salh6"]
 [ext_resource type="Script" path="res://UI/time_ui.gd" id="5_up8jm"]
+[ext_resource type="PackedScene" uid="uid://c4crthdoi3o8d" path="res://UI/gadgets/player_name_input.tscn" id="6_bpnvo"]
 [ext_resource type="PackedScene" uid="uid://6c6hrv363ddh" path="res://UI/backpack/backpack_ui_sell.tscn" id="7_qftpg"]
 [ext_resource type="StyleBox" uid="uid://btfir0aed8ui3" path="res://UI/backpack/backpack_panel_style_sell.tres" id="9_pkiay"]
 
@@ -77,7 +78,7 @@ theme_override_font_sizes/font_size = 0
 text = "0"
 horizontal_alignment = 2
 
-[node name="Panel" type="Panel" parent="Gadgets"]
+[node name="CornorPanel" type="Panel" parent="Gadgets"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -88,8 +89,9 @@ offset_right = -15.0
 offset_bottom = 46.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ltwlq")
+metadata/_edit_lock_ = true
 
-[node name="Time" type="Label" parent="Gadgets/Panel"]
+[node name="Time" type="Label" parent="Gadgets/CornorPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -105,7 +107,7 @@ text = "01-01 00:00"
 horizontal_alignment = 2
 script = ExtResource("5_up8jm")
 
-[node name="MoneyLabel" type="RichTextLabel" parent="Gadgets/Panel/Time"]
+[node name="MoneyLabel" type="RichTextLabel" parent="Gadgets/CornorPanel/Time"]
 layout_mode = 0
 offset_left = 28.0
 offset_top = 16.0
@@ -141,3 +143,7 @@ offset_right = 103.0
 offset_bottom = 245.0
 theme_override_styles/panel = ExtResource("9_pkiay")
 metadata/_edit_group_ = true
+
+[node name="LineInput" parent="." instance=ExtResource("6_bpnvo")]
+unique_name_in_owner = true
+visible = false

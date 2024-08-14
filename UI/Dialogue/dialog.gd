@@ -37,23 +37,22 @@ func end_dialog():
 	toggle_visible(false)
 	Event.player_resume.emit()
 
-func _input(event):
-	if not visible or is_smooth_playing:
+func _gui_input(event):
+	if is_smooth_playing or has_option:
 		return
-	if not has_option and (event.is_action_pressed("interact") or event.is_action_pressed("cancel")):
+	if event.is_action_pressed("interact") or event.is_action_pressed("cancel"):
 		get_next_line()
 		get_viewport().set_input_as_handled()
-		
-
 
 func get_next_line():
+	print("next")
 	while true:
 		dialog_index += 1
 		if dialog_index >= dialog_data.size():
 			end_dialog()
 			return
 		var line = dialog_data[dialog_index]
-		if line.condition==null:
+		if line.condition==null: 
 			break
 		if line.condition.substr(0,1)=="_":
 			opt_request = line.condition.substr(1)+"-"
@@ -72,11 +71,23 @@ func update_dialog_box():
 	hide_options()
 	if dialog_index >= dialog_data.size():
 		return
-	d_name.text = "[center]"+dialog_data[dialog_index]["name"]+"[/center]"
-	d_text.text = dialog_data[dialog_index]["text"]
-	smooth_display()
+	var line = dialog_data[dialog_index]
+	d_name.text = "[center]" + line["name"] + "[/center]"
+	# replace vars
+	d_text.text = replace_vars(line["text"])
+	start_display()
 	
-func smooth_display():
+func replace_vars(str:String):
+	var matches = []
+	var regex = RegEx.new()
+	regex.compile("\\{([^\\{\\}]*)\\}");
+	var match = regex.search(str)
+	if match != null:
+		var r = match.get_string(1)
+		str = str.replace("{"+r+"}", GlobalData.global_var[r])
+	return str
+
+func start_display():
 	if not smooth_display_enabled:
 		return
 	d_text.visible_characters = 0
@@ -88,17 +99,14 @@ func _process(delta):
 		return
 	smooth_play_timer += delta 
 	while smooth_play_timer > 0.05/text_speed:
-		increase_display_length()
+		step_dialog_display()
 		smooth_play_timer -= 0.05/text_speed
 
-func increase_display_length():
+func step_dialog_display():
 	d_text.visible_characters += 1
-	if d_text.visible_characters >= dialog_data[dialog_index]["text"].length():
+	if d_text.visible_characters >= d_text.text.length():
 		is_smooth_playing = false
-		show_options()
-
-
-
+		check_input()
 
 func setup_options():
 	for i in range(1,3):
@@ -113,16 +121,27 @@ func hide_options():
 		c.hide()
 	has_option = false
 	
-func show_options():
+func check_input():
 	if not dialog_data[dialog_index].option1:
 		return
 	has_option = true
 	$OptionTimer.start()
 
 func _on_optiontimer_timeout():
+	# check prompt
+	var line_data = dialog_data[dialog_index]
+	var opt1:String = line_data["option1"]
+	if opt1.begins_with("{prompt"):
+		handle_prompt(opt1)
+		return
 	for i in range(1,3):
-		var opt = dialog_data[dialog_index]["option"+str(i)]
+		var opt = line_data["option"+str(i)]
 		if opt:
 			var btn = $OptionGrid.get_child(i-1)
 			btn.text = opt
 			btn.show()
+
+func handle_prompt(opt1):
+	Event.prompt_input.emit(opt1, func():
+		has_option = false
+		get_next_line())

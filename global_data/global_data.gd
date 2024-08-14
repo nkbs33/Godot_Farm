@@ -4,6 +4,7 @@ var hud:HUD
 var player:Player
 var world:World
 
+var global_var:Dictionary = {}
 
 @onready var crop_data:CropData = $CropData
 @onready var backpack:BackpackData = $Backpack
@@ -16,7 +17,6 @@ func set_player_coord(coord_):
 	player_coord = coord_
 	find_target()
 	if target:
-	#	print("t")
 		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 	else:
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
@@ -45,11 +45,3 @@ func on_player_interact():
 	if idx < 0: # fail
 		return
 	crop_data.remove_crop(player_coord)
-
-
-#func _ready():
-	#Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
-	#get_viewport().connect("gui_focus_changed", _on_focus_changed)
-
-#func _on_focus_changed(control):
-#	print("focus: ", control.name)
