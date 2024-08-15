@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://deugn7yycsrt" path="res://UI/Dialogue/dialog_option.tscn" id="5_mx3jg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lfnxq"]
-load_path = "res://.godot/imported/carrot_ui.png-377670a7dc2690fa5405876010bad344.ctex"
 
 [node name="Dialog" type="Control"]
 layout_mode = 3
@@ -17,6 +16,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_owm88")
 script = ExtResource("1_cqls1")
+text_speed = 1.0
+comma_pause = 0.1
+period_pause = 0.3
 metadata/_edit_lock_ = true
 
 [node name="DialogBox" type="Panel" parent="."]
@@ -38,6 +40,7 @@ offset_left = -9.0
 offset_top = -17.0
 offset_right = 48.0
 offset_bottom = -1.0
+mouse_filter = 1
 theme_override_fonts/normal_font = ExtResource("3_02jum")
 theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
@@ -52,6 +55,7 @@ offset_left = 26.0
 offset_top = 9.0
 offset_right = 294.0
 offset_bottom = 59.0
+mouse_filter = 1
 theme_override_fonts/normal_font = ExtResource("3_02jum")
 theme_override_font_sizes/normal_font_size = 12
 text = "The person is talking ..."
@@ -85,17 +89,20 @@ theme_override_constants/v_separation = 1
 columns = 5
 
 [node name="Option1" parent="OptionGrid" instance=ExtResource("5_mx3jg")]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 
 [node name="Option2" parent="OptionGrid" instance=ExtResource("5_mx3jg")]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 
 [node name="Option3" parent="OptionGrid" instance=ExtResource("5_mx3jg")]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 
 [node name="OptionTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.5
 one_shot = true

@@ -15,3 +15,5 @@ func make_input_dialog(prompt="prompt", place_holder="place_holder", callback=nu
 func _on_confirm_click():
 	hide()
 
+func value():
+	return get_node("panel/field").text

@@ -26,8 +26,7 @@ func _on_close_backpack_sell():
 
 func _on_prompt_input(prompt, callback:Callable):
 	if prompt == "{prompt_player_name}":
-		var li:LineInput = %LineInput
-		li.make_input_dialog("你的名字是？","咪咪", func():
-			GlobalData.global_var['player_name'] = %LineInput.get_node("panel/field").text
+		%LineInput.make_input_dialog("你的名字是？","咪咪", func():
+			GlobalData.global_var['player_name'] = %LineInput.value()
 			callback.call())
-		li.show()
+		%LineInput.show()

@@ -2,20 +2,27 @@ class_name Dialog
 extends Control
 
 @onready var hud:HUD = get_parent()
-@onready var d_name = $DialogBox.get_node("Name")
-@onready var d_text = $DialogBox.get_node("Text")
+@onready var d_name = get_node("DialogBox/Name")
+@onready var d_text = get_node("DialogBox/Text")
 
 var dialog_data
 var dialog_index:int
+var line
+var ch_name
+
 		
 @export var smooth_display_enabled:bool = true
-@export var text_speed = 5
+@export var text_speed:float = 5.0
+@export var comma_pause = 0.3
+@export var period_pause = 0.5
+var pause_timer = 0.0
+
 var is_smooth_playing:bool = false
 var smooth_play_timer:float
 
 var has_option:bool = false
-var option_chosen:String
 var opt_request:String
+
 
 func _ready():
 	Event.start_dialog.connect(_on_start_dialog)
@@ -52,26 +59,30 @@ func get_next_line():
 			end_dialog()
 			return
 		var line = dialog_data[dialog_index]
-		if line.condition==null: 
+		if line.condition==null or line.condition=="": 
 			break
-		if line.condition.substr(0,1)=="_":
+		if line.condition.substr(0,1)=="#":
 			opt_request = line.condition.substr(1)+"-"
 			print("request option: ", opt_request)
 			break
+		var option_request = line.condition.split('-')[0]+'-'
+		var option_chosen = GlobalData.global_state.get_character_state(ch_name, option_request)
 		if line.condition == option_chosen:
 			break
 	update_dialog_box()
 
 func choose_dialog_option(idx):
-	option_chosen = opt_request+str(idx)
+	var option_chosen = opt_request+str(idx)
 	print("option chosen: ", option_chosen)
+	GlobalData.global_state.set_character_state(ch_name, opt_request, option_chosen)
 	get_next_line()
 
 func update_dialog_box():
 	hide_options()
 	if dialog_index >= dialog_data.size():
 		return
-	var line = dialog_data[dialog_index]
+	line = dialog_data[dialog_index]
+	ch_name = line["name"]
 	d_name.text = "[center]" + line["name"] + "[/center]"
 	# replace vars
 	d_text.text = replace_vars(line["text"])
@@ -84,7 +95,8 @@ func replace_vars(str:String):
 	var match = regex.search(str)
 	if match != null:
 		var r = match.get_string(1)
-		str = str.replace("{"+r+"}", GlobalData.global_var[r])
+		if GlobalData.global_var.has(r):
+			str = str.replace("{"+r+"}", GlobalData.global_var[r])
 	return str
 
 func start_display():
@@ -97,6 +109,9 @@ func start_display():
 func _process(delta):
 	if not is_smooth_playing:
 		return
+	if pause_timer > 0:
+		pause_timer -= delta
+		return
 	smooth_play_timer += delta 
 	while smooth_play_timer > 0.05/text_speed:
 		step_dialog_display()
@@ -107,6 +122,12 @@ func step_dialog_display():
 	if d_text.visible_characters >= d_text.text.length():
 		is_smooth_playing = false
 		check_input()
+	else:
+		var char = d_text.text[d_text.visible_characters-1]
+		if char == '，':
+			pause_timer = comma_pause
+		elif char == '。' or char == '？':
+			pause_timer = period_pause
 
 func setup_options():
 	for i in range(1,3):

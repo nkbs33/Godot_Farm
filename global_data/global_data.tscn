@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://do3cycmmbtnqj"]
+[gd_scene load_steps=10 format=3 uid="uid://do3cycmmbtnqj"]
 
 [ext_resource type="Script" path="res://global_data/global_data.gd" id="1_yux4g"]
 [ext_resource type="Script" path="res://global_data/crop_data.gd" id="2_lnvip"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://global_data/player_data.gd" id="5_j65s6"]
 [ext_resource type="PackedScene" uid="uid://dqy4pt7o0lwx3" path="res://singletons/time.tscn" id="6_bm6km"]
 [ext_resource type="Script" path="res://global_data/item_data.gd" id="7_m6117"]
+[ext_resource type="Script" path="res://global_data/global_state.gd" id="8_d3k88"]
+[ext_resource type="Script" path="res://global_data/stage_manager.gd" id="9_722qx"]
 
 [node name="GlobalData" type="Node"]
 script = ExtResource("1_yux4g")
@@ -27,3 +29,9 @@ script = ExtResource("5_j65s6")
 
 [node name="ItemData" type="Node" parent="."]
 script = ExtResource("7_m6117")
+
+[node name="GlobalState" type="Node" parent="."]
+script = ExtResource("8_d3k88")
+
+[node name="StageManager" type="Node" parent="."]
+script = ExtResource("9_722qx")

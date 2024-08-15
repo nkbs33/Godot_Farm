@@ -133,7 +133,6 @@ offset_bottom = -25.0
 [node name="Dialogue" parent="." instance=ExtResource("3_sh8n1")]
 visible = false
 anchors_preset = -1
-text_speed = 3
 
 [node name="BackpackSell" parent="." instance=ExtResource("7_qftpg")]
 visible = false

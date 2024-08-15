@@ -8,8 +8,10 @@ var global_var:Dictionary = {}
 
 @onready var crop_data:CropData = $CropData
 @onready var backpack:BackpackData = $Backpack
-@onready var db_agent = $DatabaseAgent
+@onready var db_agent:DatabaseAgent = $DatabaseAgent
 @onready var item_data:ItemData = $ItemData
+@onready var global_state:GlobalState = $GlobalState
+
 var player_coord:Vector2i
 var target
 
