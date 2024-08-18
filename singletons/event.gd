@@ -2,6 +2,7 @@ extends Node
 
 # dialog
 signal start_dialog(dialog_data)
+signal dialog_event(event)
 
 # player
 signal player_pause()

@@ -55,9 +55,4 @@ func get_crop_by_id(id):
 		return null
 	return id_to_crop[id]
 
-func query_dialog(name, select_condition=""):
-	if select_condition != "":
-		select_condition = ("name = '%s'" % name) + " and " + select_condition
-	else:
-		select_condition = "name = '%s'" % name
-	return db.select_rows("dialog", select_condition, ["*"])
+

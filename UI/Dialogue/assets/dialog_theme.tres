@@ -45,5 +45,5 @@ Button/styles/pressed = ExtResource("2_xrrvb")
 Fonts/fonts/large = ExtResource("1_uoepu")
 Fonts/fonts/normal = ExtResource("1_uoepu")
 Panel/styles/panel = ExtResource("1_t3orj")
-RichTextLabel/font_sizes/normal_font_size = 18
-RichTextLabel/fonts/normal_font = ExtResource("1_uoepu")
+RichTextLabel/font_sizes/normal_font_size = 14
+RichTextLabel/fonts/normal_font = ExtResource("1_nb621")

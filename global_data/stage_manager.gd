@@ -1,3 +1,3 @@
-class_name StageManager
 extends Node
 
+var current_stage:String

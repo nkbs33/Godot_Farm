@@ -18,6 +18,8 @@ config/features=PackedStringArray("4.2", "Mobile")
 
 GlobalData="*res://global_data/global_data.tscn"
 Event="*res://singletons/event.tscn"
+DialogData="*res://global_data/dialog_data.gd"
+StageManager="*res://global_data/stage_manager.gd"
 
 [display]
 
