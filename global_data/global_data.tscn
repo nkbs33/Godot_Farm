@@ -1,13 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://do3cycmmbtnqj"]
+[gd_scene load_steps=7 format=3 uid="uid://do3cycmmbtnqj"]
 
 [ext_resource type="Script" path="res://global_data/global_data.gd" id="1_yux4g"]
 [ext_resource type="Script" path="res://global_data/crop_data.gd" id="2_lnvip"]
 [ext_resource type="Script" path="res://global_data/backpack_data.gd" id="3_krf3s"]
-[ext_resource type="Script" path="res://global_data/database_agent.gd" id="4_8g4g0"]
 [ext_resource type="Script" path="res://global_data/player_data.gd" id="5_j65s6"]
 [ext_resource type="PackedScene" uid="uid://dqy4pt7o0lwx3" path="res://singletons/time.tscn" id="6_bm6km"]
 [ext_resource type="Script" path="res://global_data/item_data.gd" id="7_m6117"]
-[ext_resource type="Script" path="res://global_data/global_state.gd" id="8_d3k88"]
 
 [node name="GlobalData" type="Node"]
 script = ExtResource("1_yux4g")
@@ -18,9 +16,6 @@ script = ExtResource("2_lnvip")
 [node name="Backpack" type="Node" parent="."]
 script = ExtResource("3_krf3s")
 
-[node name="DatabaseAgent" type="Node" parent="."]
-script = ExtResource("4_8g4g0")
-
 [node name="PlayerData" type="Node" parent="."]
 script = ExtResource("5_j65s6")
 
@@ -28,6 +23,3 @@ script = ExtResource("5_j65s6")
 
 [node name="ItemData" type="Node" parent="."]
 script = ExtResource("7_m6117")
-
-[node name="GlobalState" type="Node" parent="."]
-script = ExtResource("8_d3k88")

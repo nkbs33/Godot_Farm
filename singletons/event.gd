@@ -30,6 +30,7 @@ signal prompt_input(prompt, callback)
 
 # crop
 signal use_seed(seed_name)
-signal crop_planted(coord, atlas)
+signal crop_planted(coord, crop_name, atlas)
 signal remove_crop(coord)
 
+signal database_opened()

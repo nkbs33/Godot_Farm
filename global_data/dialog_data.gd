@@ -8,10 +8,10 @@ func query_dialog(name, select_condition=""):
 		select_condition = ("name = '%s'" % name) + " and " + ("trigger_condition = '%s'" % select_condition)
 	else:
 		select_condition = "name = '%s'" % name
-	return GlobalData.db_agent.db.select_rows("dialog", select_condition, ["*"])
+	return DatabaseAgent.db.select_rows("dialog", select_condition, ["*"])
 
 func query_dialog_by_id(id):
-	db = GlobalData.db_agent.db
+	db = DatabaseAgent.db
 	var data = db.select_rows("dialog", "id = '%s'"%id, ["*"])[0]
 	var ch_name = data.name
 	cache_data( db.select_rows(("dialog"), "name = '%s'"%ch_name, ["*"]) )

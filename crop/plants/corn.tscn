@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://u1hcop8jt0wt"]
+
+[ext_resource type="Texture2D" uid="uid://0tywlfk8r4ab" path="res://crop/assets/Farming Plants.png" id="1_vmmgi"]
+
+[node name="Corn" type="Sprite2D"]
+z_index = 5
+position = Vector2(6.9223, 156.231)
+texture = ExtResource("1_vmmgi")
+offset = Vector2(-0.465, -13.865)
+hframes = 5
+frame = 4
+region_enabled = true
+region_rect = Rect2(0, 0, 80, 32)

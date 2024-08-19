@@ -6,5 +6,6 @@
 custom_minimum_size = Vector2(45, 18)
 offset_right = 45.0
 offset_bottom = 18.0
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_nbrkl")
 text = "Option"

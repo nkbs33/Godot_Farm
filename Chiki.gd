@@ -5,6 +5,7 @@ var npc_name:String = "奇奇"
 
 func _ready():
 	Event.dialog_event.connect(_on_dialog_event)
+	set_default_cursor_shape(Control.CURSOR_POINTING_HAND)
 
 func _on_dialog_event(event):
 	if event == "start_tutorial":
@@ -17,12 +18,5 @@ func _gui_input(event):
 		Event.start_dialog.emit(data)
 
 func get_dialog_data():
-	if GlobalData.global_state.get_character_state(npc_name, "first met") == null:
-		GlobalData.global_state.set_character_state(npc_name, "first met", "false")
-		dialog_id = DialogData.query_dialog(npc_name, "first met")[0].id
-	elif StageManager.current_stage== "tutorial":
-		dialog_id = DialogData.query_dialog(npc_name, "tutorial")[0].id
-	else:
-		dialog_id = DialogData.query_dialog(npc_name, "intro")[0].id
-		
+	dialog_id = StageManager.get_dialog_id(npc_name)
 	return DialogData.get_dialog(dialog_id)

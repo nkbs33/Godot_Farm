@@ -27,6 +27,10 @@ func _on_close_backpack_sell():
 func _on_prompt_input(prompt, callback:Callable):
 	if prompt == "{prompt_player_name}":
 		%LineInput.make_input_dialog("你的名字是？","咪咪", func():
-			GlobalData.global_var['player_name'] = %LineInput.value()
+			GlobalState.global_vars['player_name'] = %LineInput.value()
 			callback.call())
 		%LineInput.show()
+
+
+func _on_save_pressed():
+	GlobalState.save_data()

@@ -1,4 +1,3 @@
-class_name DatabaseAgent
 extends Node
 
 const db_path = "res://global_data/database/"
@@ -14,6 +13,8 @@ func _ready():
 	db = SQLite.new()
 	db.path = "res://assets/database/data.db"
 	db.open_db()
+	
+	Event.database_opened.emit()
 	
 	_load_item_db("items")
 	_load_crop_db("crop")
@@ -55,4 +56,5 @@ func get_crop_by_id(id):
 		return null
 	return id_to_crop[id]
 
-
+func query_raw(table, sql):
+	return db.select_rows(table, sql, ["*"]);

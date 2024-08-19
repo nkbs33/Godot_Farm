@@ -53,17 +53,16 @@ y_sort_enabled = true
 position = Vector2(2, 0)
 
 [node name="World" parent="." instance=ExtResource("2_4wagc")]
-z_index = 0
 metadata/_edit_lock_ = true
 
 [node name="HUD" parent="." instance=ExtResource("3_grrx6")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(146, 179)
+position = Vector2(219, 122)
 
 [node name="Mimi" parent="." instance=ExtResource("6_ebqgk")]
 z_index = 5
-position = Vector2(146, 179)
+position = Vector2(219, 122)
 metadata/_edit_group_ = true
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Mimi"]
@@ -73,10 +72,10 @@ remote_path = NodePath("../../Camera2D")
 y_sort_enabled = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = 164.0
-offset_top = 206.0
-offset_right = 175.0
-offset_bottom = 217.0
+offset_left = 250.0
+offset_top = 120.0
+offset_right = 261.0
+offset_bottom = 131.0
 script = ExtResource("5_bpe46")
 
 [node name="Sprite" type="Sprite2D" parent="Chiki"]

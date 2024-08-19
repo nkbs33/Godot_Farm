@@ -44,7 +44,7 @@ func get_tile_name(coord, layer, source):
 	var tile_name = tile_data.get_custom_data("name")
 	return tile_name
 
-func set_crop(coord:Vector2i, crop_atlas:Vector2i):
+func set_crop(coord:Vector2i, crop_name:String, crop_atlas:Vector2i):
 	set_cell(CROP_LAYER, coord, 0, crop_atlas)
 
 func remove_crop(coord):

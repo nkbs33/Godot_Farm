@@ -4,8 +4,6 @@ extends Node
 var crop_data = {}
 var soil_data = {}
 
-@onready var db_agent:DatabaseAgent = GlobalData.get_node("DatabaseAgent")
-
 class CropPlant:
 	var name:String
 	var quality:int
@@ -32,7 +30,7 @@ func harvest_crop(coord):
 	var crop = get_crop(coord)
 	if not crop:
 		return
-	var info = db_agent.query_crop_data(crop.name)
+	var info = DatabaseAgent.query_crop_data(crop.name)
 	return crop.name if crop.stage == info.stage_num-1 else null # check if mature
 
 func plant_crop(coord, name_) -> CropPlant:
@@ -40,7 +38,7 @@ func plant_crop(coord, name_) -> CropPlant:
 		return null
 	var crop = CropPlant.new(name_, 0, 0, 0)
 	add_crop(coord, crop)
-	Event.crop_planted.emit(coord, crop_to_atlas(crop))
+	Event.crop_planted.emit(coord, name_, crop_to_atlas(crop))
 	return crop
 
 func add_crop_by_atlas(coord, atlas):
@@ -54,7 +52,7 @@ func add_soil(coord):
 	soil_data[coord] = Soil.new()
 
 func atlas_to_crop(atlas):
-	var crop_name = db_agent.get_crop_by_id(atlas.y)
+	var crop_name = DatabaseAgent.get_crop_by_id(atlas.y)
 	if not crop_name:
 		return null
 	var quality = 0
@@ -63,7 +61,7 @@ func atlas_to_crop(atlas):
 	return CropPlant.new(crop_name, quality, stage, age)
 
 func crop_to_atlas(crop):
-	return Vector2i(crop.stage, db_agent.query_crop_data(crop.name).icon_row)
+	return Vector2i(crop.stage, DatabaseAgent.query_crop_data(crop.name).icon_row)
 
 func remove_crop(coord):
 	if not crop_data.has(coord):
@@ -83,13 +81,13 @@ func update_crops(time):
 	for coord in crop_data:
 		var crop = crop_data[coord]
 		crop.age += 10
-		var info = db_agent.query_crop_data(crop.name)
+		var info = DatabaseAgent.query_crop_data(crop.name)
 		if crop.stage < info.stage_num-1:
 			var stage_duration = info.duration[crop.stage]
 			if crop.age >= stage_duration:
 				crop.stage += 1
 				crop.age = 0
-				Event.crop_planted.emit(coord, crop_to_atlas(crop))
+				Event.crop_planted.emit(coord, crop.name, crop_to_atlas(crop))
 
 func _on_use_seed(crop_name):
 	if plant_crop(GlobalData.player_coord, crop_name):

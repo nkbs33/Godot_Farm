@@ -54,4 +54,5 @@ offset_left = 86.0
 offset_top = 33.0
 offset_right = 115.0
 offset_bottom = 48.0
+mouse_default_cursor_shape = 2
 text = "确认"

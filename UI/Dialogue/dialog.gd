@@ -36,20 +36,24 @@ func _gui_input(event):
 
 func get_next_line():
 	has_option = false
+	if dialog_data.event:
+		StageManager.handle_dialog_event(dialog_data.name, dialog_data.event)
 	if dialog_data.next_id == "0":
 		end_dialog()
-		if dialog_data.event:
-			Event.dialog_event.emit(dialog_data.event)
 		return
+	var next_id_str:String
 	if dialog_data.next_id:
 		if opt_chosen >= 0:
 			var ids = dialog_data.next_id.split(";")
-			dialog_id = int(ids[opt_chosen])
+			next_id_str = ids[opt_chosen]
 		else:
-			dialog_id = int(dialog_data.next_id)
+			next_id_str = dialog_data.next_id
+		if next_id_str[0] == '+' or next_id_str[0] == '-1':
+			dialog_id += int(next_id_str)
 	else:
 		dialog_id += 1
 	dialog_data = DialogData.query_dialog_by_id(dialog_id)	
+	opt_chosen = -1
 	update_dialog_box()
 
 
@@ -64,8 +68,8 @@ func replace_vars(str:String):
 	var match = regex.search(str)
 	if match != null:
 		var r = match.get_string(1)
-		if GlobalData.global_var.has(r):
-			str = str.replace("{"+r+"}", GlobalData.global_var[r])
+		if GlobalState.global_vars.has(r):
+			str = str.replace("{"+r+"}", GlobalState.global_vars[r])
 	return str
 
 

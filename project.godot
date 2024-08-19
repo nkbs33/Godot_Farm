@@ -20,6 +20,8 @@ GlobalData="*res://global_data/global_data.tscn"
 Event="*res://singletons/event.tscn"
 DialogData="*res://global_data/dialog_data.gd"
 StageManager="*res://global_data/stage_manager.gd"
+DatabaseAgent="*res://global_data/database_agent.gd"
+GlobalState="*res://global_data/global_state.gd"
 
 [display]
 

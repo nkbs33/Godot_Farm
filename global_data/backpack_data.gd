@@ -58,17 +58,17 @@ func find_item(name_):
 			return i
 	return -1
 
-func add_item(name_):
+func add_item(name_, num=1):
 	var idx = find_item(name_)
 	if idx >= 0:
-		items[idx].num += 1
+		items[idx].num += num
 		bag_item_change.emit(items[idx])
 		return idx
 	idx = get_empty_slot()
 	if idx >= 0:
-		var item_info = GlobalData.db_agent.query_item_info(name_)
+		var item_info = DatabaseAgent.query_item_info(name_)
 		items[idx].name = name_
-		items[idx].num = 1
+		items[idx].num = num
 		items[idx].value = item_info.value
 		match item_info.type:
 			"item": items[idx].type = ItemType.Item
@@ -117,7 +117,7 @@ func get_item_menu_entries(idx):
 func equip_from_backpack(idx):
 	equipment_idx = idx
 	var equipment_name = items[idx].name
-	var d = GlobalData.db_agent.query_item_info(equipment_name)
+	var d = DatabaseAgent.query_item_info(equipment_name)
 	items[idx].consume = d.consume
 	equipment = load("res://"+d.nodepath).instantiate()
 	if d.subtype == "seed":

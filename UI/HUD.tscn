@@ -122,6 +122,15 @@ autowrap_mode = 0
 text_direction = 2
 script = ExtResource("5_lmxm3")
 
+[node name="Save" type="Button" parent="Gadgets"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 237.0
+offset_right = 477.0
+offset_bottom = 268.0
+text = "save
+"
+
 [node name="Backpack" parent="." instance=ExtResource("2_sw0u6")]
 visible = false
 anchors_preset = 7
@@ -146,3 +155,5 @@ metadata/_edit_group_ = true
 [node name="LineInput" parent="." instance=ExtResource("6_bpnvo")]
 unique_name_in_owner = true
 visible = false
+
+[connection signal="pressed" from="Gadgets/Save" to="." method="_on_save_pressed"]
