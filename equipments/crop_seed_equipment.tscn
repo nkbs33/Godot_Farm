@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://mfd0xfkgd8bx"]
 
-[ext_resource type="Script" path="res://crop/items/crop_seed_equipment.gd" id="1_k6c15"]
+[ext_resource type="Script" path="res://equipments/crop_seed_equipment.gd" id="1_k6c15"]
 [ext_resource type="Texture2D" uid="uid://didb38xmfnn4h" path="res://crop/assets/farming-Plants-items.png" id="2_ysywp"]
 [ext_resource type="Script" path="res://crop/items/item_icon.gd" id="3_g7s18"]
 

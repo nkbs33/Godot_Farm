@@ -9,11 +9,11 @@ var goal_watchers = []
 var tasks = {}
 
 func watch_task(task):
-	var task_goals = DatabaseAgent.query_raw("task_goal","task_id = '%s'"%task.id)
-	if task_goals.size() == 0:
+	var goals = DatabaseAgent.query_raw("task_goal","task_id = '%s'"%task.id)
+	if goals.size() == 0:
 		return
-	tasks[task.id] = task_goals
-	for goal in task_goals:
+	tasks[task.id] = goals
+	for goal in goals:
 		var goal_watcher = GoalWatcher.new(goal)
 		goal_watcher.update_task = update_task
 		goal_watcher.goal_watchers = goal_watchers
@@ -47,12 +47,12 @@ class GoalWatcher:
 			Event.crop_planted.connect(self.watch_plant)
 			cut_signal = func():
 				Event.crop_planted.disconnect(self.watch_plant)
-		print("watch %s"%[goal.description])
+		print("watch goal %s"%[goal.description])
 	
 	func watch_plant(coord, crop_name, atlas):
 		if crop_name == item:
 			_num += 1
-			print("%s %s/%s"%[goal.description, _num, num])
+			print("watch_plant: %s %s/%s"%[goal.description, _num, num])
 			if _num == num:
 				finish()
 	
@@ -83,7 +83,7 @@ func handle_dialog_event(npc_name, event_str):
 			DatabaseAgent.db.update_rows("npc_state", "name = '%s'"%npc_name, {'loop':1})
 
 func find_task(npc_name):
-	var tasks = DatabaseAgent.query_raw("task", "status = 'Ready' and npc_name = '%s'"%npc_name)
+	var tasks = DatabaseAgent.query_raw("task", "status = 'R' and npc_name = '%s'"%npc_name)
 	if tasks.size() > 0:
 		for t in tasks:
 			if not task_cache.has(t.id):
@@ -98,7 +98,7 @@ func get_task(task_id):
 	return t
 
 func take_task(task_id):
-	DatabaseAgent.db.update_rows("task", "id = %s"%task_id, {'status':'Running'})
+	DatabaseAgent.db.update_rows("task", "id = %s"%task_id, {'status':'I'})
 	var task = get_task(task_id)
 	DatabaseAgent.db.update_rows("npc_state", "name = '%s'"%task.npc_name, {'stage':'%s'%task_id, 'loop':0})
 	print("take task %s"%task.name)
@@ -107,7 +107,7 @@ func take_task(task_id):
 
 func end_task(task_id):
 	var task = get_task(task_id)
-	DatabaseAgent.db.update_rows("task", "id = %s"%task_id, {'status':'Finish'})
+	DatabaseAgent.db.update_rows("task", "id = %s"%task_id, {'status':'F'})
 	DatabaseAgent.db.update_rows("npc_state", "name = '%s'"%task.npc_name, {'stage':'%sF'%task_id, 'loop':0})
 	print("end task %s"%task_cache[task_id].name)
 
@@ -121,3 +121,9 @@ func get_dialog_id(npc_name):
 		return behav.loop_dialog_id
 	else:
 		return behav.dialog_id
+
+func get_dialog(npc_name):
+	var dialog_id = get_dialog_id(npc_name)
+	var dialog_data = DialogData.get_dialog(dialog_id)
+	return dialog_data
+	

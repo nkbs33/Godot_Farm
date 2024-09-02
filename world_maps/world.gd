@@ -30,4 +30,3 @@ func turn_off_player_collision():
 
 func turn_on_player_collision():
 	ground_tile_map.tile_set.set_physics_layer_collision_mask(1, 1)
-

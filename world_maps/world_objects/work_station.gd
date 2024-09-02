@@ -10,4 +10,3 @@ func _on_click():
 	print("click work station")
 	var dialog_data = GlobalData.db_agent.query_dialog("work station")
 	Event.start_dialog.emit(dialog_data)
-

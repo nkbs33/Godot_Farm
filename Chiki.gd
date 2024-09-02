@@ -14,9 +14,11 @@ func _on_dialog_event(event):
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
-		var data = get_dialog_data()
-		Event.start_dialog.emit(data)
+		_on_click()
 
-func get_dialog_data():
-	dialog_id = StageManager.get_dialog_id(npc_name)
-	return DialogData.get_dialog(dialog_id)
+func _on_click():
+	start_dialog()
+
+func start_dialog():
+	var dd = StageManager.get_dialog(npc_name)
+	Event.start_dialog.emit(dd)

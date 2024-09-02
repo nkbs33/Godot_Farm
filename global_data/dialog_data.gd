@@ -30,4 +30,3 @@ func get_dialog(dialog_id):
 	else:
 		var dialog = query_dialog_by_id(dialog_id)
 		return dialog
-

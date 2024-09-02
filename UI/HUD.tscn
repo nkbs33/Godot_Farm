@@ -132,7 +132,6 @@ text = "save
 "
 
 [node name="Backpack" parent="." instance=ExtResource("2_sw0u6")]
-visible = false
 anchors_preset = 7
 anchor_top = 1.0
 anchor_bottom = 1.0

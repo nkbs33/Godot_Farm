@@ -4,8 +4,6 @@ var hud:HUD
 var player:Player
 var world:World
 
-var global_var:Dictionary = {}
-
 @onready var crop_data:CropData = $CropData
 @onready var backpack:BackpackData = $Backpack
 @onready var item_data:ItemData = $ItemData
@@ -45,4 +43,3 @@ func on_player_interact():
 	if idx < 0: # fail
 		return
 	crop_data.remove_crop(player_coord)
-
