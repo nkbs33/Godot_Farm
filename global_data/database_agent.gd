@@ -18,6 +18,7 @@ func _ready():
 	
 	_load_item_db("items")
 	_load_crop_db("crop")
+	_load_inventory()
 	load_tex()
 
 func load_tex():
@@ -36,6 +37,20 @@ func _load_crop_db(table):
 		crop_db[element.name] = element
 		id_to_crop[(int)(element.icon_row)] = element.name
 		element.duration = str_to_var("["+element.duration+"]")
+
+func _load_inventory():
+	var res = db.select_rows("inventory", "", ["*"])
+	for element in res:
+		if element.location == 'backpack':
+			GlobalData.backpack.set_item(element.item_name, element.num, element.id)
+	GlobalData.backpack.bag_item_change.connect(_on_bag_item_change)
+
+func _on_bag_item_change(item:BackpackData.Item):
+	var query = "INSERT OR REPLACE INTO inventory (item_name,location,num,id) VALUES ('%s','%s',%s,%s) "\
+		%[item.name, 'backpack', item.num, item.index]
+	db.query(query)
+
+
 
 
 func query_item_info(item_name):

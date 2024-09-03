@@ -4,7 +4,7 @@ var hud:HUD
 var player:Player
 var world:World
 
-@onready var crop_data:CropData = $CropData
+@onready var crop_manager:CropManager = $CropManager
 @onready var backpack:BackpackData = $Backpack
 @onready var item_data:ItemData = $ItemData
 
@@ -24,7 +24,7 @@ func find_target():
 	if item:
 		target = item
 		return
-	var crop = crop_data.get_crop(player_coord)
+	var crop = crop_manager.get_crop(player_coord)
 	if crop:
 		target = crop
 		return
@@ -36,10 +36,10 @@ func on_player_interact():
 		item.on_interact()
 		return
 	
-	var crop = crop_data.harvest_crop(player_coord)
+	var crop = crop_manager.harvest_crop(player_coord)
 	if not crop:
 		return
 	var idx = backpack.add_item(crop)
 	if idx < 0: # fail
 		return
-	crop_data.remove_crop(player_coord)
+	crop_manager.remove_crop(player_coord)

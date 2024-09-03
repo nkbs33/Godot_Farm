@@ -58,6 +58,15 @@ func find_item(name_):
 			return i
 	return -1
 
+func set_item(item_name, num, idx):
+	var item_info = DatabaseAgent.query_item_info(item_name)
+	items[idx].name = item_name
+	items[idx].num = num
+	items[idx].value = item_info.value
+	match item_info.type:
+		"item": items[idx].type = ItemType.Item
+		"equipment": items[idx].type = ItemType.Equipment
+
 func add_item(name_, num=1):
 	var idx = find_item(name_)
 	if idx >= 0:
@@ -92,6 +101,8 @@ func _on_pickup_item(item_name):
 	add_item(item_name)
 
 func use(idx):
+	if items[idx].num == 0:
+		return
 	match items[idx].type:
 		ItemType.Item:
 			pass

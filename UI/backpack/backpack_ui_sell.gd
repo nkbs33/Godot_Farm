@@ -30,6 +30,9 @@ func setup_slots():
 func connect_to_data():
 	backpack_data = GlobalData.backpack
 	backpack_data.bag_item_change.connect(_on_bag_item_change)
+	for i in range(27):
+		if backpack_data.items[i].num > 0:
+			_on_bag_item_change(backpack_data.items[i])
 
 func _on_bag_item_change(item):
 	get_slot(item.index).item_name = item.name

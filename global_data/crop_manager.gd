@@ -1,4 +1,4 @@
-class_name CropData
+class_name CropManager
 extends Node
 
 var crop_data = {}
@@ -15,6 +15,8 @@ class CropPlant:
 		quality = quality_
 		stage = stage_
 		age = age_
+	func _to_string() -> String:
+		return "%s %s %s" %[name, stage, age]
 
 class Soil:
 	var name:String
@@ -38,7 +40,7 @@ func plant_crop(coord, name_) -> CropPlant:
 		return null
 	var crop = CropPlant.new(name_, 0, 0, 0)
 	add_crop(coord, crop)
-	Event.crop_planted.emit(coord, name_, crop_to_atlas(crop))
+	Event.crop_changed.emit(coord, name_, crop_to_atlas(crop))
 	return crop
 
 func add_crop_by_atlas(coord, atlas):
@@ -47,6 +49,12 @@ func add_crop_by_atlas(coord, atlas):
 func add_crop(coord, crop:CropPlant):
 	crop_data[coord] = crop
 	soil_data[coord].crop = crop
+
+func add_crop_by_attr(coord, crop_attr):
+	var crop = CropPlant.new(crop_attr.name, crop_attr.quality, crop_attr.stage, crop_attr.age)
+	crop_data[coord] = crop
+	soil_data[coord].crop = crop
+	Event.crop_changed.emit(coord, crop.name, crop_to_atlas(crop))
 
 func add_soil(coord):
 	soil_data[coord] = Soil.new()
@@ -87,8 +95,24 @@ func update_crops(time):
 			if crop.age >= stage_duration:
 				crop.stage += 1
 				crop.age = 0
-				Event.crop_planted.emit(coord, crop.name, crop_to_atlas(crop))
+				Event.crop_changed.emit(coord, crop.name, crop_to_atlas(crop))
 
 func _on_use_seed(crop_name):
 	if plant_crop(GlobalData.player_coord, crop_name):
 		Event.consume_equipment.emit()
+
+
+func save_data():
+	for coord in crop_data:
+		var crop = crop_data[coord]
+		var query = "INSERT OR REPLACE INTO field_plants (name,stage,age,quality,map,coord) VALUES ('%s',%s,%s, %s,%s,'%s') "\
+			%[crop.name, crop.stage, crop.age, crop.quality, 0, '0-'+str(coord)]
+		#print(query)
+		DatabaseAgent.db.query(query)
+
+func _load_field_plants():
+	var res = DatabaseAgent.db.select_rows("field_plants", "", ["*"])
+	for element in res:
+		var coord = str_to_var('Vector2i'+element.coord.split('-')[1])
+		print(coord)
+		GlobalData.crop_manager.add_crop_by_attr(coord, element)

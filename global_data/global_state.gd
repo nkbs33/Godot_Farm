@@ -31,17 +31,5 @@ func load_data():
 	global_vars["farm_skill"] = d.farm_skill	
 	
 func save_data():
-	var res = DatabaseAgent.query_raw("npc_relationship", "name = '奇奇'");
-	var d
-	if res.size() > 0:
-		d = res[0]
-	else:
-		d = {
-			name='奇奇'
-		}
-		DatabaseAgent.db.insert_row("npc_relationship", d)
-		
-	d.chat_num = get_character_state("奇奇", "chat num");
-	DatabaseAgent.db.update_rows("npc_relationship", "name = '奇奇'", d)
-	
+	GlobalData.crop_manager.save_data()
 	print("save data")

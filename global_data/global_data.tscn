@@ -10,7 +10,7 @@
 [node name="GlobalData" type="Node"]
 script = ExtResource("1_yux4g")
 
-[node name="CropData" type="Node" parent="."]
+[node name="CropManager" type="Node" parent="."]
 script = ExtResource("2_lnvip")
 
 [node name="Backpack" type="Node" parent="."]

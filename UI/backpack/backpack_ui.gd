@@ -8,7 +8,7 @@ var background:bool
 var selected_indices = []
 var backpack_data:BackpackData
 
-@export var idx:int
+@export var idx:int = 0
 @onready var item_menu
 
 func set_idx(value):
@@ -19,23 +19,24 @@ func get_slot(idx):
 	return slots.get_child((idx))
 
 func _ready():
+	setup_slots()
+	connect_to_data()
+
+func setup_slots():
 	slots = $Slots
-	item_menu = $ItemMenu
 	for i in range(slots.get_child_count()):
 		var slot = slots.get_child(i)
 		slot.id = i
 		slot.focus_entered.connect(func(): idx = slot.id)
 		slot.click.connect(func():
 			backpack_data.use(idx))
-		
-	item_menu.hide()
-	idx = 0
-	connect_to_data()
-	setup_item_menu()
-	
+
 func connect_to_data():
 	backpack_data = GlobalData.backpack
 	backpack_data.bag_item_change.connect(_on_bag_item_change)
+	for i in range(27):
+		if backpack_data.items[i].num > 0:
+			_on_bag_item_change(backpack_data.items[i])
 
 func _on_bag_item_change(item):
 	get_slot(item.index).item_name = item.name
@@ -44,7 +45,7 @@ func _on_bag_item_change(item):
 func toggle_visible(vis):
 	if visible == vis: return
 	visible = vis
-	item_menu.toggle_visible(false)
+	# item_menu.toggle_visible(false)
 	set_background(false)
 
 func set_background(val:bool):
@@ -56,7 +57,7 @@ func set_background(val:bool):
 
 
 func _physics_process(delta):
-	if not visible or background or item_menu.visible:
+	if not visible or background:
 		return
 	var vec = Vector2i(0,0)
 	if Input.is_action_just_pressed("ui_left"):
@@ -73,7 +74,7 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouse:
 		return
-	if visible and not item_menu.visible and event.is_action_pressed("cancel"):
+	if visible and event.is_action_pressed("cancel"):
 		toggle_visible(false)
 
 func show_item_menu():
@@ -108,7 +109,5 @@ func _on_item_menu_visibility_changed():
 
 func equip_item():
 	backpack_data.equip_from_backpack(idx)
-	item_menu.toggle_visible(false)
 func unequip_item():
 	backpack_data.unequip_from_backpack(idx)
-	item_menu.toggle_visible(false)

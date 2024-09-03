@@ -1,8 +1,7 @@
 class_name World
 extends Node2D
 
-@onready var ground_tile_map = $GroundTileMap
-@onready var crop_tile_map = $CropTileMap
+@onready var ground_tile_map = get_node("GroundTileMap/base_ground")
 var tile_focus
 
 func _ready():

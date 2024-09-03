@@ -44,9 +44,9 @@ class GoalWatcher:
 		if move[0] == 'plant':
 			item = move[1]
 			num = int(move[2])
-			Event.crop_planted.connect(self.watch_plant)
+			Event.crop_changed.connect(self.watch_plant)
 			cut_signal = func():
-				Event.crop_planted.disconnect(self.watch_plant)
+				Event.crop_changed.disconnect(self.watch_plant)
 		print("watch goal %s"%[goal.description])
 	
 	func watch_plant(coord, crop_name, atlas):
