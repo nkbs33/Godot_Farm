@@ -151,3 +151,9 @@ func _on_consume_equipment():
 	if items[equipment_idx].num == 0:
 		equipment_idx = -1
 		Event.player_unequip.emit()
+
+func save_data():
+	for item in items:
+		var query = "INSERT OR REPLACE INTO inventory (item_name,location,num,id) VALUES ('%s','%s',%s,%s) "\
+			%[item.name, 'backpack', item.num, item.index]
+		DatabaseAgent.db.query(query)

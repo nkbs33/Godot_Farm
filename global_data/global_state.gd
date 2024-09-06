@@ -32,4 +32,5 @@ func load_data():
 	
 func save_data():
 	GlobalData.crop_manager.save_data()
+	GlobalData.backpack.save_data()
 	print("save data")

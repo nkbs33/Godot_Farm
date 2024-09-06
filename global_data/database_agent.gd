@@ -43,12 +43,8 @@ func _load_inventory():
 	for element in res:
 		if element.location == 'backpack':
 			GlobalData.backpack.set_item(element.item_name, element.num, element.id)
-	GlobalData.backpack.bag_item_change.connect(_on_bag_item_change)
 
-func _on_bag_item_change(item:BackpackData.Item):
-	var query = "INSERT OR REPLACE INTO inventory (item_name,location,num,id) VALUES ('%s','%s',%s,%s) "\
-		%[item.name, 'backpack', item.num, item.index]
-	db.query(query)
+
 
 
 
